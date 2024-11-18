@@ -1,0 +1,324 @@
+io_pair:
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: RELAYMAN_UNSTANDARDIZED
+          source: env_var_input
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          value_encoding: none
+          stage: pre_process
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          value: x' or 'x'='x
+        - value_encoding: none
+          value_type_enum: 1
+          ordinal: 2
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 0
+          stage_enum: 0
+          value: northwind
+          source: database_content_input
+          stage: pre_process
+          server: ss-db-mysql
+          source_enum: 0
+          database: mysql
+        - source_enum: 2
+          name: SS_DBMYSQLDATABASE
+          value: SET_DYNAMIC_DB_NAME
+          ordinal: 3
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+        - database: mysql
+          value_encoding: none
+          stage_enum: 2
+          value_type_enum: 0
+          stage: post_process
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          ordinal: 1
+          source_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          database_enum: 0
+          server: ss-db-mysql
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          name: RELAYMAN_UNSTANDARDIZED
+        - stage: pre_process
+          id: source
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          ordinal: 2
+          value: "x'; Select * from Orders; -- "
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          value_type_enum: 0
+        - ordinal: 2
+          value: northwind
+          stage: pre_process
+          database_enum: 0
+          value_encoding: none
+          server: ss-db-mysql
+          database: mysql
+          source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          stage_enum: 0
+          source: database_content_input
+        - source: env_var_input
+          source_enum: 2
+          name: SS_DBMYSQLDATABASE
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+        - value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          stage: post_process
+          ordinal: 1
+          source: database_content_input
+          stage_enum: 2
+          source_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          database_enum: 0
+          database: mysql
+          server: ss-db-mysql
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: RELAYMAN_UNSTANDARDIZED
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: RELAYMAN_UNSTANDARDIZED
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+        - value_encoding: none
+          ordinal: 2
+          stage: pre_process
+          id: source
+          name: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          value: USA
+          value_type_enum: 0
+          stage_enum: 0
+        - source: database_content_input
+          database: mysql
+          server: ss-db-mysql
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          stage_enum: 0
+          database_enum: 0
+          source_enum: 0
+          value_type_enum: 1
+          ordinal: 2
+          value_encoding: none
+          stage: pre_process
+        - source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+          value_encoding: none
+          value_type_enum: 0
+          name: SS_DBMYSQLDATABASE
+          value_type: USE_TEXT_DIRECTLY
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: database_content_input
+          ordinal: 1
+          server: ss-db-mysql
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          value_type_enum: 0
+          database: mysql
+          database_enum: 0
+          source_enum: 0
+          stage_enum: 2
+          stage: post_process
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          name: RELAYMAN_UNSTANDARDIZED
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          value_encoding: none
+          value: Germany
+          value_type_enum: 0
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          id: source
+          name: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          value_type: USE_TEXT_DIRECTLY
+        - value_type_enum: 1
+          server: ss-db-mysql
+          stage_enum: 0
+          ordinal: 2
+          value: northwind
+          source: database_content_input
+          database_enum: 0
+          database: mysql
+          stage: pre_process
+          value_encoding: none
+          source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+        - ordinal: 3
+          source_enum: 2
+          name: SS_DBMYSQLDATABASE
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - server: ss-db-mysql
+          stage_enum: 2
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          database: mysql
+          database_enum: 0
+          source_enum: 0
+          stage: post_process
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          source_enum: 2
+          name: RELAYMAN_UNSTANDARDIZED
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/parachor_rackateering/gastroepiploic_unintricately.txt
+          id: source
+          ordinal: 2
+          value: Finland
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          value_type_enum: 0
+        - source: database_content_input
+          value_type_enum: 1
+          database_enum: 0
+          source_enum: 0
+          stage_enum: 0
+          server: ss-db-mysql
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_CONTENTS_OF_FILE
+          database: mysql
+          ordinal: 2
+          value: northwind
+        - value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          stage_enum: 0
+          name: SS_DBMYSQLDATABASE
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+        - source: database_content_input
+          server: ss-db-mysql
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 2
+          database: mysql
+          source_enum: 0
+          ordinal: 1
+          stage: post_process
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          value_type_enum: 0
+          database_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmppxc974_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    feature_group: control_flow
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature: callback
+  - file_name: /tmp/tmppxc974_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: soldadoes_underclothe
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - function_name: soldadoes_underclothe
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+    file_name: /tmp/tmppxc974_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+  - file_name: /tmp/tmppxc974_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: liasing_aes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

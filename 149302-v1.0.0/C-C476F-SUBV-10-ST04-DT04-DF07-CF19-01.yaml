@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SHARED_MEMORY
+    function_name: svn_tristate__from_word
+    line_number: 0
+    file_name: /tmp/tmpcsS15d_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - file_name: /tmp/tmpcsS15d_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpcsS15d_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_1
+  - file_name: /tmp/tmpcsS15d_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature_group: control_flow
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: recursive
+io_pair:
+  exploits:
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          size: 5
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          key: 4406
+          id: source
+          flags: 950
+          value_encoding: none
+          value: 1000
+    - inputs:
+        - stage: pre_process
+          key: 4406
+          source: shared_memory_input
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 5000
+          source_enum: 6
+          stage_enum: 0
+          size: 5
+          flags: 950
+          ordinal: 1
+          value_encoding: none
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4406
+      size: 5
+      flags: 950
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          value: 20
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 5
+          key: 4406
+          flags: 950
+          id: source
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          size: 5
+          value_type_enum: 0
+          value: 511
+          key: 4406
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          source: shared_memory_input
+          ordinal: 1
+    - inputs:
+        - key: 4406
+          value: 1
+          source_enum: 6
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          size: 5
+          value_type_enum: 0
+          source: shared_memory_input
+          stage_enum: 0

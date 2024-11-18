@@ -1,0 +1,94 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: TRAINMASTER_ANTIFOULING
+          stage_enum: 0
+          source: env_var_input
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source_enum: 2
+          value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          name: TRAINMASTER_ANTIFOULING
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          value: zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - stage: pre_process
+      source: env_var_input
+      source_enum: 2
+      ordinal: 1
+      stage_enum: 0
+      name: TRAINMASTER_ANTIFOULING
+      id: source
+  benigns:
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          name: TRAINMASTER_ANTIFOULING
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: Hello
+          source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: TRAINMASTER_ANTIFOULING
+          value: shortst
+          source: env_var_input
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          name: TRAINMASTER_ANTIFOULING
+          value_type: USE_TEXT_DIRECTLY
+          value: a
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+  description: "Good inputs:1) environment variable is not set2) envrionment variable is set to a value whose length is less than or equal to 8 charactersBad inputs:1) environment variable is set to a value whose length is greater than 8 chars\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature: callback
+    function_name: svn_mutex__unlock
+    feature_group: control_flow
+    file_name: /tmp/tmpQtqUuu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    function_name: anarcotin_underrun
+    file_name: /tmp/tmpQtqUuu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - line_number: 0
+    file_name: /tmp/tmpQtqUuu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: anarcotin_underrun
+    feature_group: data_type
+    feature: heap_pointer
+  - feature: buffer_address_array_index
+    feature_group: data_flow
+    file_name: /tmp/tmpQtqUuu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+    function_name: beweary_hypoglycemia

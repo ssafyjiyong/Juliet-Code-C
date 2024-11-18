@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpRgtkLE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: control_flow
+    line_number: 0
+    function_name: svn_mutex__unlock
+    feature: callback
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmpRgtkLE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - line_number: 0
+    feature: simple
+    file_name: /tmp/tmpRgtkLE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+  - line_number: 0
+    file_name: /tmp/tmpRgtkLE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: buffer_address_array_index
+    feature_group: data_flow
+    function_name: stonesoup_handle_taint
+io_pair:
+  base_inputs:
+    - id: source
+      source_enum: 5
+      address: ss-localhost
+      ordinal: 1
+      source: socket_input
+      stage_enum: 1
+      port: 8887
+      stage: co_process
+  benigns:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage: co_process
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          port: 8887
+          value_type_enum: 0
+          id: source
+          stage_enum: 1
+          value: FF
+    - inputs:
+        - stage: co_process
+          ordinal: 1
+          port: 8887
+          value: 20
+          value_encoding: none
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          value_type_enum: 0
+          address: ss-localhost
+    - inputs:
+        - address: ss-localhost
+          stage: co_process
+          value: 1
+          value_encoding: none
+          id: source
+          source: socket_input
+          ordinal: 1
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          stage_enum: 1
+          value_type_enum: 0
+  description: "Read an unsigned hex int from the input.  If unsigned is > FFFF, do nothing. Otherwise, open that many files for writing, without closing the file handles.  Output if any of the opens fail. The opens will fail if we try to open more than 1021 files.\n\n"
+  exploits:
+    - inputs:
+        - port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          value_type_enum: 0
+          id: source
+          stage: co_process
+          source_enum: 5
+          source: socket_input
+          ordinal: 1
+          stage_enum: 1
+          value_encoding: none
+          value: FFF
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          stage_enum: 1
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          address: ss-localhost
+          value: FFFF
+          stage: co_process
+          port: 8887
+          source_enum: 5
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

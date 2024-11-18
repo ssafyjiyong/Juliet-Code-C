@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp5UhMGx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmp5UhMGx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: noncabinet_cadettes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp5UhMGx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: data_type
+    function_name: noncabinet_cadettes
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmp5UhMGx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: whinier_pebworth
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+io_pair:
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          name: CAMELOPARDIDAE_YEOMANLY
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: 68718952445
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          value: 1301
+          value_encoding: none
+          id: source
+          source: env_var_input
+          source_enum: 2
+          name: CAMELOPARDIDAE_YEOMANLY
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          source_enum: 2
+          id: source
+          source: env_var_input
+          name: CAMELOPARDIDAE_YEOMANLY
+          stage: pre_process
+          stage_enum: 0
+          value: 1073676288
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value: 1073676287
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: CAMELOPARDIDAE_YEOMANLY
+    - inputs:
+        - name: CAMELOPARDIDAE_YEOMANLY
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          id: source
+          stage_enum: 0
+          value: 2147483647
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  base_inputs:
+    - ordinal: 1
+      name: CAMELOPARDIDAE_YEOMANLY
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source

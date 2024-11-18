@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152689,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: Subversion\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: TYPEDEF\n - Data Flow: BASIC\n - Control Flow: POINTER_TO_FUNCTION",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C078A-SUBV-06-ST01-DT06-DF11-CF18-01.xml"
+          },
+          "length": 58423,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "816e60139d5210ca129b6e84b018f81204d5299de457d67ed2eac802c01a5b83"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/error.c"
+          },
+          "length": 22118,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "2ddc8cd6ee3fa66e05e447272d105f16014f32bcb0fcdcd9bed0709cfc6ca65e"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "78",
+              "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-78",
+          "message": {
+            "text": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/error.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 665,
+                  "endLine": 672
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "78",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

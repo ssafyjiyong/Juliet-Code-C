@@ -1,0 +1,204 @@
+code_complexity_features:
+  - file_name: /tmp/tmpEs0zNu_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpEs0zNu_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpEs0zNu_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpEs0zNu_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  description: "Has a stack buffer of size 128.  reads in an ascii string from an environmentvariable and increments the corresponding values in the stack buffer.  Then reads in an input and prints out the count of the characters from the stack buff of those in the input.  If input contains extended ascii characters, they will be wrapped around to negative values and the buffer will be under read\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: CRUDDLE_UNIDEATED
+        - id: source
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          value_encoding: base64
+          value: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUGugIE=
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_encoding: none
+          name: INPUT_STRING
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: CRUDDLE_UNIDEATED
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          value: SGVsbKUgV6lybGSI
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 2
+          value_encoding: none
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_type_enum: 0
+          name: INPUT_STRING
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: CRUDDLE_UNIDEATED
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: CRUDDLE_UNIDEATED
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          stage: pre_process
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          id: source
+          name: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+        - stage: pre_process
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          ordinal: 2
+          source: env_var_input
+          name: INPUT_STRING
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          value_type_enum: 0
+          name: CRUDDLE_UNIDEATED
+          ordinal: 1
+          stage_enum: 0
+        - value: This is probably not going to overflow a buffer of some sort.  Let's run it anyway and see what happens.
+          name: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          stage: pre_process
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          source: file_content_input
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          name: INPUT_STRING
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          name: CRUDDLE_UNIDEATED
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - name: /opt/stonesoup/workspace/testData/endangers_countervolition/chiliadron_alsikes.txt
+          id: source
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: As long as this statement has more than 64 characters, then nothing bad should happen
+        - value_type: USE_TEXT_DIRECTLY
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          source: env_var_input
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          name: INPUT_STRING
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

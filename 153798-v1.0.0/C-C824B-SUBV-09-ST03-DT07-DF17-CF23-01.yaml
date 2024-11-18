@@ -1,0 +1,100 @@
+io_pair:
+  benigns:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAAAAA
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+          port: 8887
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - stage_enum: 1
+          address: ss-localhost
+          source: socket_input
+          ordinal: 1
+          id: source
+          port: 8887
+          value_encoding: none
+          value: 12345 Hello world!
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 5
+          stage: co_process
+    - inputs:
+        - stage_enum: 1
+          source: socket_input
+          stage: co_process
+          value: This string does not have 10 characters
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          source_enum: 5
+          address: ss-localhost
+          ordinal: 1
+          port: 8887
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          address: ss-localhost
+          port: 8887
+          stage_enum: 1
+          value: 0123456789
+          ordinal: 1
+          stage: co_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage: co_process
+          stage_enum: 1
+          port: 8887
+          value: 10 chars..
+          source: socket_input
+          id: source
+          source_enum: 5
+          address: ss-localhost
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Malloc a function pointer.  If the input length is not equal to 10, set the function pointer to a function.  Try to use the function pointer. This will seg fault if the input length is exactly 10.\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: SOCKET
+    file_name: /tmp/tmpAgYBRp_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpAgYBRp_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpAgYBRp_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - feature_group: control_flow
+    file_name: /tmp/tmpAgYBRp_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: set_jump_long_jump

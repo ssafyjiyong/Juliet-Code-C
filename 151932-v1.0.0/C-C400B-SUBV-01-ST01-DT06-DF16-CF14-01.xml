@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project base_program="C-SUBV" language="C" name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01" targeted_architecture="ANY" targeted_os="LINUX" test_case_type="ALL" xmlns="urn:stonesoup:project">
+    <description>Creating test case using base program.
+Added an environment variable read to the function definition.
+Completed injection.
+</description>
+    <additional_information>
+        <keyvalue key="kill_command">TRUE</keyvalue>
+        <keyvalue key="algorithmic_variant_name">UNSPECIFIED</keyvalue>
+        <keyvalue key="root_cause">UNSPECIFIED</keyvalue>
+    </additional_information>
+    <structure install="install" iodata="testData/run" scoredata="testOutput" scripts="scripts" source="src"/>
+    <run_command></run_command>
+    <weakness generation_method="FAULT_INJECTED">
+        <variant cwe="CWE-400" name="CWE-400-B"/>
+        <features>
+            <taint_source file_name="/subversion/libsvn_subr/dirent_uri.c" line_number="0" type="ENVIRONMENT_VARIABLE">
+                <method name="internal_style"/>
+            </taint_source>
+            <data_type file_name="/subversion/libsvn_subr/dirent_uri.c" line_number="0" type="TYPEDEF">
+                <method name="internal_style"/>
+            </data_type>
+            <data_flow file_name="/subversion/libsvn_subr/dirent_uri.c" line_number="0" type="BUFFER_ADDRESS_ARRAY_INDEX">
+                <method name="internal_style"/>
+            </data_flow>
+            <control_flow file_name="/subversion/libsvn_subr/dirent_uri.c" line_number="0" type="INTERPROCEDURAL_10">
+                <method name="internal_style"/>
+            </control_flow>
+        </features>
+    </weakness>
+    <build_commands cppflags="-DSTONESOUP_TRACE=1" libs="-lcrypto -ldl">
+        <command>./configure -v --prefix=&quot;$SS_TC_ROOT/$SS_TC_INSTALL&quot; --with-apr=&quot;$SS_TC_DEPS/bin/apr-1-config&quot; --with-apr-util=&quot;$SS_TC_DEPS/bin/apu-1-config&quot; --with-serf --with-sqlite=&quot;$SS_TC_DEPS&quot; --with-sasl --with-libmagic --with-zlib --without-kwallet --without-gnome-keyring --disable-keychain --without-trang --without-doxygen --without-swig --without-jikes --without-ctypesgen --without-junit --without-jdk --without-apxs --with-editor=&quot;/usr/bin/vi&quot; --disable-shared --with-pic=yes</command>
+        <command>make VERBOSE=1 CC=&quot;$SS_CC&quot; CCLD=&quot;$SS_LNK&quot;</command>
+        <command>make install CC=&quot;$SS_CC&quot; CCLD=&quot;$SS_LNK&quot;</command>
+    </build_commands>
+    <iopairs>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-01" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>create a repository
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">killall svnserve</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/svnrepos</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-01/svnrepos.tar.gz -C $SS_TC_ROOT/testData/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good01.txt</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svnserve -d --foreground -r $SS_TC_ROOT/testData/svnrepos --pid-file=$SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">bash $SS_TC_ROOT/scripts/service_mon.sh ss-localhost 3690</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="CHECKOUT" type="USE_TEXT">$SS_TC_DEPS/bin/svn checkout svn://ss-localhost/stonesoup
+                    </script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">kill -9 $(cat $SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid)</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_YlhYXbr7Yv" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-01-Default">
+                <formula name="GOOD-01-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_nFC1aiI0zl</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual input_id_ref="CHECKOUT" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">Checked out revision 0.</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_nFC1aiI0zl" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-02" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>commit a file
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">killall svnserve</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/svnrepos</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-02/svnrepos.tar.gz -C $SS_TC_ROOT/testData/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good02.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/good02.txt" type="USE_TEXT">not an empty file</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svnserve -d --foreground -r $SS_TC_ROOT/testData/svnrepos --pid-file=$SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process_group scheme="PARALLEL">
+                    <process_group scheme="SEQUENCE">
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" type="USE_TEXT">bash $SS_TC_ROOT/scripts/service_mon.sh ss-localhost 3690</script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="CHECKOUT" type="USE_TEXT">cd ../good-02 &amp;&amp; $SS_TC_DEPS/bin/svn checkout svn://ss-localhost/stonesoup
+                    </script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="ADD" type="USE_TEXT">cd ../good-02 &amp;&amp; cp file.txt stonesoup &amp;&amp; cd stonesoup &amp;&amp; $SS_TC_DEPS/bin/svn add file.txt
+                    </script>
+                        </process>
+                        <process delay_after="0" delay_before="0">
+                            <script background="false" encoding="STRING" input_id="COMMIT" type="USE_TEXT">cd ../good-02/stonesoup &amp;&amp; $SS_TC_DEPS/bin/svn commit -m &quot;good-02&quot;
+                    </script>
+                        </process>
+                    </process_group>
+                    <process_group scheme="SEQUENCE"/>
+                </process_group>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">kill -9 $(cat $SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid)</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_U3Mdgqi24E" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-02-Default">
+                <formula name="GOOD-02-Default">(CHECKOUT AND ADD AND COMMIT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_k7MSkyDzYa</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="CHECKOUT">
+                    <actual input_id_ref="CHECKOUT" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">Checked out revision 0.</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="ADD">
+                    <actual input_id_ref="ADD" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">A         file.txt</expected>
+                </compare_check>
+                <compare_check check_type="CONTAINS" name="COMMIT">
+                    <actual input_id_ref="COMMIT" output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-02/output.txt</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_k7MSkyDzYa" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-03" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>diff two files using svn diff
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">killall svnserve</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-03/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good03.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/good03.txt" type="USE_TEXT">This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn diff css/main.css css/main2.css</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_exf9TiKwHe" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-03-Default">
+                <formula name="GOOD-03-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_dA9yPemdTW</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-03/output.txt</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_dA9yPemdTW" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-04" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>use svn mkdir to create a directory and add it to the svn repo
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-04/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good01.txt</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn mkdir newdir</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_95YhYRYOvy" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-04-Default">
+                <formula name="GOOD-04-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_xyn70h2NLR</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">A         newdir</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_xyn70h2NLR" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-05" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>use svn to move a file and its position in the repo
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-05/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good02.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/good02.txt" type="USE_TEXT">not an empty file</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn move 404.html js/</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_Ttqs2wbslQ" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-05-Default">
+                <formula name="GOOD-05-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_SUGyHdloIe</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-05/output.txt</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_SUGyHdloIe" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-06" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>run blame on 404.html
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-06/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good03.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/good03.txt" type="USE_TEXT">This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn blame 404.html</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_ZTTdegbhht" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-06-Default">
+                <formula name="GOOD-06-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_hwTt8flWfz</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_FILE_CONTENTS">good-06/output.txt</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_hwTt8flWfz" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-07" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>apply a patch
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-07/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good01.txt</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn patch good-07.diff</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_iizLB8Tz19" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-07-Default">
+                <formula name="GOOD-07-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_oZLVy8bLFe</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">U         404.html</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_oZLVy8bLFe" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-08" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>add a property
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-08/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good02.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/good02.txt" type="USE_TEXT">not an empty file</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn propset rating &quot;awesome&quot; 404.html</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_z6TenOLGgY" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-08-Default">
+                <formula name="GOOD-08-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_qDKTkgvl4V</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">property 'rating' set on '404.html'</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_qDKTkgvl4V" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-09" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>get a property
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-09/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good03.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/good03.txt" type="USE_TEXT">This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn propget rating 404.html</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_SHZiaTg0LN" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-09-Default">
+                <formula name="GOOD-09-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_c9wTePSk8h</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">awesome</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_c9wTePSk8h" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-GOOD-10" reset_scheme="NONE" timeout="300" type="GOOD">
+            <description>delete a property
+Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>NONE</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/run &amp;&amp; mkdir $SS_TC_ROOT/testData/run</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-10/allura.tar.gz --strip-components=1 -C $SS_TC_ROOT/testData/run/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/good01.txt</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svn propdel rating 404.html</run_command>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_zlbmO6aZ5j" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="GOOD-10-Default">
+                <formula name="GOOD-10-Default">(STDOUT AND NOT TIMEOUT AND NOT CONTROLLED_EXIT) AND log_file_hashes_p2j3oIl1iP</formula>
+            </scoring_formula>
+            <output_checks>
+                <compare_check check_type="CONTAINS" name="STDOUT">
+                    <actual output_type="STANDARD_OUT"></actual>
+                    <expected encoding="STRING" type="USE_TEXT">property 'rating' deleted from '404.html'.</expected>
+                </compare_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="TIMEOUT" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="CONTROLLED_EXIT" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SCRIPT" encoding="STRING" name="log_file_hashes_p2j3oIl1iP" type="USE_TEXT">if (( $(/bin/grep -E '^[0-9a-f]{32,128}  .+' &quot;../logfile.txt&quot; | wc -l) % 21 )); then false; else true; fi;</simple_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-BAD-01" reset_scheme="NONE" timeout="300" type="BAD">
+            <description>Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>DOS_BLOCKING</technical_impact>
+            <technical_impact>DOS_RESOURCE_CONSUMPTION</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">killall svnserve</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/svnrepos</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-02/svnrepos.tar.gz -C $SS_TC_ROOT/testData/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/dev/urandom</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svnserve -d --foreground -r $SS_TC_ROOT/testData/svnrepos --pid-file=$SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">bash $SS_TC_ROOT/scripts/service_mon.sh ss-localhost 3690</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="CHECKOUTEs4qcoBDnl" type="USE_TEXT">cd ../good-02 &amp;&amp; $SS_TC_DEPS/bin/svn checkout svn://ss-localhost/stonesoup
+                    </script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="ADDrfh1S0NcMr" type="USE_TEXT">cd ../good-02 &amp;&amp; cp file.txt stonesoup &amp;&amp; cd stonesoup &amp;&amp; $SS_TC_DEPS/bin/svn add file.txt
+                    </script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="COMMITesR387VSER" type="USE_TEXT">cd ../good-02/stonesoup &amp;&amp; $SS_TC_DEPS/bin/svn commit -m &quot;good-02&quot;
+                    </script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">kill -9 $(cat $SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid)</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_rIX9xxHYEdcbyqsU0sv4" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="timeout_formula_LNoTuHgtUh">
+                <formula name="timeout_formula_LNoTuHgtUh">weakness_started_DGNGxb1V7eRm6wgIsnSY AND ((NOT PERFORMER AND (timeout_eCcqgVEebU)) or (PERFORMER AND NOT ((timeout_eCcqgVEebU) OR controlled_exit_mEH0jmYrnW)))</formula>
+                <formula name="no_weakness_started_formula_ENQ6SNDiac">(NOT PERFORMER AND (timeout_eCcqgVEebU)) or (PERFORMER AND NOT ((timeout_eCcqgVEebU) OR controlled_exit_mEH0jmYrnW))</formula>
+            </scoring_formula>
+            <output_checks>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="timeout_eCcqgVEebU" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="controlled_exit_mEH0jmYrnW" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="continued_execution_zbRf2NDmrs" type="USE_TEXT">CONTINUED_EXECUTION</simple_check>
+                <compare_check check_type="CONTAINS" name="weakness_started_DGNGxb1V7eRm6wgIsnSY">
+                    <actual encoding="STRING" input_id_ref="lttng_output_rIX9xxHYEdcbyqsU0sv4" output_type="STANDARD_OUT">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">stonesoup_trace:weakness_start</expected>
+                </compare_check>
+            </output_checks>
+        </iopair>
+        <iopair name="C-C400B-SUBV-01-ST01-DT06-DF16-CF14-01-BAD-02" reset_scheme="NONE" timeout="300" type="BAD">
+            <description>Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus
+
+</description>
+            <technical_impact>DOS_BLOCKING</technical_impact>
+            <technical_impact>DOS_RESOURCE_CONSUMPTION</technical_impact>
+            <pre_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">printf 'env HIEROCRACY_DEBAUCHEDNESS;\n' | tee nginx_conf_env.txt</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">killall svnserve</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/testData/svnrepos</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">tar -zxvf $SS_TC_ROOT/testData/good-02/svnrepos.tar.gz -C $SS_TC_ROOT/testData/</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="HIEROCRACY_DEBAUCHEDNESS" type="USE_TEXT">/opt/stonesoup/workspace/testData/bad02.txt</environment_variable>
+                </process>
+                <process>
+                    <file encoding="STRING" path="/opt/stonesoup/workspace/testData/bad02.txt" type="USE_TEXT">a</file>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf /opt/stonesoup/workspace/testData/bad02.txt</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir $SS_TC_ROOT/logs/execute/lttng</script>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="LTTNG_HOME" type="USE_TEXT">$SS_TC_ROOT/logs/execute/lttng</environment_variable>
+                </process>
+                <process>
+                    <environment_variable encoding="STRING" key="SS_RUN_COMMAND_LD_PRELOAD" type="USE_TEXT">$SS_TC_DEPS/lib64/liblttng-stonesoup-c.so:$SS_TC_DEPS/lib64/liblttng-ust-fork.so</environment_variable>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">mkdir -p $SS_TC_DEPS/var/run/lttng</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">$SS_TC_DEPS/bin/lttng create &amp;&amp; $SS_TC_DEPS/bin/lttng enable-event -u -a &amp;&amp; $SS_TC_DEPS/bin/lttng start</script>
+                </process>
+                <process>
+                    <script background="false" encoding="STRING" type="USE_TEXT">rm -rf $SS_TC_ROOT/lockDir</script>
+                </process>
+            </pre_processes>
+            <run_command encoding="STRING" preprend_runcommand="true" type="USE_TEXT">$SS_TC_ROOT/$SS_TC_INSTALL/bin/svnserve -d --foreground -r $SS_TC_ROOT/testData/svnrepos --pid-file=$SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid</run_command>
+            <co_processes scheme="SEQUENCE">
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">bash $SS_TC_ROOT/scripts/service_mon.sh ss-localhost 3690</script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="CHECKOUTOCQzaun6Rv" type="USE_TEXT">cd ../good-02 &amp;&amp; $SS_TC_DEPS/bin/svn checkout svn://ss-localhost/stonesoup
+                    </script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="ADDZO3C6stuI8" type="USE_TEXT">cd ../good-02 &amp;&amp; cp file.txt stonesoup &amp;&amp; cd stonesoup &amp;&amp; $SS_TC_DEPS/bin/svn add file.txt
+                    </script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" input_id="COMMITMYevg20qja" type="USE_TEXT">cd ../good-02/stonesoup &amp;&amp; $SS_TC_DEPS/bin/svn commit -m &quot;good-02&quot;
+                    </script>
+                </process>
+                <process delay_after="0" delay_before="0">
+                    <script background="false" encoding="STRING" type="USE_TEXT">kill -9 $(cat $SS_TC_ROOT/$SS_TC_INSTALL/svnserve.pid)</script>
+                </process>
+            </co_processes>
+            <post_processes scheme="SEQUENCE">
+                <process>
+                    <script background="false" encoding="STRING" input_id="lttng_output_COCDsCf8rgVRw8IUswU7" type="USE_TEXT">$SS_TC_DEPS/bin/lttng stop &amp;&amp; $SS_TC_DEPS/bin/lttng view &amp;&amp; $SS_TC_DEPS/bin/lttng destroy</script>
+                </process>
+            </post_processes>
+            <scoring_formula default="timeout_formula_bWKxiFbaEc">
+                <formula name="timeout_formula_bWKxiFbaEc">weakness_started_cOlKFkSDBMARFdlJKmf9 AND ((NOT PERFORMER AND (timeout_zIPgutG16E)) or (PERFORMER AND NOT ((timeout_zIPgutG16E) OR controlled_exit_MdoE5BYcj7)))</formula>
+                <formula name="no_weakness_started_formula_dTGPcCiDlc">(NOT PERFORMER AND (timeout_zIPgutG16E)) or (PERFORMER AND NOT ((timeout_zIPgutG16E) OR controlled_exit_MdoE5BYcj7))</formula>
+            </scoring_formula>
+            <output_checks>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="timeout_zIPgutG16E" type="USE_TEXT">DOES_NOT_RETURN</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="controlled_exit_MdoE5BYcj7" type="USE_TEXT">CONTROLLED_EXIT</simple_check>
+                <simple_check check_type="SPECIAL" encoding="STRING" name="continued_execution_BxPw2XJwml" type="USE_TEXT">CONTINUED_EXECUTION</simple_check>
+                <compare_check check_type="CONTAINS" name="weakness_started_cOlKFkSDBMARFdlJKmf9">
+                    <actual encoding="STRING" input_id_ref="lttng_output_COCDsCf8rgVRw8IUswU7" output_type="STANDARD_OUT">None</actual>
+                    <expected encoding="STRING" type="USE_TEXT">stonesoup_trace:weakness_start</expected>
+                </compare_check>
+            </output_checks>
+        </iopair>
+    </iopairs>
+</project>

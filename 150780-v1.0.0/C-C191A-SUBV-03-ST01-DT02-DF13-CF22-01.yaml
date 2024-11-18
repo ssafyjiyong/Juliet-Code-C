@@ -1,0 +1,94 @@
+io_pair:
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: ABSTRICTION_STICTIDACEAE
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value: 8
+          stage: pre_process
+          source_enum: 2
+          id: source
+          ordinal: 1
+          stage_enum: 0
+          name: ABSTRICTION_STICTIDACEAE
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          value: 4
+          source: env_var_input
+          name: ABSTRICTION_STICTIDACEAE
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value: 45
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          id: source
+          name: ABSTRICTION_STICTIDACEAE
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+    - inputs:
+        - name: ABSTRICTION_STICTIDACEAE
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 80
+          id: source
+          ordinal: 1
+          value_encoding: none
+    - inputs:
+        - value: 8000
+          stage_enum: 0
+          id: source
+          name: ABSTRICTION_STICTIDACEAE
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+    feature_group: source_taint
+    file_name: /tmp/tmpso2Szl_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmpso2Szl_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpso2Szl_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpso2Szl_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: macros

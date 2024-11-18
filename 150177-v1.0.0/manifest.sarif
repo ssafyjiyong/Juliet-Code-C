@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150177,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case uses a counting semaphore initialized to one count of a shared resource to implement multiple unlocks of a critical resource for certain input. The test case takes a control integer, the names of two control files, and an input string. The control integer and the two control files are used for timing within the test case to ensure that the test case follows an exploiting or benign execution path, and the input string is used as shared data for the threads to act upon. When executing, the test case checks the input string for non-alpha characters, and if it contains non-alpha characters the test case increments the counting semaphore and spawns two threads that both use the semaphore as an access control mechanism surrounding a shared reference to the input string. Since the semaphore incorrectly indicates that there are two counts of the input string available, both threads now have the ability to access the shared string (actual concurrent access is controlled by the control files and integer) leading to a segfault. If the input string does not contain non-alpha characters, only one thread will spawn and the semaphore will be decremented and incremented appropriately, allowing the test case to run without error.\nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: SIMPLE\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: INFINITE_LOOP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C765B-SUBV-03-ST03-DT02-DF17-CF03-01.xml"
+          },
+          "length": 84908,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "0d07929641e59b4f11dd75cc7ebdaec20ab41e4bcdf6ef396fd22da55557170c"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/utf.c"
+          },
+          "length": 42795,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "3c27b178523fcb0e04944e9f1f24e64e7319e6d1dd83aef2698795d1bfdb9cdb"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "765",
+              "name": "Multiple Unlocks of a Critical Resource"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-765",
+          "message": {
+            "text": "Multiple Unlocks of a Critical Resource."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/utf.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 233,
+                  "endLine": 234
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "765",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

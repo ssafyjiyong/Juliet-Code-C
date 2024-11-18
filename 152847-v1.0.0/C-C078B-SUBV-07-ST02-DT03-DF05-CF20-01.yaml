@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: KAMPLILES_IRRESOLVEDLY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+  benigns:
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          name: KAMPLILES_IRRESOLVEDLY
+          source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: 10
+          value_encoding: none
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+          name: KAMPLILES_IRRESOLVEDLY
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+        - ordinal: 2
+          value_encoding: none
+          value: google.com
+          source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          name: KAMPLILES_IRRESOLVEDLY
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          value_type: USE_TEXT_DIRECTLY
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          id: source
+          value: localhost
+          name: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          value_encoding: none
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          name: KAMPLILES_IRRESOLVEDLY
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          value: 10%20%3B%20ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: KAMPLILES_IRRESOLVEDLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hooksmith_gmt/swampside_marling.txt
+          value: localhost%20%26%20echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmpVG2Gm2_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpVG2Gm2_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: void_pointer
+    feature_group: data_type
+  - file_name: /tmp/tmpVG2Gm2_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpVG2Gm2_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: noncorrupter_ruinatious
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence

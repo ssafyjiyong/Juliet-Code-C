@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpa26kXi_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpa26kXi_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpa26kXi_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpa26kXi_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: BOUGIES_BRANCHI
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          value_encoding: none
+        - stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          value: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          name: BOUGIES_BRANCHI
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+        - value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 10
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          name: BOUGIES_BRANCHI
+        - value_type_enum: 0
+          value: 1000
+          id: source
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          ordinal: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: BOUGIES_BRANCHI
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+        - stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          value: 65538
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: BOUGIES_BRANCHI
+          source: env_var_input
+          source_enum: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+          value: 131074
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: BOUGIES_BRANCHI
+      source: env_var_input
+      source_enum: 2
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/soundproofed_chad/cornified_cisternae.txt
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"

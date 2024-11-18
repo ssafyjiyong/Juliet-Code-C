@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpEON4J2_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpEON4J2_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpEON4J2_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpEON4J2_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - port: 8887
+          id: source
+          ordinal: 1
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          value_type_enum: 0
+          value_encoding: none
+          value: 1000
+    - inputs:
+        - stage: co_process
+          source_enum: 5
+          value: 5000
+          value_encoding: none
+          source: socket_input
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value: 20
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: socket_input
+          stage_enum: 1
+          source_enum: 5
+          ordinal: 1
+    - inputs:
+        - value: 511
+          source: socket_input
+          stage_enum: 1
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          port: 8887
+          value_encoding: none
+          address: ss-localhost
+          value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+    - inputs:
+        - address: ss-localhost
+          source: socket_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 1
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          stage: co_process
+          port: 8887
+          stage_enum: 1
+          source_enum: 5
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887

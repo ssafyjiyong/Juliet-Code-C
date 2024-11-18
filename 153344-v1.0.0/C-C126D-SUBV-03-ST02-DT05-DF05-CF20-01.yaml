@@ -1,0 +1,154 @@
+io_pair:
+  base_inputs:
+    - stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: TRUCKIE_LYSIGENIC
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          stage: pre_process
+          stage_enum: 0
+          name: TRUCKIE_LYSIGENIC
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+        - source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: TRUCKIE_LYSIGENIC
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Has a fixed stack buffer of size 64, allocated within a struct When input has a larger size, the stack buffer will be over read\n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          source: env_var_input
+          ordinal: 1
+          name: TRUCKIE_LYSIGENIC
+          source_enum: 2
+          stage_enum: 0
+        - stage_enum: 0
+          ordinal: 2
+          id: source
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          stage: pre_process
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          name: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          name: TRUCKIE_LYSIGENIC
+          source_enum: 2
+          stage: pre_process
+        - value: Hello World!
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          source_enum: 3
+          source: file_content_input
+          id: source
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          name: TRUCKIE_LYSIGENIC
+          stage: pre_process
+        - name: /opt/stonesoup/workspace/testData/recrosses_suling/euthyneural_rosemaria.txt
+          source: file_content_input
+          ordinal: 2
+          value: Short is good
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp06RNzT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: source_taint
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmp06RNzT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp06RNzT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - feature_group: control_flow
+    feature: sequence
+    file_name: /tmp/tmp06RNzT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: tungstosilicate_staid
+    line_number: 0

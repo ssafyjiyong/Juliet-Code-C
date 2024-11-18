@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpnzsbLx_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpnzsbLx_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpnzsbLx_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_50
+  - file_name: /tmp/tmpnzsbLx_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6151
+      size: 12
+      flags: 950
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+          value: 1073676287
+          source: shared_memory_input
+          flags: 950
+          key: 6151
+          source_enum: 6
+          stage: pre_process
+          size: 12
+          stage_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          key: 6151
+          value: 2147483647
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          flags: 950
+          source: shared_memory_input
+          size: 12
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          flags: 950
+          key: 6151
+          size: 12
+          value: 68718952445
+          value_encoding: none
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          value: 1301
+          ordinal: 1
+          key: 6151
+          value_encoding: none
+          size: 12
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          key: 6151
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          size: 12
+          value_type_enum: 0
+          ordinal: 1
+          value: 1073676288
+          flags: 950
+          source: shared_memory_input

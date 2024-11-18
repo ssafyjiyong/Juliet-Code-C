@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpx1ENWa_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+    feature_group: source_taint
+  - feature_group: data_type
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: void_pointer
+    file_name: /tmp/tmpx1ENWa_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - feature_group: data_flow
+    file_name: /tmp/tmpx1ENWa_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: address_as_constant
+  - feature_group: control_flow
+    file_name: /tmp/tmpx1ENWa_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: autosomes_rougy
+    line_number: 0
+    feature: sequence
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      id: source
+      name: MINONG_MARSUPIALISING
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+  description: "Has a fixed stack buffer of size 64.  (char [64])\n\n"
+  benigns:
+    - inputs:
+        - value: AAA
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          name: MINONG_MARSUPIALISING
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value: Hellow world!
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: MINONG_MARSUPIALISING
+          stage: pre_process
+          source: env_var_input
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          name: MINONG_MARSUPIALISING
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: Good-bye cruel world!
+          value_encoding: none
+  exploits:
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_type_enum: 0
+          stage: pre_process
+          name: MINONG_MARSUPIALISING
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+    - inputs:
+        - value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          name: MINONG_MARSUPIALISING
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

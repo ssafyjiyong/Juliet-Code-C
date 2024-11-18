@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp8l5Bvt_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    feature_group: control_flow
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature: callback
+  - file_name: /tmp/tmp8l5Bvt_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: fullmouth_coitions
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp8l5Bvt_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: fullmouth_coitions
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmp8l5Bvt_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: scio_jtunn
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+io_pair:
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  base_inputs:
+    - stage: pre_process
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 1527
+      size: 35
+      flags: 950
+  benigns:
+    - inputs:
+        - flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          key: 1527
+          value_encoding: none
+          value: 10
+          value_type_enum: 0
+          size: 35
+    - inputs:
+        - size: 35
+          source_enum: 6
+          value: google.com
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          id: source
+          source: shared_memory_input
+          key: 1527
+          ordinal: 1
+          value_type_enum: 0
+          flags: 950
+    - inputs:
+        - source: shared_memory_input
+          id: source
+          value: localhost
+          flags: 950
+          key: 1527
+          stage: pre_process
+          stage_enum: 0
+          size: 35
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+  exploits:
+    - inputs:
+        - id: source
+          ordinal: 1
+          value_type_enum: 0
+          source: shared_memory_input
+          size: 35
+          key: 1527
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          flags: 950
+          value_encoding: none
+          value: 10%20%3B%20ls -la
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 6
+          flags: 950
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value: localhost%20%26%20echo Hello world
+          stage: pre_process
+          id: source
+          key: 1527
+          stage_enum: 0
+          ordinal: 1
+          size: 35
+          value_encoding: none
+          value_type_enum: 0

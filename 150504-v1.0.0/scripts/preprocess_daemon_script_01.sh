@@ -1,0 +1,3 @@
+#!/bin/bash
+
+inotifywait -m -e create --format "%f" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ "${NEW_FILE}" == *.pid ]]; then PROC_ID="${NEW_FILE%.pid}"; echo "Signaling: " "${PROC_ID}" && sleep 1 && kill -s 10 "${PROC_ID}" && echo "Signaled (10).  Sleeping..." && sleep 1 && kill -s 12 "${PROC_ID}" && echo "Signaled (12)."; else echo "Ignoring: " "/opt/stonesoup/workspace/testData/${NEW_FILE}"; fi; done;

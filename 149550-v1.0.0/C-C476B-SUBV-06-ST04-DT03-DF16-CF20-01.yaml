@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  benigns:
+    - inputs:
+        - flags: 950
+          key: 6655
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          stage_enum: 0
+          value: AAAAAaba
+          value_type: USE_TEXT_DIRECTLY
+          size: 66
+          source_enum: 6
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+    - inputs:
+        - id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          size: 66
+          stage: pre_process
+          flags: 950
+          key: 6655
+          ordinal: 1
+          source_enum: 6
+          value: ABCabaD123
+          value_encoding: none
+          value_type_enum: 0
+          source: shared_memory_input
+    - inputs:
+        - key: 6655
+          id: source
+          stage: pre_process
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          flags: 950
+          value_encoding: none
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          size: 66
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          size: 66
+          key: 6655
+          id: source
+          source_enum: 6
+          source: shared_memory_input
+          ordinal: 1
+          flags: 950
+          stage_enum: 0
+          value: A.A
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - size: 66
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          key: 6655
+          source: shared_memory_input
+          source_enum: 6
+          ordinal: 1
+          stage_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - key: 6655
+      id: source
+      stage: pre_process
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      size: 66
+      flags: 950
+code_complexity_features:
+  - file_name: /tmp/tmpZHsZgO_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    line_number: 0
+  - feature_group: data_type
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: void_pointer
+    file_name: /tmp/tmpZHsZgO_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - feature_group: data_flow
+    file_name: /tmp/tmpZHsZgO_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: buffer_address_array_index
+  - feature_group: control_flow
+    file_name: /tmp/tmpZHsZgO_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: sequence

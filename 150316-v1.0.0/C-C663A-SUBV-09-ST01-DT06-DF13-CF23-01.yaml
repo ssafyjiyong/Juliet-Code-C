@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmp2J6APe_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp2J6APe_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp2J6APe_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmp2J6APe_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+io_pair:
+  benigns:
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          name: SHAKTI_HARVESTRY
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          value: 3 hephalump
+    - inputs:
+        - value: 1 Sniffles_and_whiffles,_yo.
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          name: SHAKTI_HARVESTRY
+          ordinal: 1
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          source: env_var_input
+          source_enum: 2
+          name: SHAKTI_HARVESTRY
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+  exploits:
+    - inputs:
+        - name: SHAKTI_HARVESTRY
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          name: SHAKTI_HARVESTRY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SHAKTI_HARVESTRY
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152954,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case allocates a buffer on the heap, copies the input string into it, and then capitalizes each letter in the buffer. It searches that buffer to see if it contains the letter 'E', using a while loop that increments the pointer to the buffer each time through the loop. When it finds a letter 'E', or reaches the end of the buffer, it frees the buffer, using the pointer that it may have incremented. If the input is the empty string, or has the letter 'E' (or 'e') as its first character, the free happens successfully. If the input is non-empty and does not have the letter 'E' as its first character, the free does not happen at the start of the buffer, resulting in a segfault.   \nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: UNION\n - Data Flow: INDEX_ALIAS_2\n - Control Flow: SEQUENCE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C761A-SUBV-08-ST03-DT07-DF08-CF20-01.xml"
+          },
+          "length": 70192,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "b4ae9e6318e9655e6f0906974ada4b047844e041a3da6385d13a3e5998c9af8f"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/config.c"
+          },
+          "length": 37559,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "6f659a5653247cb40ee242856a1c5f4da6fe783ab569471fdfd22adb72bc2edf"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "761",
+              "name": "Free of Pointer not at Start of Buffer"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-761",
+          "message": {
+            "text": "Free of Pointer not at Start of Buffer."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/config.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 155,
+                  "endLine": 157
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "761",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

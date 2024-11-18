@@ -1,0 +1,94 @@
+io_pair:
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          name: ACHLUOPHOBIA_PLATYRRHINE
+          value_encoding: none
+          value_type_enum: 0
+          value: 123451234567
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          source_enum: 2
+          name: ACHLUOPHOBIA_PLATYRRHINE
+          source: env_var_input
+          value: 845633125678
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          name: ACHLUOPHOBIA_PLATYRRHINE
+          value: 80
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          value: 3643
+          stage: pre_process
+          name: ACHLUOPHOBIA_PLATYRRHINE
+          value_type_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          name: ACHLUOPHOBIA_PLATYRRHINE
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: ACHLUOPHOBIA_PLATYRRHINE
+  description: "Reads in a integer and uses the value to allocate memory for a string on the stack. Because the input value is unchecked can allocate arbitrarily large value, resulting in a resource drain\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmp5W3boo_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp5W3boo_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: union
+    feature_group: data_type
+  - file_name: /tmp/tmp5W3boo_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: dresser_monodelphic
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmp5W3boo_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature: recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

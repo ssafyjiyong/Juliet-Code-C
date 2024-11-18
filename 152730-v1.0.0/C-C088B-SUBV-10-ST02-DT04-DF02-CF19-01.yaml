@@ -1,0 +1,254 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: PRESUMERS_SUSS
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          source_enum: 2
+        - stage_enum: 0
+          ordinal: 2
+          value_encoding: none
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          id: source
+          name: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+        - stage: pre_process
+          ordinal: 1
+          source_enum: 3
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_encoding: none
+          source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+        - source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          source_enum: 3
+          ordinal: 2
+          value: !<!> hello World!
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: PRESUMERS_SUSS
+          source: env_var_input
+          source_enum: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_encoding: none
+          source: file_content_input
+          value_type_enum: 0
+        - ordinal: 2
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          value_type_enum: 0
+          stage: pre_process
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          source_enum: 3
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: file_content_input
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          name: PRESUMERS_SUSS
+          value: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          value_encoding: none
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+        - value_type_enum: 0
+          stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          ordinal: 2
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          source_enum: 3
+        - name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+        - ordinal: 2
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> hello World!
+          source_enum: 3
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          name: PRESUMERS_SUSS
+          source_enum: 2
+          source: env_var_input
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          id: source
+          stage: pre_process
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          source: file_content_input
+          ordinal: 2
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_type_enum: 0
+        - source: file_content_input
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage_enum: 0
+          source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          value_encoding: none
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          stage_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          name: PRESUMERS_SUSS
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+        - source: file_content_input
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+          source_enum: 3
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          ordinal: 2
+          value_encoding: none
+          value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          stage: pre_process
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: PRESUMERS_SUSS
+      source: env_var_input
+      source_enum: 2
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/bookland_overtinseling/rallinae_gemless.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpG3hik5_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpG3hik5_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_2
+    file_name: /tmp/tmpG3hik5_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - file_name: /tmp/tmpG3hik5_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive

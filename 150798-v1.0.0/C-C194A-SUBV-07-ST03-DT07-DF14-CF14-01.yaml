@@ -1,0 +1,130 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpb6MvmA_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpb6MvmA_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpb6MvmA_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpb6MvmA_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_10
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          source: socket_input
+          address: ss-localhost
+          value_type_enum: 0
+          port: 8887
+          value: 50
+          source_enum: 5
+          value_encoding: none
+        - stage_enum: 0
+          source: script_input
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage: pre_process
+          source_enum: 7
+    - inputs:
+        - ordinal: 1
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          id: source
+          value: 1000
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 7
+          source: script_input
+          stage: pre_process
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          address: ss-localhost
+          stage_enum: 1
+          port: 8887
+          id: source
+          value: 20000
+          ordinal: 1
+        - stage: pre_process
+          ordinal: 2
+          source: script_input
+          stage_enum: 0
+          source_enum: 7
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  exploits:
+    - inputs:
+        - value: -5
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          address: ss-localhost
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          port: 8887
+        - stage: pre_process
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+          ordinal: 2
+    - inputs:
+        - ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: co_process
+          stage_enum: 1
+          id: source
+          value: -10
+          source: socket_input
+          source_enum: 5
+          value_encoding: none
+        - stage: pre_process
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 7
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M

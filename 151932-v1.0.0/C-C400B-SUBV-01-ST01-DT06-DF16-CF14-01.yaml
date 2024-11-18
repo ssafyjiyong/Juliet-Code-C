@@ -1,0 +1,136 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpSVcwhj_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpSVcwhj_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpSVcwhj_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpSVcwhj_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature: interprocedural_10
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - source: env_var_input
+          name: HIEROCRACY_DEBAUCHEDNESS
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          id: source
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          name: HIEROCRACY_DEBAUCHEDNESS
+        - value: not an empty file
+          source: file_content_input
+          source_enum: 3
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/good02.txt
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          name: HIEROCRACY_DEBAUCHEDNESS
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          source: env_var_input
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          value_encoding: none
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: HIEROCRACY_DEBAUCHEDNESS
+  exploits:
+    - inputs:
+        - value: /dev/urandom
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: HIEROCRACY_DEBAUCHEDNESS
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          id: source
+          source_enum: 2
+          ordinal: 1
+          name: HIEROCRACY_DEBAUCHEDNESS
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          value: a
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+        - source_enum: 7
+          stage_enum: 0
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+          ordinal: 3
+          stage: pre_process
+        - source_enum: 7
+          ordinal: 4
+          stage_enum: 0
+          source: script_input
+          name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+          stage: pre_process

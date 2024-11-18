@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmp_PlK1x_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp_PlK1x_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp_PlK1x_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: bazoos_blackbrush
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmp_PlK1x_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    feature: set_jump_long_jump
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6844
+      size: 19
+      flags: 950
+  benigns:
+    - inputs:
+        - value: exampleofgoodinput
+          ordinal: 1
+          key: 6844
+          value_type: USE_TEXT_DIRECTLY
+          size: 19
+          flags: 950
+          value_type_enum: 0
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 6
+          id: source
+          value_encoding: none
+    - inputs:
+        - key: 6844
+          size: 19
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value: abcd12345ABCDE
+          flags: 950
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value: R0G3RR4881T
+          size: 19
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          key: 6844
+          source: shared_memory_input
+          id: source
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          flags: 950
+  exploits:
+    - inputs:
+        - source_enum: 6
+          value_encoding: none
+          source: shared_memory_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          flags: 950
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: a-b+c*d
+          key: 6844
+          size: 19
+    - inputs:
+        - value: 3.14159
+          ordinal: 1
+          flags: 950
+          size: 19
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          key: 6844
+  description: "Good input:1) environment variable contains only alphanumeric charactersBad input:1) environment variable contains non alphanumeric characters\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

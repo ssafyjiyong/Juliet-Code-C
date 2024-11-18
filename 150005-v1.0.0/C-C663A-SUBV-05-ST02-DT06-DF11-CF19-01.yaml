@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpPqrA6A_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpPqrA6A_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpPqrA6A_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpPqrA6A_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: ELECTROLYTICAL_MOONISH
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+  benigns:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: ELECTROLYTICAL_MOONISH
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+        - source: file_content_input
+          stage_enum: 0
+          id: source
+          value: 3 hephalump
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          source_enum: 3
+          ordinal: 2
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          value_type: USE_TEXT_DIRECTLY
+          name: ELECTROLYTICAL_MOONISH
+          ordinal: 1
+        - id: source
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          value: 1 Sniffles_and_whiffles,_yo.
+          name: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          source_enum: 3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+          name: ELECTROLYTICAL_MOONISH
+          ordinal: 1
+        - id: source
+          name: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: ELECTROLYTICAL_MOONISH
+        - source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: ELECTROLYTICAL_MOONISH
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/frescoed_freytag/rushings_gloeosporiose.txt
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

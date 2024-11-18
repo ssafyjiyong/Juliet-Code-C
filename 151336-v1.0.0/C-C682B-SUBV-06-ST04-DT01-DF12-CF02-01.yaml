@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp7Q9byr_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+    function_name: svn_error_wrap_apr
+  - feature_group: data_type
+    file_name: /tmp/tmp7Q9byr_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmp7Q9byr_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+    file_name: /tmp/tmp7Q9byr_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: reassigning_commistion
+io_pair:
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5297
+      size: 7
+      flags: 950
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          size: 7
+          stage_enum: 0
+          key: 5297
+          flags: 950
+          ordinal: 1
+          value: 10000
+          value_type_enum: 0
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          value_encoding: none
+          id: source
+    - inputs:
+        - stage_enum: 0
+          id: source
+          source: shared_memory_input
+          ordinal: 1
+          source_enum: 6
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          size: 7
+          key: 5297
+          flags: 950
+          value: FFFFFF
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - source_enum: 6
+          value_type_enum: 0
+          flags: 950
+          size: 7
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: shared_memory_input
+          key: 5297
+          stage: pre_process
+          value_encoding: none
+          id: source
+          ordinal: 1
+    - inputs:
+        - ordinal: 1
+          flags: 950
+          size: 7
+          source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 0
+          key: 5297
+    - inputs:
+        - value_encoding: none
+          flags: 950
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          source: shared_memory_input
+          source_enum: 6
+          key: 5297
+          value: FFFF
+          ordinal: 1
+          size: 7
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY

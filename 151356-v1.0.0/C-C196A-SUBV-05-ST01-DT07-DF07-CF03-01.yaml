@@ -1,0 +1,144 @@
+io_pair:
+  exploits:
+    - inputs:
+        - name: DESTINY_NONHERETICALLY
+          value_type_enum: 0
+          value: 4294967291
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          id: source
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+        - name: SS_BUFF
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: Good_Bye_World
+          value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          name: DESTINY_NONHERETICALLY
+          id: source
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          value: 2147483650
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+        - stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          value: aaaaaaaaaaaaaaaaa
+          source_enum: 2
+          name: SS_BUFF
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - id: source
+          name: DESTINY_NONHERETICALLY
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value: 15
+          source: env_var_input
+          stage: pre_process
+          ordinal: 1
+        - source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          stage: pre_process
+          value: hello
+          ordinal: 2
+          source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - name: DESTINY_NONHERETICALLY
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: 8
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+        - source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+          name: SS_BUFF
+          value: abcdefghiklmnopqrstuvwxyz
+          source_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          name: DESTINY_NONHERETICALLY
+          id: source
+          source_enum: 2
+          source: env_var_input
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+        - source_enum: 2
+          ordinal: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+          name: SS_BUFF
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: DESTINY_NONHERETICALLY
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmp3TuHDF_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp3TuHDF_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: data_type
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: union
+  - file_name: /tmp/tmp3TuHDF_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_1
+  - file_name: /tmp/tmp3TuHDF_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: control_flow
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: infinite_loop
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

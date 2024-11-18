@@ -1,0 +1,140 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          id: source
+          value: 50 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 This_will_surely_break_things.
+          value_encoding: none
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage_enum: 0
+          source_enum: 7
+          id: background
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          value: 75 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 asdfasdfasdfasdfasdfasdfasdfasdfasdf
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          stage: co_process
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+        - id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are files to be read (also to delay execution), and data is a string containing no spaces.  It does a double checked lock which can allow a second thread to return an uninitialized struct while the first thread is in the process of initialization, leading to a null pointer dereference.\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 a1s2d3f4
+          source_enum: 5
+          port: 8887
+          source: socket_input
+          id: source
+          stage: co_process
+          value_encoding: none
+        - id: background
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+    - inputs:
+        - source_enum: 5
+          value: 25 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 waffles
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          address: ss-localhost
+          port: 8887
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+        - id: background
+          ordinal: 2
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          source: script_input
+          stage_enum: 0
+    - inputs:
+        - port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 5
+          source: socket_input
+          stage: co_process
+          stage_enum: 1
+          value: 5000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 bannana.
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          address: ss-localhost
+        - name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file2
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 3
+          source_enum: 3
+code_complexity_features:
+  - file_name: /tmp/tmps36CBN_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmps36CBN_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmps36CBN_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+    file_name: /tmp/tmps36CBN_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

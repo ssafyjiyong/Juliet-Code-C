@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpG8P5g3_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+    function_name: stonesoup_handle_taint
+  - file_name: /tmp/tmpG8P5g3_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpG8P5g3_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature: recursive
+    feature_group: control_flow
+    file_name: /tmp/tmpG8P5g3_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: startles_maylike
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          id: source
+          source: socket_input
+          address: ss-localhost
+          source_enum: 5
+          stage_enum: 1
+          value: 46400
+          port: 8887
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          source_enum: 5
+          source: socket_input
+          stage: co_process
+          id: source
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 1
+          port: 8887
+          value: 55000
+          value_encoding: none
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          source_enum: 5
+          value: 50
+          source: socket_input
+          stage: co_process
+          value_type_enum: 0
+    - inputs:
+        - value: 100
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          value: 10000
+          address: ss-localhost
+          port: 8887
+          source_enum: 5
+          id: source
+          source: socket_input
+          value_encoding: none
+          stage_enum: 1
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887

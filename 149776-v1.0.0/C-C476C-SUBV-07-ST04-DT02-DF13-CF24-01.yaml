@@ -1,0 +1,106 @@
+io_pair:
+  exploits:
+    - inputs:
+        - source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          value: 2 a
+          source_enum: 6
+          value_encoding: none
+          stage: pre_process
+          id: source
+          ordinal: 1
+          key: 7013
+          size: 22
+          flags: 950
+    - inputs:
+        - stage_enum: 0
+          flags: 950
+          id: source
+          size: 22
+          value_encoding: none
+          key: 7013
+          source: shared_memory_input
+          source_enum: 6
+          value: 10 a b c
+          ordinal: 1
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          size: 22
+          key: 7013
+          stage: pre_process
+          flags: 950
+          value: 1 foo
+          value_encoding: none
+          source: shared_memory_input
+          source_enum: 6
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          source: shared_memory_input
+          value: 2 a b
+          value_type: USE_TEXT_DIRECTLY
+          size: 22
+          flags: 950
+          key: 7013
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          size: 22
+          value: 3 alpha bravo charlie
+          key: 7013
+          source_enum: 6
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          flags: 950
+          source: shared_memory_input
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7013
+      size: 22
+      flags: 950
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpDM0C4O_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - file_name: /tmp/tmpDM0C4O_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpDM0C4O_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - function_name: skip_bom
+    line_number: 0
+    feature: unconditional_jump
+    file_name: /tmp/tmpDM0C4O_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: control_flow

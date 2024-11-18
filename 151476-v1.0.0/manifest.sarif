@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151476,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: TYPEDEF\n - Data Flow: ADDRESS_AS_CONSTANT\n - Control Flow: INTERPROCEDURAL_10",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C401A-SUBV-02-ST03-DT06-DF05-CF14-01.xml"
+          },
+          "length": 65850,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "dd922518c69e82c01daae0adfcb762bd3328bb8a6e80dd5b889f99408e8c6a7e"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/mutex.c"
+          },
+          "length": 10492,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "50f651b12b8fcaf61e06b2c811e9c6cec08fdfbfdf76d99f906ae110c36d044a"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "401",
+              "name": "Missing Release of Memory after Effective Lifetime"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-401",
+          "message": {
+            "text": "Missing Release of Memory after Effective Lifetime."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/mutex.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 243,
+                  "endLine": 250
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "401",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

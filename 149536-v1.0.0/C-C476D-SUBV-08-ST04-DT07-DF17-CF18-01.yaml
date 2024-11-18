@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpYXR7Vp_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature: SHARED_MEMORY
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpYXR7Vp_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpYXR7Vp_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpYXR7Vp_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: control_flow
+    function_name: svn_config_read3
+    line_number: 0
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5625
+      size: 63
+      flags: 950
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  exploits:
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 63
+          value: A.A
+          key: 5625
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          key: 5625
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAHHHHHHHHHHHH!
+          id: source
+          size: 63
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          flags: 950
+          value_type_enum: 0
+          key: 5625
+          stage: pre_process
+          size: 63
+          value: AAAAA
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          ordinal: 1
+          value_encoding: none
+          flags: 950
+          key: 5625
+          stage: pre_process
+          value: ABCD123
+          id: source
+          size: 63
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          ordinal: 1
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          flags: 950
+          key: 5625
+          size: 63
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY

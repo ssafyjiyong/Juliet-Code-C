@@ -1,0 +1,154 @@
+code_complexity_features:
+  - line_number: 0
+    function_name: svn_mutex__unlock
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+    file_name: /tmp/tmpd0K6Kb_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - function_name: svn_mutex__unlock
+    feature_group: data_type
+    line_number: 0
+    file_name: /tmp/tmpd0K6Kb_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: array
+  - file_name: /tmp/tmpd0K6Kb_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: address_as_function_return_value
+    function_name: svn_mutex__unlock
+    feature_group: data_flow
+    line_number: 0
+  - feature_group: control_flow
+    file_name: /tmp/tmpd0K6Kb_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature: unconditional_jump
+io_pair:
+  description: "Reads in a integer and uses the value to allocate memory for a string on the stack. Because the input value is unchecked can allocate arbitrarily large value, resulting in a resource drain\n\n"
+  exploits:
+    - inputs:
+        - name: BIOS_ASCOTS
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+        - stage: pre_process
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          source_enum: 3
+          id: source
+          ordinal: 2
+          value: 123451234567
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - name: BIOS_ASCOTS
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          ordinal: 1
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+        - stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          source_enum: 3
+          id: source
+          ordinal: 2
+          value: 845633125678
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - name: BIOS_ASCOTS
+      value_type: USE_TEXT_DIRECTLY
+      stage: pre_process
+      source: env_var_input
+      value: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+      ordinal: 1
+      source_enum: 2
+      value_encoding: none
+      value_type_enum: 0
+      stage_enum: 0
+    - stage_enum: 0
+      stage: pre_process
+      source: file_content_input
+      name: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+      source_enum: 3
+      id: source
+      ordinal: 2
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          value_encoding: none
+          name: BIOS_ASCOTS
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 2
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          value: 80
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          stage: pre_process
+          name: BIOS_ASCOTS
+        - ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          id: source
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 3643
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          value_type: USE_TEXT_DIRECTLY
+          name: BIOS_ASCOTS
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+        - stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/algal_woodbridge/oarman_viraginian.txt
+          ordinal: 2
+          source_enum: 3
+          id: source
+          value: 10
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          source: file_content_input
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

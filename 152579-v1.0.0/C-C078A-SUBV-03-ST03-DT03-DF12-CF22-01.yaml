@@ -1,0 +1,100 @@
+io_pair:
+  exploits:
+    - inputs:
+        - address: ss-localhost
+          id: source
+          value_type_enum: 0
+          stage_enum: 1
+          value_encoding: none
+          source_enum: 5
+          source: socket_input
+          value: 10; ls -la
+          ordinal: 1
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+    - inputs:
+        - id: source
+          value_encoding: none
+          source: socket_input
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          value: localhost; echo Hello world
+          source_enum: 5
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          address: ss-localhost
+  benigns:
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          address: ss-localhost
+          value: 10
+          stage_enum: 1
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          stage: co_process
+          source: socket_input
+          source_enum: 5
+    - inputs:
+        - ordinal: 1
+          port: 8887
+          stage: co_process
+          source_enum: 5
+          id: source
+          address: ss-localhost
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: google.com
+          value_type_enum: 0
+          source: socket_input
+    - inputs:
+        - value_type_enum: 0
+          port: 8887
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          value: localhost
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          id: source
+          stage: co_process
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: SOCKET
+    line_number: 0
+    function_name: stonesoup_handle_taint
+    feature_group: source_taint
+    file_name: /tmp/tmp_tekWo_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmp_tekWo_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+  - file_name: /tmp/tmp_tekWo_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature_group: control_flow
+    feature: macros
+    file_name: /tmp/tmp_tekWo_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: blabbered_stampedable

@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: PRELA_VOROSHILOVSK
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: PRELA_VOROSHILOVSK
+          value: 46400
+          ordinal: 1
+          stage: pre_process
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          value: 55000
+          source: env_var_input
+          source_enum: 2
+          name: PRELA_VOROSHILOVSK
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  benigns:
+    - inputs:
+        - name: PRELA_VOROSHILOVSK
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value: 50
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          value: 100
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          name: PRELA_VOROSHILOVSK
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          value: 10000
+          source: env_var_input
+          stage_enum: 0
+          name: PRELA_VOROSHILOVSK
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - file_name: /tmp/tmpIdUxbE_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpIdUxbE_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: data_type
+    function_name: skip_bom
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpIdUxbE_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpIdUxbE_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - size: 44
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 1
+      key: 1773
+      id: source
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          flags: 950
+          size: 44
+          key: 1773
+          id: source
+          value: aaa
+          value_encoding: none
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          flags: 950
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 6
+          value: this string begins with a lower-case letter
+          id: source
+          size: 44
+          source: shared_memory_input
+          key: 1773
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+  description: "Malloc a pointer, and free it.  If input begins with ascii character 'a' or higher, free it a second time.  Causes seg fault.\n\n"
+  benigns:
+    - inputs:
+        - key: 1773
+          value_type_enum: 0
+          flags: 950
+          source: shared_memory_input
+          size: 44
+          stage_enum: 0
+          source_enum: 6
+          stage: pre_process
+          value: AAA
+          ordinal: 1
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - flags: 950
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          size: 44
+          stage: pre_process
+          value_type_enum: 0
+          key: 1773
+          ordinal: 1
+          value_encoding: none
+          value: 12345 Hello world!
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          value: "[Good-bye cruel world!]"
+          flags: 950
+          size: 44
+          key: 1773
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpBvBCOw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - feature_group: data_type
+    file_name: /tmp/tmpBvBCOw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpBvBCOw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: indirectly_recursive
+    file_name: /tmp/tmpBvBCOw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: control_flow

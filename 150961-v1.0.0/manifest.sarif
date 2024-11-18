@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150961,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case takes a filename. It determines the size of the file, and attempts to check whether the size of the file is smaller than 128 characters. The arithmetic used in the if-check may cause an integer underflow, which will result in the if-check succeeding when it should fail. If the if-check succeeds after an integer underflow, a large amount of data is copied into a small (128-character) buffer on the stack. This will overwrite memory on the stack, resulting in segmentation fault upon return from the function.\nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: TYPEDEF\n - Data Flow: BUFFER_ADDRESS_ARRAY_INDEX\n - Control Flow: INTERPROCEDURAL_10",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C191B-SUBV-09-ST03-DT06-DF16-CF14-01.xml"
+          },
+          "length": 155889,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "7b82afc27173f4fc2ac1c004ac928cd5b3d18a241b709943e8287b113882c726"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/cmdline.c"
+          },
+          "length": 45933,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "f8bb72909528bc76ec711d75628b1e341b8d8ba30ce1b2a96daafd1b9aba71a5"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "191",
+              "name": "Integer Underflow (Wrap or Wraparound)"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-191",
+          "message": {
+            "text": "Integer Underflow (Wrap or Wraparound)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/cmdline.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1226,
+                  "endLine": 1230
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "191",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

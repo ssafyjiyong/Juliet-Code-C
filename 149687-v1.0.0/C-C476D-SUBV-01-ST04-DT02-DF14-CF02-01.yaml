@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpYA0Por_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpYA0Por_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpYA0Por_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpYA0Por_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          flags: 950
+          stage_enum: 0
+          value_type_enum: 0
+          key: 5775
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          ordinal: 1
+          size: 63
+          value: A.A
+          id: source
+    - inputs:
+        - flags: 950
+          value: AAAAAAAHHHHHHHHHHHH!
+          size: 63
+          key: 5775
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5775
+      size: 63
+      flags: 950
+  benigns:
+    - inputs:
+        - value: AAAAA
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          size: 63
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          key: 5775
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          value_type_enum: 0
+          stage_enum: 0
+          flags: 950
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 63
+          value: ABCD123
+          key: 5775
+          value_encoding: none
+          source: shared_memory_input
+    - inputs:
+        - source: shared_memory_input
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          key: 5775
+          flags: 950
+          size: 63
+          ordinal: 1
+          value_type_enum: 0

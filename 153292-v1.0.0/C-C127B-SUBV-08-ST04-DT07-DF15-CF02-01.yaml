@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmplQpbBb_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: union
+    file_name: /tmp/tmplQpbBb_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+  - file_name: /tmp/tmplQpbBb_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmplQpbBb_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: control_flow
+    function_name: svn_config_read3
+    line_number: 0
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          id: source
+          ordinal: 1
+          flags: 950
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          source: shared_memory_input
+          source_enum: 6
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          key: 8925
+          size: 131
+    - inputs:
+        - key: 8925
+          source: shared_memory_input
+          size: 131
+          stage: pre_process
+          source_enum: 6
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          value: This is probably not going to overflow a buffer of some sort.
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          key: 8925
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          size: 131
+          stage_enum: 0
+          source_enum: 6
+          value_encoding: none
+          value: This statement has less than 64 characters, then nothing bad.
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a heap buffer of size 64.  Reads in an ascii string from an environment variable and copies the final 63 characters into the heap buffer.  Then  reads the variable back from the heap buffer in reverse order, but incorrectly uses the size of the original string.  If the original string is longer than 63characters, this will result in an underread.\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          key: 8925
+          flags: 950
+          value_encoding: none
+          size: 131
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          key: 8925
+          source: shared_memory_input
+          value: The quick brown fox jumps over the lazy dog.  Why?  I don't know, because he was in a rush and trying to get somewhere.
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          size: 131
+          value_type_enum: 0
+          ordinal: 1
+          flags: 950
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8925
+      size: 131
+      flags: 950

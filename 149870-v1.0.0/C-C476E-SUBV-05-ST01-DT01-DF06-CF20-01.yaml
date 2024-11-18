@@ -1,0 +1,124 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - stage: pre_process
+          name: PHONETIZE_GESTICULAR
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          source_enum: 2
+          id: source
+          source: env_var_input
+          stage_enum: 0
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          value: This file is not empty.
+          source: file_content_input
+          ordinal: 2
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_encoding: none
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: PHONETIZE_GESTICULAR
+          stage: pre_process
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_encoding: none
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value: Hello world!  And, good-bye.
+          stage_enum: 0
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_type: USE_TEXT_DIRECTLY
+          name: PHONETIZE_GESTICULAR
+          stage: pre_process
+          source: env_var_input
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          stage: pre_process
+          value: Yet another file.
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          ordinal: 2
+          source_enum: 3
+  exploits:
+    - inputs:
+        - source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          name: PHONETIZE_GESTICULAR
+          source_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          id: source
+          value_encoding: none
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          name: PHONETIZE_GESTICULAR
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: PHONETIZE_GESTICULAR
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmp8fzCG8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp8fzCG8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: data_type
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmp8fzCG8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmp8fzCG8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence

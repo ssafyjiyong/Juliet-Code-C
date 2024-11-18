@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpGx29xl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpGx29xl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpGx29xl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpGx29xl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: metusia_dropwort
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+io_pair:
+  exploits:
+    - inputs:
+        - size: 63
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          key: 7171
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 6
+          flags: 950
+          id: source
+          value: A.A
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          key: 7171
+          stage_enum: 0
+          source_enum: 6
+          size: 63
+          flags: 950
+          source: shared_memory_input
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_encoding: none
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - ordinal: 1
+      key: 7171
+      size: 63
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  benigns:
+    - inputs:
+        - source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAA
+          stage_enum: 0
+          size: 63
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          flags: 950
+          source: shared_memory_input
+          key: 7171
+          stage: pre_process
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          value_encoding: none
+          flags: 950
+          key: 7171
+          size: 63
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          source_enum: 6
+          stage_enum: 0
+          value: ABCD123
+    - inputs:
+        - value_encoding: none
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          ordinal: 1
+          size: 63
+          key: 7171
+          source: shared_memory_input
+          flags: 950
+          stage: pre_process
+          id: source
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

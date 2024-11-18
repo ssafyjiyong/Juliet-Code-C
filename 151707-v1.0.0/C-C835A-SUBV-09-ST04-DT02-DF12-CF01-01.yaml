@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          stage: pre_process
+          size: 29
+          value: AAA
+          ordinal: 1
+          key: 4850
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+          source_enum: 6
+          size: 29
+          value_type_enum: 0
+          stage: pre_process
+          key: 4850
+          value_encoding: none
+          flags: 950
+          value: Hellowworld
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - value: Goodbyecruelworld
+          value_type_enum: 0
+          key: 4850
+          size: 29
+          flags: 950
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - size: 29
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 6
+          source: shared_memory_input
+          id: source
+          key: 4850
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value: AAAAA.AAAAAAAA
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          stage: pre_process
+          source_enum: 6
+          stage_enum: 0
+          value: This statement will break it
+          source: shared_memory_input
+          size: 29
+          key: 4850
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          flags: 950
+          value_type_enum: 0
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4850
+      size: 29
+      flags: 950
+code_complexity_features:
+  - file_name: /tmp/tmpsgoQLS_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpsgoQLS_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: cascaras_hogreeve
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpsgoQLS_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: cascaras_hogreeve
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpsgoQLS_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: lyocratic_squad
+    line_number: 0
+    feature: var_arg_list
+    feature_group: data_flow

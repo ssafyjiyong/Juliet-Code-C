@@ -1,0 +1,106 @@
+code_complexity_features:
+  - feature_group: control_flow
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: callback
+    file_name: /tmp/tmptnsJo7_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - line_number: 0
+    file_name: /tmp/tmptnsJo7_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    function_name: rhv_centrad
+  - file_name: /tmp/tmptnsJo7_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: data_type
+    function_name: rhv_centrad
+    line_number: 0
+    feature: struct
+  - file_name: /tmp/tmptnsJo7_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: pseudoparallel_ferroalloy
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+  base_inputs:
+    - key: 3331
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      size: 7
+      stage: pre_process
+      id: source
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          key: 3331
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          size: 7
+          source: shared_memory_input
+          source_enum: 6
+          flags: 950
+          value: 65538
+          stage_enum: 0
+          id: source
+    - inputs:
+        - ordinal: 1
+          flags: 950
+          stage_enum: 0
+          source_enum: 6
+          key: 3331
+          value_type_enum: 0
+          size: 7
+          value_encoding: none
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          value: 131074
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source_enum: 6
+          flags: 950
+          value_type_enum: 0
+          key: 3331
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          size: 7
+          source: shared_memory_input
+          value: 1
+    - inputs:
+        - value_type_enum: 0
+          flags: 950
+          source_enum: 6
+          key: 3331
+          source: shared_memory_input
+          ordinal: 1
+          stage_enum: 0
+          size: 7
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: 10
+          value_encoding: none
+    - inputs:
+        - value: 1000
+          size: 7
+          key: 3331
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          flags: 950
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1

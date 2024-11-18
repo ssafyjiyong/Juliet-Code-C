@@ -1,0 +1,100 @@
+io_pair:
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          value: AAAAA.AAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          stage_enum: 1
+          source_enum: 5
+          stage: co_process
+          id: source
+          port: 8887
+          address: ss-localhost
+          value: This statement will break it
+          value_encoding: none
+  benigns:
+    - inputs:
+        - source_enum: 5
+          stage: co_process
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          stage_enum: 1
+          address: ss-localhost
+          id: source
+          port: 8887
+          value_encoding: none
+          value: AAA
+    - inputs:
+        - source: socket_input
+          port: 8887
+          value_encoding: none
+          value: Hellowworld
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          id: source
+          ordinal: 1
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+    - inputs:
+        - value: Goodbyecruelworld
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          source_enum: 5
+          value_encoding: none
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          value_type_enum: 0
+          port: 8887
+          stage_enum: 1
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: SOCKET
+    line_number: 0
+    feature_group: source_taint
+    function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpPwYc5g_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    file_name: /tmp/tmpPwYc5g_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature: heap_pointer
+  - file_name: /tmp/tmpPwYc5g_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: indirectly_recursive
+    feature_group: control_flow
+    file_name: /tmp/tmpPwYc5g_ss_testcase/src-rose/subversion/libsvn_subr/utf.c

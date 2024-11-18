@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpqNEbul_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    feature_group: source_taint
+    line_number: 0
+    feature: SOCKET
+  - file_name: /tmp/tmpqNEbul_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpqNEbul_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpqNEbul_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: pointer_to_function
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          port: 8887
+          address: ss-localhost
+          value: brah
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          source_enum: 5
+    - inputs:
+        - value: dude
+          stage: co_process
+          address: ss-localhost
+          source_enum: 5
+          id: source
+          source: socket_input
+          stage_enum: 1
+          ordinal: 1
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - address: ss-localhost
+          ordinal: 1
+          source_enum: 5
+          value: bromigo
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          source: socket_input
+          stage: co_process
+          port: 8887
+          stage_enum: 1
+  exploits:
+    - inputs:
+        - stage: co_process
+          source: socket_input
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          source: socket_input
+          ordinal: 1
+          source_enum: 5
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          port: 8887
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          value_encoding: none
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"

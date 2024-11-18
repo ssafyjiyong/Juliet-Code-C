@@ -1,0 +1,250 @@
+io_pair:
+  description: "During preprocessing, files are created and placed in a directory to represent a lock that is externally accessible and unrestricted The program itself reads an input string.  It will attempt to create a lock by creating a file in the testData directory named <input string>.lck.  If such a file does not exist, it will run to completion.  If such a file does exists, it will wait until it is deleted so that it can create its own file.  This results in a deadlock. testData directory.  Bad inputs: name of a file that does exist under the testData directory.\n\n"
+  exploits:
+    - inputs:
+        - source_enum: 5
+          address: ss-localhost
+          ordinal: 1
+          value: file1
+          id: source
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value_encoding: none
+          stage: pre_process
+          source: file_content_input
+          value: file1
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          value_type_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+        - name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value: file2
+          value_encoding: none
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          source_enum: 3
+          ordinal: 4
+          value: file3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          id: source
+          stage: co_process
+          ordinal: 1
+          value_type_enum: 0
+          stage_enum: 1
+          value_encoding: none
+          port: 8887
+          address: ss-localhost
+          value: sync/file2
+          value_type: USE_TEXT_DIRECTLY
+        - value_type_enum: 0
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: file1
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value_encoding: none
+          ordinal: 3
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: file2
+          stage_enum: 0
+        - ordinal: 4
+          stage_enum: 0
+          value: file3
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          source: file_content_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+  base_inputs:
+    - ordinal: 1
+      source_enum: 5
+      id: source
+      port: 8887
+      stage_enum: 1
+      stage: co_process
+      address: ss-localhost
+      source: socket_input
+  benigns:
+    - inputs:
+        - ordinal: 1
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          port: 8887
+          source: socket_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          value: critical
+          address: ss-localhost
+          id: source
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          value_type_enum: 0
+          source_enum: 3
+          value: file1
+          stage_enum: 0
+          source: file_content_input
+        - ordinal: 3
+          stage_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          source: file_content_input
+          source_enum: 3
+          value: file2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - ordinal: 4
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: file3
+          source: file_content_input
+          stage: pre_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: socket_input
+          value_type_enum: 0
+          stage: co_process
+          value: sync/noissues
+          ordinal: 1
+          port: 8887
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+        - value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          value_encoding: none
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: file1
+          stage: pre_process
+          stage_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+          value_encoding: none
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value_type_enum: 0
+          stage: pre_process
+          value: file2
+          source: file_content_input
+          source_enum: 3
+        - value_type_enum: 0
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value: file3
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          ordinal: 4
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - id: source
+          source: socket_input
+          address: ss-localhost
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 1
+          stage: co_process
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: temp/sync/section
+          port: 8887
+        - value: file1
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 3
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+        - source: file_content_input
+          ordinal: 3
+          stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          value_type_enum: 0
+          value: file2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+        - value_type_enum: 0
+          ordinal: 4
+          source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value: file3
+          stage: pre_process
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    feature: SOCKET
+    file_name: /tmp/tmpZUP5Dd_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpZUP5Dd_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: union
+    line_number: 0
+    function_name: stonesoup_handle_taint
+    feature_group: data_type
+  - file_name: /tmp/tmpZUP5Dd_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: address_as_function_return_value
+    feature_group: data_flow
+    line_number: 0
+    function_name: stonesoup_handle_taint
+  - line_number: 0
+    feature: interprocedural_2
+    feature_group: control_flow
+    function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpZUP5Dd_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

@@ -1,0 +1,140 @@
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpWyFw4w_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpWyFw4w_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpWyFw4w_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpWyFw4w_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+io_pair:
+  benigns:
+    - inputs:
+        - address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          port: 8887
+          stage: co_process
+          id: source
+          stage_enum: 1
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Dirt_McGert
+          value_encoding: none
+        - source: script_input
+          id: background
+          stage: pre_process
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - address: ss-localhost
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          port: 8887
+          id: source
+          source_enum: 5
+          stage: co_process
+          source: socket_input
+          stage_enum: 1
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 @the_longest_hashtag_that_ever_existed_on_the_face_of_the_earth
+        - source_enum: 7
+          source: script_input
+          id: background
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 Silly_rabbit,_tricks_are_for_kids
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 2
+          source_enum: 3
+        - source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file2
+          source_enum: 3
+          ordinal: 3
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          address: ss-localhost
+          ordinal: 1
+          value_encoding: none
+          source: socket_input
+          port: 8887
+          source_enum: 5
+          stage: co_process
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 @the_longest_hashtag_that_ever_existed_on_the_face_of_the_earth
+          stage_enum: 1
+        - source_enum: 7
+          ordinal: 2
+          id: background
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source: script_input
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          stage: co_process
+          value_type_enum: 0
+          port: 8887
+          stage_enum: 1
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 1234567890_0987654321_1029384756_5647382910_0192837465_6574839201
+          value_encoding: none
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          ordinal: 2
+          id: background
+          stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certan benign cases), file1 and file2 are files used to delay the execution, and data is a string containing no spaces. A lack of syncronization leads to an underread/write for certain inputs. For the weakness to occur, FIFO files must be provided in the correct order (controlled by the runFifo.py script), the input must begin with a character with ASCII value less than 'A' and be 2 or more characters long.\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

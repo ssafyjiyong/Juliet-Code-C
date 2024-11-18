@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpIeQiMg_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpIeQiMg_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature: array
+    feature_group: data_type
+  - file_name: /tmp/tmpIeQiMg_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpIeQiMg_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    feature: macros
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          name: GELATINOTYPE_DIOPTRY
+          source_enum: 2
+          source: env_var_input
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          value: AAAAA.AAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: GELATINOTYPE_DIOPTRY
+          source: env_var_input
+          source_enum: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          value: This statement will break it
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: GELATINOTYPE_DIOPTRY
+      source: env_var_input
+      source_enum: 2
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"
+  benigns:
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          name: GELATINOTYPE_DIOPTRY
+          value_type_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+        - stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          value: AAA
+          id: source
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          source_enum: 2
+          source: env_var_input
+          name: GELATINOTYPE_DIOPTRY
+          stage_enum: 0
+        - stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          id: source
+          value_encoding: none
+          value: Hellowworld
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          name: GELATINOTYPE_DIOPTRY
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+        - stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          id: source
+          ordinal: 2
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/hydropneumatic_sansi/ceryx_salida.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: Goodbyecruelworld

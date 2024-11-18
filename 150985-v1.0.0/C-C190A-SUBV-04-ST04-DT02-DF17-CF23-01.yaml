@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          key: 6081
+          size: 6
+          value: 50
+          id: source
+    - inputs:
+        - value_encoding: none
+          size: 6
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+          value: 100
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage: pre_process
+          flags: 950
+          key: 6081
+          source: shared_memory_input
+          stage_enum: 0
+    - inputs:
+        - source: shared_memory_input
+          value: 10000
+          size: 6
+          id: source
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          key: 6081
+  exploits:
+    - inputs:
+        - ordinal: 1
+          id: source
+          value: 46400
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          stage_enum: 0
+          flags: 950
+          size: 6
+          value_type: USE_TEXT_DIRECTLY
+          key: 6081
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - key: 6081
+          source: shared_memory_input
+          source_enum: 6
+          value: 55000
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          size: 6
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6081
+      size: 6
+      flags: 950
+code_complexity_features:
+  - file_name: /tmp/tmpb7cHxE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - file_name: /tmp/tmpb7cHxE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpb7cHxE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpb7cHxE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump

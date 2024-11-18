@@ -1,0 +1,136 @@
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: ALLUTTERLY_USHERIAN
+  exploits:
+    - inputs:
+        - name: ALLUTTERLY_USHERIAN
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          id: source
+          value: /dev/urandom
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          stage: pre_process
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          name: ALLUTTERLY_USHERIAN
+        - value: a
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          ordinal: 3
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+        - source: script_input
+          stage_enum: 0
+          stage: pre_process
+          name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+          ordinal: 4
+          source_enum: 7
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          name: ALLUTTERLY_USHERIAN
+    - inputs:
+        - id: source
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          name: ALLUTTERLY_USHERIAN
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/good02.txt
+        - source: file_content_input
+          value: not an empty file
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          id: source
+          stage_enum: 0
+          name: ALLUTTERLY_USHERIAN
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpjhDVMJ_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - file_name: /tmp/tmpjhDVMJ_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpjhDVMJ_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpjhDVMJ_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function

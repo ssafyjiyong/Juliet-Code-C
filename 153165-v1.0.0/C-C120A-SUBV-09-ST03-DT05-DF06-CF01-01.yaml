@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "Has a fixed stack buffer of size 64.  (char [64])\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - stage: co_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          address: ss-localhost
+          value: AAA
+          id: source
+          stage_enum: 1
+          port: 8887
+          source: socket_input
+          source_enum: 5
+    - inputs:
+        - address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          id: source
+          value_encoding: none
+          ordinal: 1
+          port: 8887
+          value: Hellow world!
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          value_encoding: none
+          stage_enum: 1
+          stage: co_process
+          value: Good-bye cruel world!
+          id: source
+          address: ss-localhost
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - source: socket_input
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          port: 8887
+    - inputs:
+        - value_encoding: none
+          port: 8887
+          value: I've reached a point where I feel the need to express my disappointment with Gov. Common W Enumeration. There are a number of reasons Gov. Enumeration isn't telling us as to why he wants to obfuscate the issue so that one can't see what ought to be completely obvious to all. In this letter, I will expose those reasons one-by-one, on the principle that his argument that the sky is falling is hopelessly flawed and thoroughly circuitous. His cold, analytical approach to philistinism doesn't take into account the human element. In particular, those who have been hurt by philistinism know that Gov. Enumeration's jobations emblematize an increasing deturpation of cultural standards and a triumph of the meretricious. Get that straight, please. Any other thinking is blame-shoving or responsibility-dodging. Furthermore, Gov. Enumeration wants to eavesdrop on all types of private conversations. Why he wants that, I don't know, but that's what he wants.
+          address: ss-localhost
+          source: socket_input
+          stage_enum: 1
+          ordinal: 1
+          stage: co_process
+          id: source
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+code_complexity_features:
+  - function_name: svn_cmdline_init
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+    file_name: /tmp/tmp3rj7bQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+  - file_name: /tmp/tmp3rj7bQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmp3rj7bQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp3rj7bQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value

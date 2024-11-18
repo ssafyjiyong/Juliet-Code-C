@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpr9iCbw_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpr9iCbw_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+    file_name: /tmp/tmpr9iCbw_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+  - file_name: /tmp/tmpr9iCbw_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  benigns:
+    - inputs:
+        - value: 10
+          stage_enum: 1
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          id: source
+          address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          ordinal: 1
+          stage: co_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          value: google.com
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          address: ss-localhost
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          port: 8887
+    - inputs:
+        - value: localhost
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          value_encoding: none
+          port: 8887
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          ordinal: 1
+          source: socket_input
+          source_enum: 5
+          port: 8887
+          id: source
+          address: ss-localhost
+          value: 10%20%3B%20ls -la
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 5
+          stage: co_process
+          id: source
+          value: localhost%20%26%20echo Hello world
+          address: ss-localhost
+          source: socket_input
+          stage_enum: 1
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0

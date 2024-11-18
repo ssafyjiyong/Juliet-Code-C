@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152548,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: VOID_POINTER\n - Data Flow: ADDRESS_ALIAS_10\n - Control Flow: POINTER_TO_FUNCTION",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C089A-SUBV-03-ST02-DT03-DF03-CF18-01.xml"
+          },
+          "length": 72495,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "61091a139648b9ad96ca574c224366a2a30548836113a89d96b6577196b8c495"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/utf.c"
+          },
+          "length": 44071,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "c5059634092a1dedbc5127cdd28ee38cc46cc154a7a42080f6ca2dd77afb8511"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "89",
+              "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-89",
+          "message": {
+            "text": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/utf.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1065,
+                  "endLine": 1097
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "89",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

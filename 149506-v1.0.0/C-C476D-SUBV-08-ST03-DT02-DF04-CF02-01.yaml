@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - address: ss-localhost
+          value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          id: source
+          port: 8887
+          value: A.A
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - value_encoding: none
+          port: 8887
+          value_type_enum: 0
+          ordinal: 1
+          address: ss-localhost
+          stage_enum: 1
+          id: source
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAAAHHHHHHHHHHHH!
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - id: source
+          value: AAAAA
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          value_encoding: none
+          stage_enum: 1
+          value_type_enum: 0
+          ordinal: 1
+          port: 8887
+          source_enum: 5
+          address: ss-localhost
+          source: socket_input
+    - inputs:
+        - stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          ordinal: 1
+          address: ss-localhost
+          stage_enum: 1
+          value: ABCD123
+          value_encoding: none
+          port: 8887
+          value_type_enum: 0
+          id: source
+          source: socket_input
+    - inputs:
+        - stage: co_process
+          address: ss-localhost
+          source: socket_input
+          stage_enum: 1
+          source_enum: 5
+          id: source
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+code_complexity_features:
+  - file_name: /tmp/tmpbv8Chj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpbv8Chj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpbv8Chj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_50
+  - file_name: /tmp/tmpbv8Chj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    line_number: 0
+    feature_group: control_flow
+    function_name: stonesoup_handle_taint
+    feature: indirectly_recursive

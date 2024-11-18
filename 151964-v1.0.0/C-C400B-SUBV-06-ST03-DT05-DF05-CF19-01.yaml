@@ -1,0 +1,142 @@
+code_complexity_features:
+  - file_name: /tmp/tmpY6KI3B_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpY6KI3B_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpY6KI3B_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - line_number: 0
+    feature: recursive
+    file_name: /tmp/tmpY6KI3B_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: beachie_phenoxid
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          address: ss-localhost
+          source_enum: 5
+          value_encoding: none
+          stage: co_process
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          port: 8887
+          id: source
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good01.txt
+    - inputs:
+        - value_encoding: none
+          source: socket_input
+          source_enum: 5
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value_type_enum: 0
+          stage: co_process
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          value: not an empty file
+    - inputs:
+        - port: 8887
+          id: source
+          address: ss-localhost
+          value_type_enum: 0
+          stage_enum: 1
+          stage: co_process
+          source_enum: 5
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: socket_input
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          value_encoding: none
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          stage_enum: 0
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          address: ss-localhost
+          value_encoding: none
+          stage: co_process
+          source_enum: 5
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /dev/urandom
+          port: 8887
+          ordinal: 1
+          source: socket_input
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/bad02.txt
+          id: source
+          stage_enum: 1
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          ordinal: 1
+          address: ss-localhost
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          value: a
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 3
+        - stage: pre_process
+          ordinal: 3
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+          stage_enum: 0
+          source_enum: 7
+        - stage_enum: 0
+          name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+          source_enum: 7
+          ordinal: 4
+          stage: pre_process
+          source: script_input

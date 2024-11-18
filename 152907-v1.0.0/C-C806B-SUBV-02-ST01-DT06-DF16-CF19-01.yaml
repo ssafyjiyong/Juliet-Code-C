@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpvZOW0T_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: ENVIRONMENT_VARIABLE
+    line_number: 0
+    feature_group: source_taint
+    function_name: svn_mutex__unlock
+  - line_number: 0
+    feature_group: data_type
+    feature: typedef
+    file_name: /tmp/tmpvZOW0T_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+  - file_name: /tmp/tmpvZOW0T_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - feature_group: control_flow
+    line_number: 0
+    feature: recursive
+    file_name: /tmp/tmpvZOW0T_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+io_pair:
+  description: "Has a buffer declared on the heap. malloc(64*sizeOf(char)) If input is shorter than 64 it will overflowdue to using improper sizeof and strlen checking\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: BACCALAUREATES_OUTFFED
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value: AAAAAAAAAAAAAAA
+          source_enum: 2
+          ordinal: 1
+    - inputs:
+        - value_encoding: none
+          stage_enum: 0
+          value: Short is now bad
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          id: source
+          name: BACCALAUREATES_OUTFFED
+  benigns:
+    - inputs:
+        - value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAA
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: BACCALAUREATES_OUTFFED
+          source_enum: 2
+          id: source
+          source: env_var_input
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: BACCALAUREATES_OUTFFED
+          id: source
+          value: Hello World!  If this statement isn't more than 64 characters, it will go badly
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+    - inputs:
+        - name: BACCALAUREATES_OUTFFED
+          stage: pre_process
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          value: Short is good for buffer overflows, unless you make a mistake and get it wrong
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+  base_inputs:
+    - source_enum: 2
+      id: source
+      source: env_var_input
+      name: BACCALAUREATES_OUTFFED
+      ordinal: 1
+      stage: pre_process
+      stage_enum: 0

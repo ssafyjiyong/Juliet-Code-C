@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Converts the input into an int using atoi.\n  Takes that number mod 4, then uses that as the divisor in another operation.  IF the original input value is 0 mod 4, this will result in a floating point error.  Good values: input mod 4 is not 0, Bad values: input mod 4 = 0\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: CONYGER_KAFIR
+  exploits:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          name: CONYGER_KAFIR
+          value: 1024
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          name: CONYGER_KAFIR
+          value: -512
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - id: source
+          value: 99
+          name: CONYGER_KAFIR
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          name: CONYGER_KAFIR
+          value_encoding: none
+          value: -2
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          stage_enum: 0
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          name: CONYGER_KAFIR
+          ordinal: 1
+          id: source
+          value: 1023
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpneyKPv_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpneyKPv_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpneyKPv_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpneyKPv_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: peatweed_slalomed
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function

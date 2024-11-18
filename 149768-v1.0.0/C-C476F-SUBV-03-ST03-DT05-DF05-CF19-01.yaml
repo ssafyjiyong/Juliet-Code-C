@@ -1,0 +1,100 @@
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SOCKET
+    function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpBnCCKT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    line_number: 0
+  - file_name: /tmp/tmpBnCCKT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpBnCCKT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - feature_group: control_flow
+    feature: recursive
+    file_name: /tmp/tmpBnCCKT_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: undisfranchised_coastland
+    line_number: 0
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          value_encoding: none
+          port: 8887
+          source: socket_input
+          source_enum: 5
+          value: 1000
+    - inputs:
+        - address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          value_encoding: none
+          port: 8887
+          value_type_enum: 0
+          stage: co_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          id: source
+          value: 5000
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - stage: co_process
+          source: socket_input
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          value: 20
+          id: source
+          source_enum: 5
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value: 511
+          id: source
+          ordinal: 1
+          stage: co_process
+          stage_enum: 1
+          source: socket_input
+          source_enum: 5
+    - inputs:
+        - ordinal: 1
+          stage_enum: 1
+          id: source
+          value: 1
+          value_encoding: none
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 5
+          stage: co_process
+          port: 8887
+          address: ss-localhost

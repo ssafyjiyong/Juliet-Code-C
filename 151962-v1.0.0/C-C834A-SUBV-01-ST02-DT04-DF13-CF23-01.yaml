@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmp_k5vsk_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmp_k5vsk_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmp_k5vsk_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmp_k5vsk_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          name: SIMURGH_QUENCHERS
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          stage: pre_process
+          value: 68718952445
+          stage_enum: 0
+          source: file_content_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - name: SIMURGH_QUENCHERS
+          value: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          value: 1301
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          name: SIMURGH_QUENCHERS
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          ordinal: 2
+          source: file_content_input
+          value: 1073676288
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          ordinal: 1
+          name: SIMURGH_QUENCHERS
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          value: 1073676287
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SIMURGH_QUENCHERS
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+          value: 2147483647
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SIMURGH_QUENCHERS
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/nonconclusive_fluxions/ndea_ziti.txt
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"

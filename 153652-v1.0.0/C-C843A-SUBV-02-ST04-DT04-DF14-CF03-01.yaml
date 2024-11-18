@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - size: 39
+          stage: pre_process
+          source_enum: 6
+          value_type_enum: 0
+          id: source
+          key: 1586
+          source: shared_memory_input
+          value: AAA
+          stage_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - stage_enum: 0
+          id: source
+          source: shared_memory_input
+          size: 39
+          key: 1586
+          value: This is not a number
+          value_type_enum: 0
+          source_enum: 6
+          flags: 950
+          ordinal: 1
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          flags: 950
+          stage: pre_process
+          source: shared_memory_input
+          size: 39
+          value_encoding: none
+          source_enum: 6
+          id: source
+          key: 1586
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: not a number not a number not a number
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      flags: 950
+      key: 1586
+      size: 39
+  description: "Creates a union that can be either an int or a char *.\n  If input is a non-zero number, set union to that number, else set union to the input string.\n  Try to access the union as a string, regardless of how it is set.\nSeg fault if the input is a non-zero number.\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          value_encoding: none
+          flags: 950
+          ordinal: 1
+          key: 1586
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: 012
+          size: 39
+          value_type_enum: 0
+    - inputs:
+        - source: shared_memory_input
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 40000
+          ordinal: 1
+          stage: pre_process
+          source_enum: 6
+          size: 39
+          stage_enum: 0
+          flags: 950
+          value_type_enum: 0
+          key: 1586
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpAtdZLu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - feature_group: data_type
+    line_number: 0
+    feature: heap_pointer
+    file_name: /tmp/tmpAtdZLu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+  - file_name: /tmp/tmpAtdZLu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: address_as_nonlinear_expression
+    feature_group: data_flow
+    function_name: svn_mutex__unlock
+    line_number: 0
+  - feature_group: control_flow
+    feature: infinite_loop
+    file_name: /tmp/tmpAtdZLu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0

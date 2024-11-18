@@ -1,0 +1,106 @@
+io_pair:
+  description: "Infinite Loop that checks each character of input and if it is ascii val 48 or higher, updates the exit counter.  Otherwise it doesn't, resulting in an infinite loop\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2851
+      size: 29
+      flags: 950
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value: AAAAA.AAAAAAAA
+          id: source
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          key: 2851
+          flags: 950
+          size: 29
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - key: 2851
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          size: 29
+          flags: 950
+          source_enum: 6
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: This statement will break it
+  benigns:
+    - inputs:
+        - ordinal: 1
+          flags: 950
+          size: 29
+          key: 2851
+          value_type: USE_TEXT_DIRECTLY
+          value: AAA
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+    - inputs:
+        - value: Hellowworld
+          value_encoding: none
+          source_enum: 6
+          size: 29
+          source: shared_memory_input
+          stage: pre_process
+          flags: 950
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 2851
+    - inputs:
+        - value: Goodbyecruelworld
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 29
+          key: 2851
+          value_type_enum: 0
+          value_encoding: none
+code_complexity_features:
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+    file_name: /tmp/tmpzEYF5z_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpzEYF5z_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: sapodilla_paterfamiliarly
+  - file_name: /tmp/tmpzEYF5z_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: sapodilla_paterfamiliarly
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+  - file_name: /tmp/tmpzEYF5z_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: purgatorial_wrappings
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

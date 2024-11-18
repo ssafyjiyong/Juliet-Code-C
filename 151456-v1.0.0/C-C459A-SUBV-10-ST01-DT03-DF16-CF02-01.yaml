@@ -1,0 +1,94 @@
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpFNMeyH_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+  - file_name: /tmp/tmpFNMeyH_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature_group: data_type
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpFNMeyH_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpFNMeyH_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: EGYPTOLOGER_PILULA
+      source: env_var_input
+      source_enum: 2
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          value: 10
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: EGYPTOLOGER_PILULA
+          source: env_var_input
+          id: source
+          stage_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          name: EGYPTOLOGER_PILULA
+          ordinal: 1
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          value: 42
+          value_type_enum: 0
+    - inputs:
+        - name: EGYPTOLOGER_PILULA
+          source: env_var_input
+          source_enum: 2
+          id: source
+          stage: pre_process
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+          value: 37
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          value: 20000
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          name: EGYPTOLOGER_PILULA
+          source_enum: 2
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          value: 6000
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          name: EGYPTOLOGER_PILULA
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"

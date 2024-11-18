@@ -1,0 +1,194 @@
+code_complexity_features:
+  - file_name: /tmp/tmpfrG0qj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpfrG0qj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpfrG0qj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature_group: control_flow
+    file_name: /tmp/tmpfrG0qj_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: interprocedural_1
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: PARACUSIC_CAMBRIC
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          stage: pre_process
+          source_enum: 2
+          name: PARACUSIC_CAMBRIC
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+        - stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          ordinal: 1
+          value_encoding: none
+        - source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          value_type_enum: 0
+          value: !<!> hello World!
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+    - inputs:
+        - stage: pre_process
+          value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          name: PARACUSIC_CAMBRIC
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+        - ordinal: 2
+          value_encoding: none
+          source: file_content_input
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          name: PARACUSIC_CAMBRIC
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          source: env_var_input
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          value_encoding: none
+        - stage: pre_process
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          ordinal: 1
+        - stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          value: !<!> hello World!
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          id: source
+          name: PARACUSIC_CAMBRIC
+          ordinal: 1
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+        - stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          source_enum: 3
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - source_enum: 3
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          stage_enum: 0
+          ordinal: 2
+          value_type_enum: 0
+          source: file_content_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          id: source
+          name: PARACUSIC_CAMBRIC
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+        - value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source: file_content_input
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_encoding: none
+          ordinal: 1
+        - value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0

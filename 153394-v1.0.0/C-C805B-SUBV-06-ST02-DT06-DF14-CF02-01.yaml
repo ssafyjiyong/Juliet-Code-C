@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          name: GITONIN_SUBSTANTIABLE
+        - source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          stage: pre_process
+          id: source
+          value: This_input_is_too_long_to_be_contained_in_buffer
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          ordinal: 1
+          name: GITONIN_SUBSTANTIABLE
+        - source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          stage: pre_process
+          id: source
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          name: GITONIN_SUBSTANTIABLE
+          value_type_enum: 0
+          source_enum: 2
+        - source: file_content_input
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          ordinal: 2
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          value: Hello
+          source_enum: 3
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: GITONIN_SUBSTANTIABLE
+        - value_encoding: none
+          ordinal: 2
+          value_type_enum: 0
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: a
+          stage: pre_process
+    - inputs:
+        - name: GITONIN_SUBSTANTIABLE
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 2
+        - value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value: ok_str
+          source_enum: 3
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+          id: source
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      stage: pre_process
+      value: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+      ordinal: 1
+      name: GITONIN_SUBSTANTIABLE
+    - source: file_content_input
+      source_enum: 3
+      stage_enum: 0
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mewled_chamkanni/mothless_exogastritis.txt
+      stage: pre_process
+      id: source
+code_complexity_features:
+  - function_name: svn_error_wrap_apr
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpp7VdUW_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: source_taint
+    line_number: 0
+  - feature_group: data_type
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: typedef
+    file_name: /tmp/tmpp7VdUW_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - file_name: /tmp/tmpp7VdUW_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: address_as_nonlinear_expression
+    feature_group: data_flow
+  - function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+    file_name: /tmp/tmpp7VdUW_ss_testcase/src-rose/subversion/libsvn_subr/error.c

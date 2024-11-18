@@ -1,0 +1,124 @@
+code_complexity_features:
+  - function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpWfkNcD_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+  - file_name: /tmp/tmpWfkNcD_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: data_type
+    function_name: svn_config_read3
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpWfkNcD_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpWfkNcD_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: doubled_helvellyn
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - name: BEDAUBED_LOSSPROOF
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          id: source
+          value_encoding: none
+          stage: pre_process
+        - source: file_content_input
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 2
+          value: This file is not empty.
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good01.txt
+    - inputs:
+        - name: BEDAUBED_LOSSPROOF
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          source_enum: 3
+          value: Hello world!  And, good-bye.
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/good03.txt
+          source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          name: BEDAUBED_LOSSPROOF
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+        - source_enum: 3
+          source: file_content_input
+          value_encoding: none
+          stage_enum: 0
+          value: Yet another file.
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/good03.txt
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: BEDAUBED_LOSSPROOF
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          name: BEDAUBED_LOSSPROOF
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          source: env_var_input
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          name: BEDAUBED_LOSSPROOF
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"

@@ -1,0 +1,106 @@
+code_complexity_features:
+  - line_number: 0
+    feature: SHARED_MEMORY
+    function_name: svn_error_wrap_apr
+    feature_group: source_taint
+    file_name: /tmp/tmpw3l1gl_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - feature_group: data_type
+    file_name: /tmp/tmpw3l1gl_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: simple
+  - file_name: /tmp/tmpw3l1gl_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: address_alias_50
+    feature_group: data_flow
+  - feature: infinite_loop
+    file_name: /tmp/tmpw3l1gl_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - key: 5086
+          flags: 950
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 1
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          size: 7
+          stage: pre_process
+          stage_enum: 0
+          source: shared_memory_input
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          size: 7
+          source: shared_memory_input
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          key: 5086
+          value: 10
+          flags: 950
+          id: source
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          key: 5086
+          value: 1000
+          source: shared_memory_input
+          size: 7
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          flags: 950
+          ordinal: 1
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          size: 7
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: 65538
+          flags: 950
+          key: 5086
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          flags: 950
+          source_enum: 6
+          source: shared_memory_input
+          value: 131074
+          stage_enum: 0
+          size: 7
+          ordinal: 1
+          stage: pre_process
+          key: 5086
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      size: 7
+      stage: pre_process
+      flags: 950
+      key: 5086
+      id: source
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

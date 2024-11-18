@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpJgZEjQ_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: control_flow
+    function_name: skip_bom
+    line_number: 0
+    feature: callback
+  - file_name: /tmp/tmpJgZEjQ_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: nationhood_definite
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpJgZEjQ_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: nationhood_definite
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+  - file_name: /tmp/tmpJgZEjQ_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: rezone_fuddles
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+io_pair:
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SUBSIMIOUS_MERYCOIDODON
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          ordinal: 1
+          value: 20
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source: env_var_input
+          name: SUBSIMIOUS_MERYCOIDODON
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          name: SUBSIMIOUS_MERYCOIDODON
+          id: source
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          value: 511
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          id: source
+          ordinal: 1
+          name: SUBSIMIOUS_MERYCOIDODON
+          value: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: SUBSIMIOUS_MERYCOIDODON
+          value: 1000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          value: 5000
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          source: env_var_input
+          name: SUBSIMIOUS_MERYCOIDODON
+          value_encoding: none
+          source_enum: 2
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpGvAJ3I_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpGvAJ3I_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature: array
+    feature_group: data_type
+  - file_name: /tmp/tmpGvAJ3I_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature: recursive
+    file_name: /tmp/tmpGvAJ3I_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          name: REVERTIBILITY_MER
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          source: file_content_input
+          id: source
+          stage: pre_process
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          name: REVERTIBILITY_MER
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 2
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          ordinal: 2
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: Hello World!
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: REVERTIBILITY_MER
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+        - stage_enum: 0
+          value: Short is good
+          value_encoding: none
+          stage: pre_process
+          id: source
+          ordinal: 2
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: REVERTIBILITY_MER
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+  description: "Has a fixed stack buffer of size 64.  (char [64]) When input has a larger size, the stack buffer will be over read\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: REVERTIBILITY_MER
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: REVERTIBILITY_MER
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/anorexiant_eleusinianism/crazingmill_berlauda.txt
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

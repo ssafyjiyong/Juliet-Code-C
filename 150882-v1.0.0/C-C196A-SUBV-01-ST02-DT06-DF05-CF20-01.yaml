@@ -1,0 +1,204 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    file_name: /tmp/tmpZR_cDn_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpZR_cDn_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpZR_cDn_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpZR_cDn_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: airlike_pasitelean
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: PHOTOCHROMOTYPY_NAHUA
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: PHOTOCHROMOTYPY_NAHUA
+          ordinal: 1
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+        - source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          id: source
+          value: 15
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          source: file_content_input
+          value_encoding: none
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 2
+          value: hello
+          source: env_var_input
+          name: SS_BUFF
+    - inputs:
+        - name: PHOTOCHROMOTYPY_NAHUA
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value_encoding: none
+          value: 8
+          ordinal: 2
+          value_type_enum: 0
+          stage: pre_process
+        - value: abcdefghiklmnopqrstuvwxyz
+          source_enum: 2
+          name: SS_BUFF
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - name: PHOTOCHROMOTYPY_NAHUA
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value_type_enum: 0
+          ordinal: 1
+        - source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          name: SS_BUFF
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          name: PHOTOCHROMOTYPY_NAHUA
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - value: 4294967291
+          value_encoding: none
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          id: source
+          name: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          stage_enum: 0
+          value_type_enum: 0
+        - value: Good_Bye_World
+          value_encoding: none
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          source_enum: 2
+          ordinal: 2
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: PHOTOCHROMOTYPY_NAHUA
+          source: env_var_input
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/coppras_luculently/yava_griffithville.txt
+          value: 2147483650
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value_type_enum: 0
+          name: SS_BUFF
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value: aaaaaaaaaaaaaaaaa
+          value_encoding: none

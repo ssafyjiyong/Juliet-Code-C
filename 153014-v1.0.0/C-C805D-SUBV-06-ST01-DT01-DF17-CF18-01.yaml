@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpri7G_i_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature: ENVIRONMENT_VARIABLE
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpri7G_i_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: data_type
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: array
+  - feature: buffer_address_array_index
+    feature_group: data_flow
+    file_name: /tmp/tmpri7G_i_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+  - feature_group: control_flow
+    file_name: /tmp/tmpri7G_i_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    line_number: 0
+    feature: pointer_to_function
+    function_name: svn_error_wrap_apr
+io_pair:
+  benigns:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          id: source
+          source_enum: 2
+          value: Hello
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: DARKY_ALCESTIS
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          id: source
+          name: DARKY_ALCESTIS
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value: a
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          id: source
+          ordinal: 1
+          name: DARKY_ALCESTIS
+          source: env_var_input
+          value: ok_str
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          name: DARKY_ALCESTIS
+          value: This_input_is_too_long_to_be_contained_in_buffer
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          name: DARKY_ALCESTIS
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+  base_inputs:
+    - id: source
+      stage: pre_process
+      name: DARKY_ALCESTIS
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1

@@ -1,0 +1,100 @@
+code_complexity_features:
+  - line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmp8GlLY1_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+  - file_name: /tmp/tmp8GlLY1_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmp8GlLY1_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp8GlLY1_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - id: source
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          source_enum: 5
+          ordinal: 1
+          stage_enum: 1
+          stage: co_process
+          source: socket_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          address: ss-localhost
+          port: 8887
+          ordinal: 1
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          stage_enum: 1
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: Hello World!
+    - inputs:
+        - value_encoding: none
+          id: source
+          address: ss-localhost
+          source: socket_input
+          stage: co_process
+          port: 8887
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 5
+          value: Short is good
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a fixed heap buffer of size 64.  (malloc(64*sizeof(char))) When input has a larger size, the heap buffer will be over read\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          stage: co_process
+          value_type_enum: 0
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          address: ss-localhost
+          port: 8887
+          ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    - inputs:
+        - source: socket_input
+          address: ss-localhost
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          id: source
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

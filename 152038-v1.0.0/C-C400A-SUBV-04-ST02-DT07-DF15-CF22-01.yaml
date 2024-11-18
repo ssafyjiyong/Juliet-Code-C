@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpI0_5Jn_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpI0_5Jn_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpI0_5Jn_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpI0_5Jn_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    feature_group: control_flow
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature: macros
+io_pair:
+  base_inputs:
+    - name: SYNCRYPTIC_ORSEDE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - stage: pre_process
+      source: file_content_input
+      source_enum: 3
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          name: SYNCRYPTIC_ORSEDE
+          value: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 3
+          source: file_content_input
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value_type_enum: 0
+          value: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: SYNCRYPTIC_ORSEDE
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          value: 1
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          id: source
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          name: SYNCRYPTIC_ORSEDE
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+        - id: source
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 2
+          value: 1000
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value_encoding: none
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          name: SYNCRYPTIC_ORSEDE
+          value: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value: 100000
+          value_encoding: none
+          source: file_content_input
+          source_enum: 3
+          ordinal: 2
+    - inputs:
+        - name: SYNCRYPTIC_ORSEDE
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/arcady_recallist/undoubting_haplolaly.txt
+          value: 250052
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Read an int from the input.  If < 0, or bigger than 0xFFFFFFFF/4, do nothing.  Otherwise, malloc that many 100,000 int buffers. If memory cannot all be allocated, output 'Out of memory' then exit. This condition occurs if int > about 30000 \n\n"

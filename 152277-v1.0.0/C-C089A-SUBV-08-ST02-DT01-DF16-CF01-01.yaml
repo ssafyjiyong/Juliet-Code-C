@@ -1,0 +1,324 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp0VnogV_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+    function_name: svn_config_read3
+  - file_name: /tmp/tmp0VnogV_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: milburn_sillers
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature: buffer_address_array_index
+    feature_group: data_flow
+    file_name: /tmp/tmp0VnogV_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: unionize_tritanopsia
+    line_number: 0
+  - feature_group: data_type
+    file_name: /tmp/tmp0VnogV_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: unionize_tritanopsia
+    line_number: 0
+    feature: array
+io_pair:
+  benigns:
+    - inputs:
+        - name: MILFOILS_ASTRADDLE
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: USA
+          stage_enum: 0
+          value_encoding: none
+          source: file_content_input
+          ordinal: 2
+          value_type_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          source_enum: 3
+        - server: ss-db-mysql
+          ordinal: 2
+          database_enum: 0
+          source_enum: 0
+          value_type_enum: 1
+          database: mysql
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          stage: pre_process
+          value_encoding: none
+          source: database_content_input
+        - source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 3
+          name: SS_DBMYSQLDATABASE
+          source: env_var_input
+          stage: pre_process
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+        - server: ss-db-mysql
+          database: mysql
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 2
+          source_enum: 0
+          stage: post_process
+          ordinal: 1
+          source: database_content_input
+          database_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          name: MILFOILS_ASTRADDLE
+          value: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+        - stage: pre_process
+          value_encoding: none
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          value: Germany
+          name: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+        - server: ss-db-mysql
+          source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          stage: pre_process
+          database: mysql
+          database_enum: 0
+          ordinal: 2
+          stage_enum: 0
+          value: northwind
+          source: database_content_input
+          value_type_enum: 1
+          value_encoding: none
+        - name: SS_DBMYSQLDATABASE
+          stage: pre_process
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          database_enum: 0
+          database: mysql
+          stage: post_process
+          stage_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          server: ss-db-mysql
+          source: database_content_input
+          source_enum: 0
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: MILFOILS_ASTRADDLE
+        - stage: pre_process
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          value: Finland
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+        - database: mysql
+          stage: pre_process
+          source_enum: 0
+          value: northwind
+          source: database_content_input
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          value_encoding: none
+          ordinal: 2
+          database_enum: 0
+          server: ss-db-mysql
+          stage_enum: 0
+        - stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBMYSQLDATABASE
+          source: env_var_input
+          stage_enum: 0
+        - value_type_enum: 0
+          ordinal: 1
+          source: database_content_input
+          database_enum: 0
+          source_enum: 0
+          value_encoding: none
+          stage: post_process
+          server: ss-db-mysql
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          stage_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          database: mysql
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"
+  base_inputs:
+    - source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: MILFOILS_ASTRADDLE
+      source: env_var_input
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          name: MILFOILS_ASTRADDLE
+          ordinal: 1
+        - value_encoding: none
+          source_enum: 3
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+          value: x' or 'x'='x
+        - value_type_enum: 1
+          value_encoding: none
+          database_enum: 0
+          stage: pre_process
+          database: mysql
+          stage_enum: 0
+          ordinal: 2
+          value_type: USE_CONTENTS_OF_FILE
+          server: ss-db-mysql
+          value: northwind
+          source: database_content_input
+          source_enum: 0
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: SS_DBMYSQLDATABASE
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          ordinal: 3
+          value_type_enum: 0
+          stage_enum: 0
+        - source_enum: 0
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          ordinal: 1
+          source: database_content_input
+          stage_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          database: mysql
+          server: ss-db-mysql
+          database_enum: 0
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: MILFOILS_ASTRADDLE
+          ordinal: 1
+          source: env_var_input
+        - id: source
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/terrifying_suprafeminine/autochthons_bakerstown.txt
+          value_type_enum: 0
+          value: "x'; Select * from Orders; -- "
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+        - value_type: USE_CONTENTS_OF_FILE
+          source_enum: 0
+          value_type_enum: 1
+          database: mysql
+          value: northwind
+          stage_enum: 0
+          source: database_content_input
+          server: ss-db-mysql
+          ordinal: 2
+          value_encoding: none
+          database_enum: 0
+          stage: pre_process
+        - name: SS_DBMYSQLDATABASE
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 2
+          source_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          database_enum: 0
+          database: mysql
+          server: ss-db-mysql
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          stage: post_process
+          ordinal: 1
+          source: database_content_input

@@ -1,0 +1,100 @@
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SOCKET
+    line_number: 0
+    file_name: /tmp/tmpY9t7aK_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+  - feature_group: data_type
+    feature: array
+    file_name: /tmp/tmpY9t7aK_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+  - file_name: /tmp/tmpY9t7aK_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmpY9t7aK_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: ecphorias_issachar
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - stage: co_process
+          stage_enum: 1
+          port: 8887
+          value_type_enum: 0
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: socket_input
+          value: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+    - inputs:
+        - source_enum: 5
+          value_encoding: none
+          stage_enum: 1
+          value_type_enum: 0
+          stage: co_process
+          value: 10
+          source: socket_input
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - ordinal: 1
+          source: socket_input
+          stage: co_process
+          port: 8887
+          source_enum: 5
+          value_encoding: none
+          stage_enum: 1
+          id: source
+          value: 1000
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+  exploits:
+    - inputs:
+        - stage: co_process
+          stage_enum: 1
+          id: source
+          source_enum: 5
+          source: socket_input
+          ordinal: 1
+          address: ss-localhost
+          value: 65538
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 1
+          value_encoding: none
+          source: socket_input
+          value_type_enum: 0
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          ordinal: 1
+          port: 8887
+          id: source
+          address: ss-localhost
+          value: 131074
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

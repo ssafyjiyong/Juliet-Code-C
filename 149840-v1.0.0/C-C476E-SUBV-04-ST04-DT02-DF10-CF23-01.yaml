@@ -1,0 +1,136 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpMBTori_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - file_name: /tmp/tmpMBTori_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpMBTori_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_50
+  - file_name: /tmp/tmpMBTori_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          flags: 950
+          source: shared_memory_input
+          size: 45
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          key: 1218
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          id: source
+          value_type_enum: 0
+          source_enum: 6
+        - stage: pre_process
+          value: This file is not empty.
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - ordinal: 1
+          source_enum: 6
+          size: 45
+          key: 1218
+          source: shared_memory_input
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          flags: 950
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: /opt/stonesoup/workspace/testData/good02.txt
+          value: Hello world!  And, good-bye.
+          ordinal: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - source: shared_memory_input
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 1218
+          size: 45
+          flags: 950
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          source_enum: 6
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value_encoding: none
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 3
+          value: Yet another file.
+          value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 1218
+      size: 45
+      flags: 950
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          source: shared_memory_input
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          key: 1218
+          flags: 950
+          value_encoding: none
+          stage_enum: 0
+          size: 45
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          source_enum: 6
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          key: 1218
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          id: source
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          value_type_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          size: 45
+          flags: 950

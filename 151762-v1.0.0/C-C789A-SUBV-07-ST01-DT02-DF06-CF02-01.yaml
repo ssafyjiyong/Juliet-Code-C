@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmp_bEfAt_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp_bEfAt_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmp_bEfAt_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmp_bEfAt_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: UNWELDED_BOYLIKE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          id: source
+          source: env_var_input
+          name: UNWELDED_BOYLIKE
+          value: 123451234567
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          id: source
+          source: env_var_input
+          name: UNWELDED_BOYLIKE
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          value: 845633125678
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - stage: pre_process
+          name: UNWELDED_BOYLIKE
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          value: 80
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          id: source
+    - inputs:
+        - value_encoding: none
+          name: UNWELDED_BOYLIKE
+          value: 3643
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          id: source
+          source: env_var_input
+          value: 10
+          name: UNWELDED_BOYLIKE
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+  description: "Reads in a integer and uses the value to allocate memory for a string on the stack. Because the input value is unchecked can allocate arbitrarily large value, resulting in a resource drain\n\n"

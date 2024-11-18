@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          name: SARCOCOLLIN_STUPIDITY
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - source_enum: 3
+          value_type_enum: 0
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          id: source
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAAAaba
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SARCOCOLLIN_STUPIDITY
+          value_type_enum: 0
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          ordinal: 2
+          value_type_enum: 0
+          value: ABCabaD123
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          name: SARCOCOLLIN_STUPIDITY
+          value: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          ordinal: 1
+        - name: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          value_type_enum: 0
+          value_encoding: none
+          source: file_content_input
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          id: source
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SARCOCOLLIN_STUPIDITY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          stage_enum: 0
+          name: SARCOCOLLIN_STUPIDITY
+        - source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          value: A.A
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SARCOCOLLIN_STUPIDITY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hamletize_mulberries/applauder_skidway.txt
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpOa4T88_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpOa4T88_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpOa4T88_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - function_name: homosassa_avoy
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+    file_name: /tmp/tmpOa4T88_ss_testcase/src-rose/subversion/libsvn_subr/string.c

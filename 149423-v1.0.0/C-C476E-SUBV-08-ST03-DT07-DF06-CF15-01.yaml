@@ -1,0 +1,130 @@
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    feature_group: source_taint
+    file_name: /tmp/tmplH_8Cu_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    line_number: 0
+    feature: SOCKET
+  - file_name: /tmp/tmplH_8Cu_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmplH_8Cu_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature_group: control_flow
+    feature: interprocedural_50
+    file_name: /tmp/tmplH_8Cu_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+io_pair:
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          id: source
+          stage_enum: 1
+          source_enum: 5
+          ordinal: 1
+          source: socket_input
+          value_type_enum: 0
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          port: 8887
+        - value_encoding: none
+          value: This file is not empty.
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          source: socket_input
+          port: 8887
+          id: source
+          stage_enum: 1
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_type_enum: 0
+          stage: co_process
+          address: ss-localhost
+        - value_type_enum: 0
+          value_encoding: none
+          value: Hello world!  And, good-bye.
+          ordinal: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good02.txt
+    - inputs:
+        - port: 8887
+          stage_enum: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 5
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          stage: co_process
+          source: socket_input
+          address: ss-localhost
+          value_encoding: none
+        - value: Yet another file.
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          stage: pre_process
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_type_enum: 0
+          value_encoding: none
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/bad01.txt
+          stage: co_process
+          id: source
+          source_enum: 5
+          port: 8887
+          ordinal: 1
+          stage_enum: 1
+          value_encoding: none
+          address: ss-localhost
+          source: socket_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: socket_input
+          port: 8887
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 5
+          id: source
+          ordinal: 1
+          stage_enum: 1
+          address: ss-localhost
+          value_encoding: none
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

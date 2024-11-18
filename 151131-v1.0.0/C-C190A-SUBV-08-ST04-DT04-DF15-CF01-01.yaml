@@ -1,0 +1,106 @@
+io_pair:
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  base_inputs:
+    - size: 6
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9598
+  exploits:
+    - inputs:
+        - source_enum: 6
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: 46400
+          flags: 950
+          id: source
+          stage_enum: 0
+          source: shared_memory_input
+          size: 6
+          key: 9598
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          size: 6
+          key: 9598
+          source_enum: 6
+          source: shared_memory_input
+          flags: 950
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 55000
+          value_encoding: none
+          ordinal: 1
+  benigns:
+    - inputs:
+        - flags: 950
+          stage: pre_process
+          size: 6
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          key: 9598
+          ordinal: 1
+          value: 50
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+    - inputs:
+        - id: source
+          stage: pre_process
+          source_enum: 6
+          size: 6
+          value_encoding: none
+          flags: 950
+          key: 9598
+          ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: shared_memory_input
+          value: 100
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          id: source
+          source_enum: 6
+          size: 6
+          flags: 950
+          key: 9598
+          stage: pre_process
+          value: 10000
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: shared_memory_input
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpSOBaht_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpSOBaht_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: shiftless_cuttoos
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpSOBaht_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: shiftless_cuttoos
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpSOBaht_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: scawd_cuenca
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

@@ -1,0 +1,271 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpEuxKHc_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    file_name: /tmp/tmpEuxKHc_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpEuxKHc_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - line_number: 0
+    feature_group: control_flow
+    feature: macros
+    file_name: /tmp/tmpEuxKHc_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          name: INDETERMINACIES_HIEROSOLYMITAN
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+        - stage_enum: 0
+          id: background-complex
+          source: script_input
+          ordinal: 2
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+        - ordinal: 3
+          id: background
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage: pre_process
+          stage_enum: 0
+          source: script_input
+        - value_type_enum: 0
+          stage_enum: 0
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/badfile1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 3
+          value: This is yet another file.
+          value_encoding: none
+          source: file_content_input
+    - inputs:
+        - name: INDETERMINACIES_HIEROSOLYMITAN
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          id: background-complex
+          stage_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          id: background
+          source: script_input
+          ordinal: 3
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+        - stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          ordinal: 4
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value: This is also file.
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/badfile2
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: INDETERMINACIES_HIEROSOLYMITAN
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+  description: "This weakness expects a string in the form: '<file> <data>' where file is the name of a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is a valid file. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be deleted. The weakness notifies the test harness that the that the file should be deleted by creating a file called testData/*.pid.\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          name: INDETERMINACIES_HIEROSOLYMITAN
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          source: env_var_input
+        - name: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          value_encoding: none
+          value_type_enum: 0
+        - ordinal: 2
+          stage: pre_process
+          id: background-complex
+          stage_enum: 0
+          source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+        - source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value: A non-empty file.
+          value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile1
+          ordinal: 4
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          name: INDETERMINACIES_HIEROSOLYMITAN
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+        - stage_enum: 0
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          id: background-complex
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+          ordinal: 2
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 3
+          stage_enum: 0
+        - ordinal: 4
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value: This is a file.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile2
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: INDETERMINACIES_HIEROSOLYMITAN
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+        - source: file_content_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/principal_oilpapers/hemichorda_plansheer.txt
+          source_enum: 3
+          value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_encoding: none
+        - id: background-complex
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+        - source: file_content_input
+          ordinal: 3
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage: pre_process
+          stage_enum: 0
+        - value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          value: This is another file.
+          stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 4

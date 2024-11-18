@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpD7QEDp_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature: SHARED_MEMORY
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpD7QEDp_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: data_type
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpD7QEDp_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: degumming_twinberry
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+    file_name: /tmp/tmpD7QEDp_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      stage: pre_process
+      id: source
+      ordinal: 1
+      key: 2932
+      size: 24
+      flags: 950
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          flags: 950
+          stage: pre_process
+          source: shared_memory_input
+          value: aTest
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 6
+          key: 2932
+          size: 24
+          value_encoding: none
+    - inputs:
+        - flags: 950
+          key: 2932
+          size: 24
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          value: abigwordwithoutspaces
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+    - inputs:
+        - source_enum: 6
+          size: 24
+          ordinal: 1
+          key: 2932
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value: anotherTestWithoutSpace
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - key: 2932
+          source_enum: 6
+          stage_enum: 0
+          value: This is a bad test.
+          source: shared_memory_input
+          flags: 950
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          ordinal: 1
+          size: 24
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          key: 2932
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          size: 24
+          flags: 950
+          value: A NEW TEST
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

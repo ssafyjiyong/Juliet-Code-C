@@ -1,0 +1,161 @@
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: UNPROGRESSIVELY_HOMER
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          ordinal: 1
+          name: UNPROGRESSIVELY_HOMER
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/file1 asdf
+          value_encoding: none
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+        - source_enum: 7
+          id: background-complex
+          source: script_input
+          ordinal: 2
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+        - stage_enum: 0
+          source: file_content_input
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage: pre_process
+          source_enum: 3
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/file1 fD1Sa886
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+          source: env_var_input
+          name: UNPROGRESSIVELY_HOMER
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+        - ordinal: 2
+          id: background-complex
+          source_enum: 7
+          stage_enum: 0
+          source: script_input
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+        - name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 3
+          source: file_content_input
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: UNPROGRESSIVELY_HOMER
+          value: /opt/stonesoup/workspace/testData/file1 all5alpha5numeric5yo.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          source_enum: 7
+          id: background-complex
+          stage: pre_process
+          source: script_input
+          ordinal: 2
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+        - source_enum: 3
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - ordinal: 1
+          name: UNPROGRESSIVELY_HOMER
+          stage_enum: 0
+          id: source
+          value: "/opt/stonesoup/workspace/testData/fifo1 :(){:|:&};:"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+        - id: background-complex
+          ordinal: 2
+          stage_enum: 0
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          stage: pre_process
+          source_enum: 7
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage: pre_process
+          stage_enum: 0
+          source: script_input
+          ordinal: 3
+          source_enum: 7
+          id: background
+    - inputs:
+        - name: UNPROGRESSIVELY_HOMER
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/fifo1 re-entrant,_re-smentrant
+        - stage_enum: 0
+          id: background-complex
+          ordinal: 2
+          source: script_input
+          source_enum: 7
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+        - ordinal: 3
+          stage: pre_process
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+  description: "This weakness expects a string in the form: '<qsize> <file1> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 is a file that is read to delay execution, and data is a string containing no spaces. The data string is used for processing, but the contents are unimportant. The weakness calls a non-rentrent function from a signal handler causing deadlock on a mutex. While this function is executing, catching a SIGUSR1 signal will cause the signal handler to re-invoke the function leading to deadlock. The weakness notifies the test harness that it is ready for a signal by creating a file called testData/*.pid.\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpBJYb88_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature_group: data_type
+    file_name: /tmp/tmpBJYb88_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: simple
+  - file_name: /tmp/tmpBJYb88_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - feature_group: control_flow
+    file_name: /tmp/tmpBJYb88_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,106 @@
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 3366
+      size: 7
+      flags: 950
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+          source_enum: 6
+          size: 7
+          value: 0
+          key: 3366
+          flags: 950
+          stage: pre_process
+          value_encoding: none
+    - inputs:
+        - value: 1
+          value_encoding: none
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          key: 3366
+          ordinal: 1
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          value_type_enum: 0
+          stage_enum: 0
+          size: 7
+    - inputs:
+        - ordinal: 1
+          id: source
+          stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          value_encoding: none
+          size: 7
+          key: 3366
+          flags: 950
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value: 100000
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 7
+          key: 3366
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          value: 250052
+          key: 3366
+          size: 7
+          flags: 950
+          ordinal: 1
+          source_enum: 6
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          source: shared_memory_input
+  description: "Read an int from the input.  If < 0, or bigger than 0xFFFFFFFF/4, do nothing.  Otherwise, malloc that many 100,000 int buffers. If memory cannot all be allocated, output 'Out of memory' then exit. This condition occurs if int > about 30000 \n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmprgbizc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmprgbizc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmprgbizc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmprgbizc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c

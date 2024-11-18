@@ -1,0 +1,166 @@
+code_complexity_features:
+  - file_name: /tmp/tmpn_7kQ4_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpn_7kQ4_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: struct
+    feature_group: data_type
+  - file_name: /tmp/tmpn_7kQ4_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_1
+  - file_name: /tmp/tmpn_7kQ4_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: control_flow
+    function_name: svn_config_read3
+    line_number: 0
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: BLEPHARORRHAPHY_STEELWARE
+          value_type_enum: 0
+        - id: source
+          ordinal: 2
+          source: file_content_input
+          value_encoding: none
+          value: "\"file.*\""
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: BLEPHARORRHAPHY_STEELWARE
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          value_type_enum: 0
+          ordinal: 1
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          ordinal: 2
+          value: filename.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          name: BLEPHARORRHAPHY_STEELWARE
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+        - ordinal: 2
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value: "\"*\""
+          name: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  base_inputs:
+    - value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: BLEPHARORRHAPHY_STEELWARE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+      value_encoding: none
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+  exploits:
+    - inputs:
+        - source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: BLEPHARORRHAPHY_STEELWARE
+          source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          stage: pre_process
+          value_encoding: none
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          value_type_enum: 0
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+        - ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: BLEPHARORRHAPHY_STEELWARE
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          value_encoding: none
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/figbird_townspeople/paramatta_postcretaceous.txt
+          value: "\"*\" -exec netstat -an \\;"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/temp/file.txt

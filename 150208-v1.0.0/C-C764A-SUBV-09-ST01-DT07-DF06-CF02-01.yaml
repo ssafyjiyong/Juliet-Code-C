@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - ordinal: 1
+      name: EDS_OVERPOLISH
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          name: EDS_OVERPOLISH
+          source_enum: 2
+          value: This is a bad test.
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          id: source
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          name: EDS_OVERPOLISH
+          value: A NEW TEST
+          id: source
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          name: EDS_OVERPOLISH
+          ordinal: 1
+          stage: pre_process
+          value_type_enum: 0
+          value: aTest
+          id: source
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          value: abigwordwithoutspaces
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: EDS_OVERPOLISH
+          value_type_enum: 0
+    - inputs:
+        - value: anotherTestWithoutSpace
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          source: env_var_input
+          name: EDS_OVERPOLISH
+          source_enum: 2
+          value_encoding: none
+          id: source
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmplAcT4q_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+  - file_name: /tmp/tmplAcT4q_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmplAcT4q_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmplAcT4q_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive

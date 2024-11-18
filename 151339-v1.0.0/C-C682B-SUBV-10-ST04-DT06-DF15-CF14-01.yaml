@@ -1,0 +1,106 @@
+io_pair:
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7544
+      size: 7
+      flags: 950
+  benigns:
+    - inputs:
+        - value_encoding: none
+          size: 7
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          source: shared_memory_input
+          key: 7544
+          value: 10
+          ordinal: 1
+          source_enum: 6
+          flags: 950
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - source: shared_memory_input
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          key: 7544
+          value: 0
+          ordinal: 1
+          id: source
+          size: 7
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          stage: pre_process
+    - inputs:
+        - size: 7
+          source: shared_memory_input
+          flags: 950
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value: FFFF
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          key: 7544
+  exploits:
+    - inputs:
+        - size: 7
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          key: 7544
+          source_enum: 6
+          stage_enum: 0
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          value: 10000
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: shared_memory_input
+          value: FFFFFF
+          source_enum: 6
+          flags: 950
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          key: 7544
+          value_type: USE_TEXT_DIRECTLY
+          size: 7
+          value_encoding: none
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpDluHFc_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - file_name: /tmp/tmpDluHFc_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpDluHFc_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpDluHFc_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_10

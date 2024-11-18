@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+      id: source
+      ordinal: 1
+      name: TALCLIKE_MASONITE
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value: 1st char does not appear again
+          name: TALCLIKE_MASONITE
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source_enum: 2
+    - inputs:
+        - value: FEDCBA
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: TALCLIKE_MASONITE
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          value: asdfasdf
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          ordinal: 1
+          source_enum: 2
+          name: TALCLIKE_MASONITE
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          name: TALCLIKE_MASONITE
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: this string has an another t
+          id: source
+          source: env_var_input
+          source_enum: 2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          ordinal: 1
+          value: 1st char is 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: TALCLIKE_MASONITE
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+code_complexity_features:
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpyPqpuw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - file_name: /tmp/tmpyPqpuw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpyPqpuw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpyPqpuw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

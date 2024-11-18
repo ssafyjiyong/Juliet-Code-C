@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153816,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements an unchecked read from a buffer. The buffer is declared as a fixed size member of a struct that is allocated on the heap. Untrusted input is not properly sanitized or restricted before being used to determine the number of characters to read from the buffer. This allows input greater than 63 characters in length to over read the buffer, printing the contents of the memory located after the buffer on the heap. \nMetadata\n - Base program: Subversion\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: ARRAY\n - Data Flow: ADDRESS_ALIAS_2\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C126C-SUBV-06-ST01-DT01-DF02-CF23-01.xml"
+          },
+          "length": 61761,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "f72e47f0dc0c17ce6c4c84423e8b733fa76e404fd4aad8a618302e0fd50b5767"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/error.c"
+          },
+          "length": 23021,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "a7cbb9a62f88feaec72ac2b95facb100937e479b454af9c16a281948520b4f16"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "126",
+              "name": "Buffer Over-read"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-126",
+          "message": {
+            "text": "Buffer Over-read."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/error.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 226,
+                  "endLine": 232
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "126",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

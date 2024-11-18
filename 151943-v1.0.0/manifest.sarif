@@ -1,0 +1,111 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151943,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: Subversion\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: UNION\n - Data Flow: BASIC\n - Control Flow: RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C771A-SUBV-10-ST01-DT07-DF11-CF19-01.xml"
+          },
+          "length": 117744,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "75a90ef0e2d53808b7f6a144052f1147094e541fe21b048f971e5bae59af573f"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/types.c"
+          },
+          "length": 16660,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "bf2dfd0a7582878a6bf17d05c81d4b3d4fda3dc2875cb7d471c4693f8869f737"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "771",
+              "name": "Missing Reference to Active Allocated Resource"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-771",
+          "message": {
+            "text": "Missing Reference to Active Allocated Resource."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/types.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 459
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "771",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

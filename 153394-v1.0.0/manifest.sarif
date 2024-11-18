@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153394,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case takes a buffer as input and copies it into another buffer. It then converts the new buffer to uppercase and prints it out. If the provided input is larger than the buffer it is being copied into, then this will result in a buffer overwrite due to access with an incorrect length. This is due to using the input length in the strncpy call used to copy the buffer.\nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: TYPEDEF\n - Data Flow: ADDRESS_AS_NONLINEAR_EXPRESSION\n - Control Flow: INDIRECTLY_RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C805B-SUBV-06-ST02-DT06-DF14-CF02-01.xml"
+          },
+          "length": 68369,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "770bb46e6ae18eb87d60b333b4b7760f7e518823d84450b452f5426a9b436b5a"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/error.c"
+          },
+          "length": 24124,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "db2f0a0eeb60729f5a5e2c5d149dea2eee7de907049e2368a65fafd321d5f3e2"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "805",
+              "name": "Buffer Access with Incorrect Length Value"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-805",
+          "message": {
+            "text": "Buffer Access with Incorrect Length Value."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/error.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 705,
+                  "endLine": 712
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "805",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

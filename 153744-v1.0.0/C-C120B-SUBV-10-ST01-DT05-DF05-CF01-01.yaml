@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpwBYTPS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+  - function_name: fairmont_grandiosity
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpwBYTPS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - file_name: /tmp/tmpwBYTPS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: fairmont_grandiosity
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - function_name: unerring_coaration
+    line_number: 0
+    feature: address_as_constant
+    feature_group: data_flow
+    file_name: /tmp/tmpwBYTPS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+io_pair:
+  exploits:
+    - inputs:
+        - id: source
+          stage: pre_process
+          ordinal: 1
+          name: HARDWICKIA_CYRTOGRAPH
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+    - inputs:
+        - value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_encoding: none
+          name: HARDWICKIA_CYRTOGRAPH
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: HARDWICKIA_CYRTOGRAPH
+  description: "Has a fixed heap buffer of size 64.  (char [64])\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          name: HARDWICKIA_CYRTOGRAPH
+          id: source
+          value: AAA
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+    - inputs:
+        - source: env_var_input
+          name: HARDWICKIA_CYRTOGRAPH
+          ordinal: 1
+          stage: pre_process
+          id: source
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: Hellow world!
+          value_encoding: none
+    - inputs:
+        - id: source
+          name: HARDWICKIA_CYRTOGRAPH
+          value: Good-bye cruel world!
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 2

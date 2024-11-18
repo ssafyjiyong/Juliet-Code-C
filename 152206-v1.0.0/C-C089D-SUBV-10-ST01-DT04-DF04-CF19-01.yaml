@@ -1,0 +1,264 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          name: AUTOGRAPHING_SHOPFOLK
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: shipper1
+          source_enum: 2
+          source: env_var_input
+          ordinal: 1
+          id: source
+          stage: pre_process
+          stage_enum: 0
+        - source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          value: northwind
+          database: postgresql
+          server: ss-db-postgres
+          source: database_content_input
+          database_enum: 1
+          value_encoding: none
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+        - source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          value: SET_DYNAMIC_DB_NAME
+          ordinal: 3
+          stage_enum: 0
+          source: env_var_input
+          name: SS_DBPGDATABASE
+        - database: postgresql
+          server: ss-db-postgres
+          database_enum: 1
+          value_type_enum: 0
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          stage_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          source_enum: 0
+          ordinal: 1
+          stage: post_process
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: AUTOGRAPHING_SHOPFOLK
+          value_encoding: none
+          value: NewShipper
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+        - source: database_content_input
+          stage: pre_process
+          value: northwind
+          ordinal: 2
+          database: postgresql
+          value_type_enum: 1
+          server: ss-db-postgres
+          value_type: USE_CONTENTS_OF_FILE
+          source_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          database_enum: 1
+        - stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          name: SS_DBPGDATABASE
+          value_type: USE_TEXT_DIRECTLY
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 3
+          value_encoding: none
+        - source_enum: 0
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          server: ss-db-postgres
+          database_enum: 1
+          source: database_content_input
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 2
+          database: postgresql
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: post_process
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          stage: pre_process
+          name: AUTOGRAPHING_SHOPFOLK
+          ordinal: 1
+          source_enum: 2
+          value_encoding: none
+          value: ShippingCompany
+          value_type_enum: 0
+        - database_enum: 1
+          database: postgresql
+          source: database_content_input
+          value_type: USE_CONTENTS_OF_FILE
+          server: ss-db-postgres
+          value: northwind
+          value_encoding: none
+          value_type_enum: 1
+          stage: pre_process
+          source_enum: 0
+          stage_enum: 0
+          ordinal: 2
+        - value_type_enum: 0
+          stage_enum: 0
+          source_enum: 2
+          name: SS_DBPGDATABASE
+          ordinal: 3
+          source: env_var_input
+          value: SET_DYNAMIC_DB_NAME
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - database: postgresql
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          value_encoding: none
+          stage_enum: 2
+          ordinal: 1
+          source_enum: 0
+          stage: post_process
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          server: ss-db-postgres
+          database_enum: 1
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - value: BadShipper'), ('80','BadShipper2
+          value_type_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: AUTOGRAPHING_SHOPFOLK
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+        - stage: pre_process
+          database: postgresql
+          value_type: USE_CONTENTS_OF_FILE
+          source_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 2
+          source: database_content_input
+          value: northwind
+          value_type_enum: 1
+          server: ss-db-postgres
+          database_enum: 1
+        - source: env_var_input
+          ordinal: 3
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: SS_DBPGDATABASE
+          value: SET_DYNAMIC_DB_NAME
+        - value_type_enum: 0
+          database: postgresql
+          stage_enum: 2
+          value_encoding: none
+          server: ss-db-postgres
+          database_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          source: database_content_input
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          ordinal: 1
+          stage: post_process
+    - inputs:
+        - value_type_enum: 0
+          name: AUTOGRAPHING_SHOPFOLK
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: ShippersRUs'), ('20','BadShips'), ('65','ShipAttack'), ('45', 'MultiShip
+          stage_enum: 0
+        - stage: pre_process
+          server: ss-db-postgres
+          source_enum: 0
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          database: postgresql
+          ordinal: 2
+          database_enum: 1
+          value: northwind
+          value_encoding: none
+          value_type_enum: 1
+          source: database_content_input
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: SS_DBPGDATABASE
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+        - stage: post_process
+          database: postgresql
+          database_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 0
+          value_type_enum: 0
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          stage_enum: 2
+          server: ss-db-postgres
+          ordinal: 1
+          source: database_content_input
+  description: "Good inputs: 1) name of shipper for use in Sql databaseBad inputs:SQL argument injection \n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: AUTOGRAPHING_SHOPFOLK
+code_complexity_features:
+  - file_name: /tmp/tmp76FEfZ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature_group: data_type
+    line_number: 0
+    feature: heap_pointer
+    file_name: /tmp/tmp76FEfZ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+  - feature_group: data_flow
+    feature: address_alias_50
+    file_name: /tmp/tmp76FEfZ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+  - file_name: /tmp/tmp76FEfZ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    line_number: 0
+    function_name: svn_tristate__from_word
+    feature: recursive
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

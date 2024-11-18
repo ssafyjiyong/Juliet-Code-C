@@ -1,0 +1,122 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150047,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements two threads that do not use synchronization while accessing a shared resource. The test case takes a control integer, the names of two control files, and an input string. The control integer and the two control files are used for timing within the test case to ensure that the test case follows an exploiting or benign execution path, and the input string is used as shared data for the threads to act upon. When executing, the test case spawns two threads, one of which calculates an increment amount, and the other uses this increment amount to iterate through the shared input string setting each position to a '#'. If the calculated increment amount is negative, and the thread that uses it to iterate though the string does so before it is sanitized, the test case will underwrite its buffer, causing a segfault if it underwrites far enough.\nMetadata\n - Base program: Subversion\n - Source Taint: SHARED_MEMORY\n - Data Type: VOID_POINTER\n - Data Flow: BASIC\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C820A-SUBV-06-ST04-DT03-DF11-CF23-01.xml"
+          },
+          "length": 95668,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "724183bab8806e7964b8148491808e7e46b95020d62e78f93919f826ec10d4f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "scripts/shm_setup.c"
+          },
+          "length": 3155,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "15d311b07d65d83f38876f4ee427c355e2048145d6db756d5d71877405f24822"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/error.c"
+          },
+          "length": 27796,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "89aa09adfbbb1a0e2a0b5ddaeb8ad165a2bb955e9e6271cedbfbb43b80cda5ef"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "820",
+              "name": "Missing Synchronization"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-820",
+          "message": {
+            "text": "Missing Synchronization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/error.c",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 207,
+                  "endLine": 213
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "820",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

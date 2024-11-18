@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150962,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case converts a user string to a short, and then converts that short to an unsigned int. If the short is negative, this will result in unexpected sign extension. The unsigned int value is used to determine how much data to read from a file, resulting in massive buffer overwrite if the file is large and the original input was negative. \nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: VOID_POINTER\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: INFINITE_LOOP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C194A-SUBV-06-ST02-DT03-DF17-CF03-01.xml"
+          },
+          "length": 71315,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "3f6dbc9496c9660ba5bd7cc1be1fd9fa7a3bbac5bcc68b949da55c7596e40ff6"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/error.c"
+          },
+          "length": 24974,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "6f5ae83c1b5c30687f08c3b7ad46851c6e65d841824f4ff1c951fa2105c6e9ff"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "194",
+              "name": "Unexpected Sign Extension"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-194",
+          "message": {
+            "text": "Unexpected Sign Extension."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/error.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 272,
+                  "endLine": 280
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "194",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

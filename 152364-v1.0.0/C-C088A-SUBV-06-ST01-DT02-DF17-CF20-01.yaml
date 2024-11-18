@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: ENVIRONMENT_VARIABLE
+    line_number: 0
+    function_name: svn_error_wrap_apr
+    file_name: /tmp/tmpj_oneq_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: source_taint
+  - feature_group: data_type
+    file_name: /tmp/tmpj_oneq_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: simple
+  - file_name: /tmp/tmpj_oneq_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: buffer_address_array_index
+    feature_group: data_flow
+  - feature_group: control_flow
+    file_name: /tmp/tmpj_oneq_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: sequence
+io_pair:
+  description: "Read a string from the input.  Perform a find path -iname input.If input contains arguments such as -exec with a \\; ending the command, a user can insert other commands instead of just find\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: "\"*\" -exec cat /etc/passwd \\;"
+          name: LEASHES_MISLAYS
+          id: source
+          source_enum: 2
+        - source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: "\"*\" -exec netstat -an \\;"
+          stage: pre_process
+          name: LEASHES_MISLAYS
+          source: env_var_input
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+        - stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/file.txt
+  base_inputs:
+    - stage: pre_process
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+      name: LEASHES_MISLAYS
+      id: source
+  benigns:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          name: LEASHES_MISLAYS
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          value: "\"file.*\""
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - name: LEASHES_MISLAYS
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          value: filename.txt
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - id: source
+          stage: pre_process
+          name: LEASHES_MISLAYS
+          stage_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value: "\"*\""
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          ordinal: 1

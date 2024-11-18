@@ -1,0 +1,144 @@
+code_complexity_features:
+  - file_name: /tmp/tmplSwi_A_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - line_number: 0
+    feature_group: data_type
+    feature: simple
+    file_name: /tmp/tmplSwi_A_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+  - file_name: /tmp/tmplSwi_A_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature_group: control_flow
+    file_name: /tmp/tmplSwi_A_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          name: MAILLE_TROMPING
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          id: source
+          stage: pre_process
+          value: 4294967291
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          ordinal: 2
+          value_type_enum: 0
+          stage_enum: 0
+          value: Good_Bye_World
+          name: SS_BUFF
+          source_enum: 2
+    - inputs:
+        - value_encoding: none
+          value: 2147483650
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          name: MAILLE_TROMPING
+        - value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          ordinal: 2
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          value: aaaaaaaaaaaaaaaaa
+          source: env_var_input
+  benigns:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          name: MAILLE_TROMPING
+          value_type_enum: 0
+          source_enum: 2
+          value: 15
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          value: hello
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          name: SS_BUFF
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: MAILLE_TROMPING
+          stage: pre_process
+          value: 8
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+        - value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value: abcdefghiklmnopqrstuvwxyz
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          name: MAILLE_TROMPING
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          value_type_enum: 0
+          id: source
+          value: 1000
+        - stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          stage_enum: 0
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: MAILLE_TROMPING

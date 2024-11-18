@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149836,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case reads a space-delimited string from the taint source. The first element in the string is the number of elements following it. The test cases reads in the following elements and outputs them. If there are fewer elements than expected, a segmentation fault occurs. \nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: ARRAY\n - Data Flow: INDEX_ALIAS_1\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C476C-SUBV-01-ST02-DT01-DF07-CF23-01.xml"
+          },
+          "length": 67529,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "b98c2a98a725a7d8d84b13010c51e1db438c29ab90f88ed71cf982f2d65b829c"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/dirent_uri.c"
+          },
+          "length": 72416,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "1fdf8a6804eb432d8733abec85cdff8857cfa9a331d4a64fddf24cdba04d3d4d"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "476",
+              "name": "NULL Pointer Dereference"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-476",
+          "message": {
+            "text": "NULL Pointer Dereference."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/dirent_uri.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 199,
+                  "endLine": 205
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "476",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

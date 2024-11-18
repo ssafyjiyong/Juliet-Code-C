@@ -1,0 +1,100 @@
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmpzWiRLQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+    file_name: /tmp/tmpzWiRLQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+  - feature: address_as_constant
+    file_name: /tmp/tmpzWiRLQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpzWiRLQ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: voetsak_untitillated
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+io_pair:
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  exploits:
+    - inputs:
+        - stage_enum: 1
+          ordinal: 1
+          source: socket_input
+          source_enum: 5
+          id: source
+          stage: co_process
+          port: 8887
+          address: ss-localhost
+          value_encoding: none
+          value: A.A
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: co_process
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          source: socket_input
+          source_enum: 5
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          port: 8887
+          value_type_enum: 0
+          address: ss-localhost
+          value: AAAAAaba
+          id: source
+          stage: co_process
+          value_encoding: none
+          stage_enum: 1
+          source_enum: 5
+    - inputs:
+        - address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          stage: co_process
+          id: source
+          ordinal: 1
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value: ABCabaD123
+    - inputs:
+        - stage_enum: 1
+          address: ss-localhost
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          stage: co_process
+          id: source
+          source_enum: 5
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

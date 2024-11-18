@@ -1,0 +1,194 @@
+code_complexity_features:
+  - file_name: /tmp/tmpWKaSut_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpWKaSut_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpWKaSut_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpWKaSut_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: indirectly_recursive
+    feature_group: control_flow
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: FORTHINK_LINUS
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  exploits:
+    - inputs:
+        - value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: FORTHINK_LINUS
+          source_enum: 2
+          source: env_var_input
+          id: source
+          stage: pre_process
+          stage_enum: 0
+        - value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 1
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value: !<!> hello World!
+          ordinal: 2
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          name: FORTHINK_LINUS
+          source_enum: 2
+          value_type_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_type: USE_TEXT_DIRECTLY
+        - value_encoding: none
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          stage: pre_process
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - ordinal: 1
+          id: source
+          name: FORTHINK_LINUS
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          stage: pre_process
+          value_encoding: none
+        - stage: pre_process
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_encoding: none
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          ordinal: 1
+          source: file_content_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 3
+        - source_enum: 3
+          ordinal: 2
+          source: file_content_input
+          value_encoding: none
+          stage: pre_process
+          value: !<!> hello World!
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          name: FORTHINK_LINUS
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 1
+          value_encoding: none
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+        - value_encoding: none
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          stage_enum: 0
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 2
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          name: FORTHINK_LINUS
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+        - ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          value_type_enum: 0
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

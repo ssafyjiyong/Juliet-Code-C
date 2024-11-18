@@ -1,0 +1,146 @@
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9706
+      size: 141
+      flags: 950
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          id: source
+          flags: 950
+          ordinal: 1
+          size: 141
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          value_type: USE_TEXT_DIRECTLY
+          key: 9706
+        - stage_enum: 0
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          source_enum: 7
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          size: 141
+          ordinal: 1
+          key: 9706
+          flags: 950
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+        - source_enum: 7
+          source: script_input
+          ordinal: 2
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          id: background
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are names of either FIFO files or regular files, and data is a string containing no spaces. Using a second sem_post after a single sem_wait causes the counting semaphore to allow two proccess into the critical section instead of just one when the critical resource is unlocked, leading to a null pointer dereference. This behavior is triggered by providing two FIFO files <file1 file2> controlled by the runFifos.py script in order, and an input string containing any capitalized alpha character (A-Z). Providing this weakness with two FIFO files <file2 file1> (reverse order) controlled by runFifos.py will prevent the weakness from occuring. Providing this weakness with two regular files is nondeterministic, however a larger qsize will increase the likelyhood that the weakness will not occure.\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          id: source
+          size: 141
+          flags: 950
+          key: 9706
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          value_type_enum: 0
+          source: shared_memory_input
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          id: background
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+    - inputs:
+        - flags: 950
+          value_encoding: none
+          key: 9706
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 60 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          size: 141
+          ordinal: 1
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          id: background
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 7
+          ordinal: 2
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 9706
+          size: 141
+          flags: 950
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIlly_rabbit,_tricks_are_for_kids.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+        - source: file_content_input
+          source_enum: 3
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          stage_enum: 0
+          stage: pre_process
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpOt1qdP_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: source_taint
+    line_number: 0
+    feature: SHARED_MEMORY
+    function_name: get_xlate_handle_node_internal
+  - file_name: /tmp/tmpOt1qdP_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpOt1qdP_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpOt1qdP_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump

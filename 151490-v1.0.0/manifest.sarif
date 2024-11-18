@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151490,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: ARRAY\n - Data Flow: ADDRESS_AS_VARIABLE\n - Control Flow: POINTER_TO_FUNCTION",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C400A-SUBV-04-ST02-DT01-DF15-CF18-01.xml"
+          },
+          "length": 61466,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "71cd7229d8f82cfafc76aaa67c18b154094f73177b7d44030f33efcd87ca3053"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/stream.c"
+          },
+          "length": 56819,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "6bd7873555b2521d7a4d5439baec0bcc8e92c2cbe64a763bf50d7c7621a8fce1"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "400",
+              "name": "Uncontrolled Resource Consumption"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-400",
+          "message": {
+            "text": "Uncontrolled Resource Consumption."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/stream.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1811,
+                  "endLine": 1836
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "400",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

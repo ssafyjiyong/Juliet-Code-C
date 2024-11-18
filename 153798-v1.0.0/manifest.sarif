@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153798,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case creates a struct on the stack that contains a function pointer and a char*. It examines the length of the taint source. If the length is not equal to 10, it sets the function pointer and char* within the struct to benign values. If the length is equal to 10, it does not set the function pointer or char* inside the struct, leaving them uninitialized. Subsequently, the test case calls the function pointer from the struct, using the char* from the struct as an argument. If these values have not been initialized, this will result in a segmentation fault or illegal instruction fault. \nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: UNION\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C824B-SUBV-09-ST03-DT07-DF17-CF23-01.xml"
+          },
+          "length": 71963,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "5d6167dc2740111504a8d4ddb64328fad0b3088d1055c94bad94603f67189478"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/cmdline.c"
+          },
+          "length": 45225,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "46e31adeab7f8d69fecdb79864e7a4f7eb6f81893cef8cd6a490e1cbb09b6a8a"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "824",
+              "name": "Access of Uninitialized Pointer"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-824",
+          "message": {
+            "text": "Access of Uninitialized Pointer."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/cmdline.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1193,
+                  "endLine": 1194
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "824",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

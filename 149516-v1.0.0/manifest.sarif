@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149516,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case reads the taint source. If it contains a non-alphanumeric value, the source taint buffer is set to NULL. Subsequently, strcpy is called with the source taint buffer as this source. This causes a null pointer dereference.\nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: STRUCT\n - Data Flow: BUFFER_ADDRESS_POINTER\n - Control Flow: SEQUENCE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C476D-SUBV-07-ST02-DT05-DF17-CF20-01.xml"
+          },
+          "length": 66094,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "58866192c6714b700d1b633235e6827ec7081e856d12c65d66b3b853ba9158fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/config_file.c"
+          },
+          "length": 49847,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "513fd189a405ea3e715ca71f45f2a37ac809fb891856a7d30e9bbf497db08afb"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "476",
+              "name": "NULL Pointer Dereference"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-476",
+          "message": {
+            "text": "NULL Pointer Dereference."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/config_file.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 320,
+                  "endLine": 322
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "476",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

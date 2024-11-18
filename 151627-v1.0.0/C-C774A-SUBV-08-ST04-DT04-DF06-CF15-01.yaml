@@ -1,0 +1,106 @@
+io_pair:
+  description: "Read an unsigned hex int from the input.  If unsigned is > FFFF, do nothing. Otherwise, open that many files for writing, without closing the file handles.  Output if any of the opens fail. The opens will fail if we try to open more than 1021 files.\n\n"
+  benigns:
+    - inputs:
+        - flags: 950
+          value: FF
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          key: 5488
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          size: 5
+          value_encoding: none
+          id: source
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          source: shared_memory_input
+          ordinal: 1
+          id: source
+          key: 5488
+          flags: 950
+          size: 5
+          value: 20
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          value_type_enum: 0
+          stage: pre_process
+    - inputs:
+        - size: 5
+          value: 1
+          value_encoding: none
+          id: source
+          key: 5488
+          stage: pre_process
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5488
+      size: 5
+      flags: 950
+  exploits:
+    - inputs:
+        - value_encoding: none
+          id: source
+          stage_enum: 0
+          size: 5
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          key: 5488
+          ordinal: 1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: FFF
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          size: 5
+          source_enum: 6
+          source: shared_memory_input
+          value_type_enum: 0
+          value: FFFF
+          key: 5488
+          value_encoding: none
+          flags: 950
+code_complexity_features:
+  - file_name: /tmp/tmpcwFNyx_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: source_taint
+    function_name: svn_config_read3
+    line_number: 0
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpcwFNyx_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: heap_pointer
+    feature_group: data_type
+  - file_name: /tmp/tmpcwFNyx_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmpcwFNyx_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

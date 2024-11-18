@@ -1,0 +1,211 @@
+code_complexity_features:
+  - file_name: /tmp/tmpC2N9h2_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpC2N9h2_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    feature_group: data_type
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpC2N9h2_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpC2N9h2_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          name: DYGOGRAM_HYPERCYANOTIC
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          value_encoding: none
+          stage_enum: 0
+        - stage: pre_process
+          id: background-complex
+          ordinal: 2
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source_enum: 7
+          source: script_input
+        - stage: pre_process
+          id: background
+          source_enum: 7
+          ordinal: 3
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage_enum: 0
+        - name: /opt/stonesoup/workspace/testData/badfile1
+          stage_enum: 0
+          value: This is yet another file.
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 4
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+    - inputs:
+        - source_enum: 2
+          id: source
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          name: DYGOGRAM_HYPERCYANOTIC
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+        - source: script_input
+          stage: pre_process
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          ordinal: 2
+          stage_enum: 0
+        - id: background
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source_enum: 7
+          ordinal: 3
+          stage: pre_process
+          source: script_input
+        - value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 4
+          stage_enum: 0
+          value: This is also file.
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/badfile2
+          source_enum: 3
+          value_type_enum: 0
+  description: "This weakness expects a string in the form: '<file> <data>' where file is the name of a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is a valid file. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be deleted. The weakness notifies the test harness that the that the file should be deleted by creating a file called testData/*.pid.\n\n"
+  benigns:
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: DYGOGRAM_HYPERCYANOTIC
+          source: env_var_input
+        - ordinal: 2
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+          source: script_input
+        - source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - value_encoding: none
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value: A non-empty file.
+          ordinal: 4
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile1
+    - inputs:
+        - stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: DYGOGRAM_HYPERCYANOTIC
+          source: env_var_input
+          source_enum: 2
+        - stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          source: script_input
+          id: background-complex
+        - name: /opt/stonesoup/workspace/testData/file1
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 3
+        - stage: pre_process
+          source_enum: 3
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value: This is a file.
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/goodfile2
+    - inputs:
+        - name: DYGOGRAM_HYPERCYANOTIC
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Deleting: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Deleted.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          id: background-complex
+        - source: file_content_input
+          ordinal: 3
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - value_encoding: none
+          ordinal: 4
+          value: This is another file.
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+  base_inputs:
+    - name: DYGOGRAM_HYPERCYANOTIC
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

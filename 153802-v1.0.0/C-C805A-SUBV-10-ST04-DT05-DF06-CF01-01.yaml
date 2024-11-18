@@ -1,0 +1,106 @@
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7884
+      size: 1024
+      flags: 950
+  exploits:
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          key: 7884
+          ordinal: 1
+          value_encoding: none
+          id: source
+          flags: 950
+          value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          size: 1024
+    - inputs:
+        - source_enum: 6
+          value: zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+          flags: 950
+          source: shared_memory_input
+          size: 1024
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          key: 7884
+  description: "Good inputs:1) environment variable is not set2) envrionment variable is set to a value whose length is less than or equal to 8 charactersBad inputs:1) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  benigns:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value: Hello
+          value_encoding: none
+          size: 1024
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 7884
+          flags: 950
+          source: shared_memory_input
+          id: source
+          source_enum: 6
+          stage_enum: 0
+    - inputs:
+        - id: source
+          source: shared_memory_input
+          stage: pre_process
+          value_encoding: none
+          key: 7884
+          flags: 950
+          value: shortst
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          size: 1024
+          stage_enum: 0
+          ordinal: 1
+          source_enum: 6
+    - inputs:
+        - source_enum: 6
+          value_encoding: none
+          value: a
+          stage: pre_process
+          id: source
+          key: 7884
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          flags: 950
+          size: 1024
+          source: shared_memory_input
+code_complexity_features:
+  - file_name: /tmp/tmpSl8moi_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature: callback
+    feature_group: control_flow
+    function_name: svn_tristate__from_word
+    line_number: 0
+  - file_name: /tmp/tmpSl8moi_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: paralogy_torches
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpSl8moi_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: paralogy_torches
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpSl8moi_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: derivant_unfainting
+    line_number: 0
+    feature: address_as_function_return_value
+    feature_group: data_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

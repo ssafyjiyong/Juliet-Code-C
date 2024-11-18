@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source: socket_input
+          value_type_enum: 0
+          address: ss-localhost
+          stage: co_process
+          value: 45
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          ordinal: 1
+          source_enum: 5
+          id: source
+          value_encoding: none
+    - inputs:
+        - value: 80
+          ordinal: 1
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 1
+          id: source
+          address: ss-localhost
+    - inputs:
+        - ordinal: 1
+          stage_enum: 1
+          stage: co_process
+          source: socket_input
+          address: ss-localhost
+          port: 8887
+          value: 8000
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          source_enum: 5
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+  exploits:
+    - inputs:
+        - source_enum: 5
+          source: socket_input
+          port: 8887
+          stage_enum: 1
+          ordinal: 1
+          stage: co_process
+          value: 8
+          value_encoding: none
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+    - inputs:
+        - id: source
+          source_enum: 5
+          address: ss-localhost
+          stage_enum: 1
+          source: socket_input
+          port: 8887
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 4
+          value_type_enum: 0
+          stage: co_process
+code_complexity_features:
+  - feature: SOCKET
+    file_name: /tmp/tmp9eYdKO_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmp9eYdKO_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp9eYdKO_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - line_number: 0
+    feature: pointer_to_function
+    file_name: /tmp/tmp9eYdKO_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    feature_group: control_flow

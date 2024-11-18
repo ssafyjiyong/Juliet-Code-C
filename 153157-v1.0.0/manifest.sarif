@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153157,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements an improper array index validation that can cause a function pointer to get overwritten leading to a segfault. The test case takes untrusted user input and uses it to calculate array indexes which then get modified. If the untrusted input contains certain ASCII characters the array index calculation will result in a negative array index, modifying memory that it should not be accessing.    \nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: TYPEDEF\n - Data Flow: INDEX_ALIAS_2\n - Control Flow: INFINITE_LOOP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C129B-SUBV-03-ST02-DT06-DF08-CF03-01.xml"
+          },
+          "length": 69955,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "0a3746e2ea2290c2e7421139e269486e42ce27bbaffabfa7afd2e8c2527fba94"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/utf.c"
+          },
+          "length": 41144,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "e4ad51d294a85dd831186b2cd7cc942c29f6953eec87ee1a6e2f82a07bfa1e0a"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "129",
+              "name": "Improper Validation of Array Index"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-129",
+          "message": {
+            "text": "Improper Validation of Array Index."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/utf.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 397,
+                  "endLine": 416
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "129",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

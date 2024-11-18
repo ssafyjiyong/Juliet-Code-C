@@ -1,0 +1,244 @@
+code_complexity_features:
+  - function_name: svn_error_wrap_apr
+    feature_group: source_taint
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpOFpnhc_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: typedef
+    file_name: /tmp/tmpOFpnhc_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmpOFpnhc_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: basic
+  - feature_group: control_flow
+    file_name: /tmp/tmpOFpnhc_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - id: source
+      stage: pre_process
+      name: BALANIFEROUS_SOAPY
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+  benigns:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          value: critical
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          stage: pre_process
+          name: BALANIFEROUS_SOAPY
+        - value: file1
+          value_type_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          ordinal: 2
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value: file2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          source_enum: 3
+        - stage_enum: 0
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          value: file3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - id: source
+          source: env_var_input
+          stage: pre_process
+          name: BALANIFEROUS_SOAPY
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: sync/noissues
+          value_encoding: none
+          value_type_enum: 0
+        - source: file_content_input
+          value_type_enum: 0
+          value: file1
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          stage_enum: 0
+          source_enum: 3
+        - source: file_content_input
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value: file2
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_encoding: none
+          value: file3
+          ordinal: 4
+    - inputs:
+        - value: temp/sync/section
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          name: BALANIFEROUS_SOAPY
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+        - source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: file1
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          value_encoding: none
+          value_type_enum: 0
+        - source: file_content_input
+          ordinal: 3
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value: file2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+        - name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value: file3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 4
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+  description: "During preprocessing, files are created and placed in a directory to represent a lock that is externally accessible and unrestricted The program itself reads an input string.  It will attempt to create a lock by creating a file in the testData directory named <input string>.lck.  If such a file does not exist, it will run to completion.  If such a file does exists, it will wait until it is deleted so that it can create its own file.  This results in a deadlock. testData directory.  Bad inputs: name of a file that does exist under the testData directory.\n\n"
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          ordinal: 1
+          value: file1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: BALANIFEROUS_SOAPY
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: file1
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+        - ordinal: 3
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value_type: USE_TEXT_DIRECTLY
+          value: file2
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          value: file3
+          value_type_enum: 0
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 4
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value: sync/file2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          name: BALANIFEROUS_SOAPY
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+        - value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1.lck
+          source_enum: 3
+          stage_enum: 0
+          value: file1
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source: file_content_input
+        - stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/sync/file2.lck
+          value_type: USE_TEXT_DIRECTLY
+          value: file2
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          ordinal: 3
+        - value: file3
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/temp/sync/file3.lck
+          source_enum: 3
+          stage_enum: 0
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 4

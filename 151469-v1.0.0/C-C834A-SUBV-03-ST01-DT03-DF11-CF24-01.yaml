@@ -1,0 +1,94 @@
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          source_enum: 2
+          name: ELECTROBIOLOGY_CHRYSAZOL
+          value: 1073676287
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: ELECTROBIOLOGY_CHRYSAZOL
+          ordinal: 1
+          value_encoding: none
+          value: 2147483647
+          value_type_enum: 0
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  benigns:
+    - inputs:
+        - value: 68718952445
+          name: ELECTROBIOLOGY_CHRYSAZOL
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          source_enum: 2
+          value: 1301
+          stage: pre_process
+          name: ELECTROBIOLOGY_CHRYSAZOL
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          id: source
+    - inputs:
+        - source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          name: ELECTROBIOLOGY_CHRYSAZOL
+          ordinal: 1
+          value_encoding: none
+          value: 1073676288
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: ELECTROBIOLOGY_CHRYSAZOL
+code_complexity_features:
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpMgEZLO_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmpMgEZLO_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: data_type
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpMgEZLO_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpMgEZLO_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

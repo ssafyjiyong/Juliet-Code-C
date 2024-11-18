@@ -1,0 +1,324 @@
+code_complexity_features:
+  - file_name: /tmp/tmpM0K3tJ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    file_name: /tmp/tmpM0K3tJ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: simple
+  - feature_group: data_flow
+    file_name: /tmp/tmpM0K3tJ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: address_as_nonlinear_expression
+  - line_number: 0
+    feature: unconditional_jump
+    file_name: /tmp/tmpM0K3tJ_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          name: TOXOSOZIN_NONUTILIZATION
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          source_enum: 2
+        - id: source
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value: USA
+          value_encoding: none
+        - value: northwind
+          stage: pre_process
+          value_type: USE_CONTENTS_OF_FILE
+          server: ss-db-mysql
+          stage_enum: 0
+          database: mysql
+          source_enum: 0
+          ordinal: 2
+          source: database_content_input
+          value_type_enum: 1
+          database_enum: 0
+          value_encoding: none
+        - source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          ordinal: 3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_DBMYSQLDATABASE
+        - stage_enum: 2
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          database_enum: 0
+          value_type_enum: 0
+          database: mysql
+          ordinal: 1
+          server: ss-db-mysql
+          stage: post_process
+          source: database_content_input
+          value_encoding: none
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: TOXOSOZIN_NONUTILIZATION
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          value_encoding: none
+          ordinal: 1
+        - source: file_content_input
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          ordinal: 2
+          value: Germany
+          value_encoding: none
+          stage_enum: 0
+        - server: ss-db-mysql
+          database: mysql
+          stage: pre_process
+          ordinal: 2
+          database_enum: 0
+          source_enum: 0
+          stage_enum: 0
+          source: database_content_input
+          value_type_enum: 1
+          value_encoding: none
+          value: northwind
+          value_type: USE_CONTENTS_OF_FILE
+        - source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 3
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          name: SS_DBMYSQLDATABASE
+        - value_type_enum: 0
+          stage_enum: 2
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          database_enum: 0
+          server: ss-db-mysql
+          database: mysql
+          source: database_content_input
+          source_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          stage: post_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          name: TOXOSOZIN_NONUTILIZATION
+        - value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: Finland
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+        - database: mysql
+          stage: pre_process
+          value: northwind
+          source_enum: 0
+          ordinal: 2
+          value_type: USE_CONTENTS_OF_FILE
+          stage_enum: 0
+          value_encoding: none
+          server: ss-db-mysql
+          value_type_enum: 1
+          source: database_content_input
+          database_enum: 0
+        - stage_enum: 0
+          name: SS_DBMYSQLDATABASE
+          value_encoding: none
+          source: env_var_input
+          value: SET_DYNAMIC_DB_NAME
+          ordinal: 3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+        - source: database_content_input
+          stage_enum: 2
+          database_enum: 0
+          ordinal: 1
+          stage: post_process
+          source_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          value_type_enum: 0
+          value_encoding: none
+          server: ss-db-mysql
+          value_type: USE_TEXT_DIRECTLY
+          database: mysql
+  exploits:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          name: TOXOSOZIN_NONUTILIZATION
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - value_encoding: none
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          value: x' or 'x'='x
+          value_type_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          ordinal: 2
+        - value: northwind
+          stage: pre_process
+          ordinal: 2
+          database_enum: 0
+          value_encoding: none
+          value_type_enum: 1
+          server: ss-db-mysql
+          source: database_content_input
+          stage_enum: 0
+          database: mysql
+          source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+        - stage: pre_process
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          name: SS_DBMYSQLDATABASE
+          source: env_var_input
+          value: SET_DYNAMIC_DB_NAME
+          ordinal: 3
+        - database: mysql
+          ordinal: 1
+          database_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 2
+          value_type_enum: 0
+          stage: post_process
+          value_encoding: none
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source_enum: 0
+          source: database_content_input
+          server: ss-db-mysql
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          name: TOXOSOZIN_NONUTILIZATION
+          ordinal: 1
+        - id: source
+          value_type_enum: 0
+          value_encoding: none
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: "x'; Select * from Orders; -- "
+        - server: ss-db-mysql
+          source: database_content_input
+          source_enum: 0
+          database: mysql
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 1
+          value: northwind
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 0
+          ordinal: 2
+          stage: pre_process
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          name: SS_DBMYSQLDATABASE
+          value_type_enum: 0
+          ordinal: 3
+        - ordinal: 1
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          stage: post_process
+          source: database_content_input
+          stage_enum: 2
+          source_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          database_enum: 0
+          database: mysql
+          server: ss-db-mysql
+  base_inputs:
+    - stage: pre_process
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: TOXOSOZIN_NONUTILIZATION
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/onstage_outburned/insurgent_miersite.txt
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

@@ -1,0 +1,612 @@
+io_pair:
+  description: "Read in a file containing a list of 10 other files. Open these files and read their contents. If these contents are purly alphanumeric, the memory gets properly free()'d, otherwise a missing reference is created.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: PHILOSOPHASTRY_UNUSEFUL
+  exploits:
+    - inputs:
+        - name: PHILOSOPHASTRY_UNUSEFUL
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/bad_1.txt
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/bad_1.txt
+          ordinal: 2
+          value_type_enum: 0
+          value_encoding: none
+          value: !<!> "/opt/stonesoup/workspace/testData/exploit_data_1_1 /opt/stonesoup/workspace/testData/exploit_data_1_2 /opt/stonesoup/workspace/testData/exploit_data_1_3 /opt/stonesoup/workspace/testData/exploit_data_1_4 /opt/stonesoup/workspace/testData/exploit_data_1_5 /opt/stonesoup/workspace/testData/exploit_data_1_6 /opt/stonesoup/workspace/testData/exploit_data_1_7 /opt/stonesoup/workspace/testData/exploit_data_1_8 /opt/stonesoup/workspace/testData/exploit_data_1_9 /opt/stonesoup/workspace/testData/exploit_data_1_10 "
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_1 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_1 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_1 generated\n'
+          source_enum: 7
+          stage: pre_process
+          ordinal: 3
+          stage_enum: 0
+          source: script_input
+        - stage: post_process
+          source: script_input
+          stage_enum: 2
+          ordinal: 1
+          source_enum: 7
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_1
+        - stage: pre_process
+          source_enum: 7
+          source: script_input
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_2 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_2 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_2 generated\n'
+          ordinal: 4
+        - source_enum: 7
+          stage: post_process
+          source: script_input
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_2
+          ordinal: 2
+        - stage_enum: 0
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_3 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_3 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_3 generated\n'
+          ordinal: 5
+        - stage: post_process
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_3
+          source: script_input
+          stage_enum: 2
+          source_enum: 7
+          ordinal: 3
+        - stage_enum: 0
+          source_enum: 7
+          name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_4 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_4 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_4 generated\n'
+          ordinal: 6
+          stage: pre_process
+          source: script_input
+        - stage: post_process
+          ordinal: 4
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_4
+          source_enum: 7
+          source: script_input
+          stage_enum: 2
+        - name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_5 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_5 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_5 generated\n'
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 7
+          source: script_input
+          ordinal: 7
+        - ordinal: 5
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_5
+          stage_enum: 2
+          stage: post_process
+          source_enum: 7
+          source: script_input
+        - stage_enum: 0
+          name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_6 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_6 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_6 generated\n'
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+          ordinal: 8
+        - stage_enum: 2
+          source_enum: 7
+          ordinal: 6
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_6
+          stage: post_process
+        - stage_enum: 0
+          source: script_input
+          name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_7 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_7 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_7 generated\n'
+          ordinal: 9
+          stage: pre_process
+          source_enum: 7
+        - name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_7
+          stage: post_process
+          ordinal: 7
+          stage_enum: 2
+          source_enum: 7
+          source: script_input
+        - stage: pre_process
+          source: script_input
+          source_enum: 7
+          ordinal: 10
+          name: dd if=/dev/urandom bs=$((1024 * 1024)) count=200 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/exploit_data_1_8 && printf @ >> /opt/stonesoup/workspace/testData/exploit_data_1_8 &&printf '/opt/stonesoup/workspace/testData/exploit_data_1_8 generated\n'
+          stage_enum: 0
+        - stage: post_process
+          source_enum: 7
+          ordinal: 8
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_1_8
+          source: script_input
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          name: PHILOSOPHASTRY_UNUSEFUL
+          id: source
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/bad_2.txt
+        - value_encoding: none
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/bad_2.txt
+          value: !<!> "/opt/stonesoup/workspace/testData/exploit_data_2_1 /opt/stonesoup/workspace/testData/exploit_data_2_2 /opt/stonesoup/workspace/testData/exploit_data_2_3 /opt/stonesoup/workspace/testData/exploit_data_2_4 /opt/stonesoup/workspace/testData/exploit_data_2_5 /opt/stonesoup/workspace/testData/exploit_data_2_6 /opt/stonesoup/workspace/testData/exploit_data_2_7 /opt/stonesoup/workspace/testData/exploit_data_2_8 /opt/stonesoup/workspace/testData/exploit_data_2_9 /opt/stonesoup/workspace/testData/exploit_data_2_10 "
+          source_enum: 3
+          source: file_content_input
+          value_type_enum: 0
+          stage: pre_process
+        - stage: pre_process
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_1 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_1 generated\n'
+          source: script_input
+          source_enum: 7
+          ordinal: 3
+          stage_enum: 0
+        - source_enum: 7
+          stage: post_process
+          source: script_input
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_1
+          ordinal: 1
+        - name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_2 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_2 generated\n'
+          stage: pre_process
+          ordinal: 4
+          source_enum: 7
+          stage_enum: 0
+          source: script_input
+        - stage_enum: 2
+          stage: post_process
+          source_enum: 7
+          ordinal: 2
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_2
+        - source_enum: 7
+          source: script_input
+          stage: pre_process
+          ordinal: 5
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_3 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_3 generated\n'
+          stage_enum: 0
+        - ordinal: 3
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_3
+          stage: post_process
+          source: script_input
+          stage_enum: 2
+          source_enum: 7
+        - source: script_input
+          ordinal: 6
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_4 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_4 generated\n'
+        - name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_4
+          ordinal: 4
+          stage: post_process
+          source_enum: 7
+          stage_enum: 2
+          source: script_input
+        - stage: pre_process
+          stage_enum: 0
+          source: script_input
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_5 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_5 generated\n'
+          source_enum: 7
+          ordinal: 7
+        - source_enum: 7
+          stage: post_process
+          stage_enum: 2
+          source: script_input
+          ordinal: 5
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_5
+        - name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_6 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_6 generated\n'
+          ordinal: 8
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          source: script_input
+        - stage: post_process
+          stage_enum: 2
+          source_enum: 7
+          source: script_input
+          ordinal: 6
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_6
+        - stage: pre_process
+          ordinal: 9
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_7 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_7 generated\n'
+        - source_enum: 7
+          source: script_input
+          stage: post_process
+          stage_enum: 2
+          ordinal: 7
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_7
+        - stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+          source: script_input
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_8 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_8 generated\n'
+          ordinal: 10
+        - stage_enum: 2
+          source: script_input
+          stage: post_process
+          ordinal: 8
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_8
+          source_enum: 7
+        - source: script_input
+          stage_enum: 0
+          ordinal: 11
+          stage: pre_process
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_9 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_9 generated\n'
+          source_enum: 7
+        - name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_9
+          source: script_input
+          stage: post_process
+          stage_enum: 2
+          source_enum: 7
+          ordinal: 9
+        - source_enum: 7
+          source: script_input
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 12
+          name: dd if=/dev/urandom bs=$(( 1024 * 1024 )) count=310 of=/opt/stonesoup/workspace/testData/exploit_data_2_10 && printf '/opt/stonesoup/workspace/testData/exploit_data_2_10 generated\n'
+        - source_enum: 7
+          stage_enum: 2
+          source: script_input
+          stage: post_process
+          ordinal: 10
+          name: rm -rf /opt/stonesoup/workspace/testData/exploit_data_2_10
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          name: PHILOSOPHASTRY_UNUSEFUL
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/good_1.txt
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/good_1.txt
+          value_type_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> "/opt/stonesoup/workspace/testData/benign_data_1_1 /opt/stonesoup/workspace/testData/benign_data_1_2 /opt/stonesoup/workspace/testData/benign_data_1_3 /opt/stonesoup/workspace/testData/benign_data_1_4 /opt/stonesoup/workspace/testData/benign_data_1_5 /opt/stonesoup/workspace/testData/benign_data_1_6 /opt/stonesoup/workspace/testData/benign_data_1_7 /opt/stonesoup/workspace/testData/benign_data_1_8 /opt/stonesoup/workspace/testData/benign_data_1_9 /opt/stonesoup/workspace/testData/benign_data_1_10 "
+          value_encoding: none
+          source: file_content_input
+        - name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_1 && printf '/opt/stonesoup/workspace/testData/benign_data_1_1 generated\n'
+          ordinal: 3
+          source: script_input
+          stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+        - source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_1
+          stage: post_process
+          source_enum: 7
+          ordinal: 1
+          stage_enum: 2
+        - source: script_input
+          stage: pre_process
+          source_enum: 7
+          ordinal: 4
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_2 && printf '/opt/stonesoup/workspace/testData/benign_data_1_2 generated\n'
+        - stage_enum: 2
+          source_enum: 7
+          source: script_input
+          ordinal: 2
+          stage: post_process
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_2
+        - source: script_input
+          source_enum: 7
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_3 && printf '/opt/stonesoup/workspace/testData/benign_data_1_3 generated\n'
+          stage: pre_process
+          ordinal: 5
+        - stage: post_process
+          ordinal: 3
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_3
+          source_enum: 7
+          stage_enum: 2
+          source: script_input
+        - source_enum: 7
+          source: script_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 6
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_4 && printf '/opt/stonesoup/workspace/testData/benign_data_1_4 generated\n'
+        - source: script_input
+          stage: post_process
+          ordinal: 4
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_4
+          source_enum: 7
+        - name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_5 && printf '/opt/stonesoup/workspace/testData/benign_data_1_5 generated\n'
+          ordinal: 7
+          source: script_input
+          stage: pre_process
+          source_enum: 7
+          stage_enum: 0
+        - stage_enum: 2
+          stage: post_process
+          ordinal: 5
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_5
+          source_enum: 7
+          source: script_input
+        - ordinal: 8
+          stage_enum: 0
+          source: script_input
+          stage: pre_process
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_6 && printf '/opt/stonesoup/workspace/testData/benign_data_1_6 generated\n'
+          source_enum: 7
+        - ordinal: 6
+          source: script_input
+          stage_enum: 2
+          stage: post_process
+          source_enum: 7
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_6
+        - source: script_input
+          ordinal: 9
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_7 && printf '/opt/stonesoup/workspace/testData/benign_data_1_7 generated\n'
+        - ordinal: 7
+          stage_enum: 2
+          source: script_input
+          source_enum: 7
+          stage: post_process
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_7
+        - source: script_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 7
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_8 && printf '/opt/stonesoup/workspace/testData/benign_data_1_8 generated\n'
+          ordinal: 10
+        - stage_enum: 2
+          source_enum: 7
+          stage: post_process
+          ordinal: 8
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_8
+        - stage_enum: 0
+          source: script_input
+          stage: pre_process
+          ordinal: 11
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_9 && printf '/opt/stonesoup/workspace/testData/benign_data_1_9 generated\n'
+          source_enum: 7
+        - source: script_input
+          stage_enum: 2
+          source_enum: 7
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_9
+          stage: post_process
+          ordinal: 9
+        - source: script_input
+          name: dd if=/dev/urandom bs=1024 count=60 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_1_10 && printf '/opt/stonesoup/workspace/testData/benign_data_1_10 generated\n'
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 7
+          ordinal: 12
+        - source: script_input
+          ordinal: 10
+          stage_enum: 2
+          stage: post_process
+          source_enum: 7
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_1_10
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_encoding: none
+          id: source
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/good_2.txt
+          value_type_enum: 0
+          name: PHILOSOPHASTRY_UNUSEFUL
+          ordinal: 1
+        - value_encoding: none
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/good_2.txt
+          value: !<!> "/opt/stonesoup/workspace/testData/benign_data_2_1 /opt/stonesoup/workspace/testData/benign_data_2_2 /opt/stonesoup/workspace/testData/benign_data_2_3 /opt/stonesoup/workspace/testData/benign_data_2_4 /opt/stonesoup/workspace/testData/benign_data_2_5 /opt/stonesoup/workspace/testData/benign_data_2_6 /opt/stonesoup/workspace/testData/benign_data_2_7 /opt/stonesoup/workspace/testData/benign_data_2_8 /opt/stonesoup/workspace/testData/benign_data_2_9 /opt/stonesoup/workspace/testData/benign_data_2_10 "
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+        - source: script_input
+          ordinal: 3
+          stage: pre_process
+          name: dd if=/dev/urandom bs=1024 count=512 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_2_6 && printf '/opt/stonesoup/workspace/testData/benign_data_2_6 generated\n'
+          source_enum: 7
+          stage_enum: 0
+        - source: script_input
+          stage: post_process
+          source_enum: 7
+          ordinal: 1
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_2_6
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: PHILOSOPHASTRY_UNUSEFUL
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/good_3.txt
+        - source: file_content_input
+          value: !<!> "/opt/stonesoup/workspace/testData/benign_data_3_1 /opt/stonesoup/workspace/testData/benign_data_3_2 /opt/stonesoup/workspace/testData/benign_data_3_3 /opt/stonesoup/workspace/testData/benign_data_3_4 /opt/stonesoup/workspace/testData/benign_data_3_5 /opt/stonesoup/workspace/testData/benign_data_3_6 /opt/stonesoup/workspace/testData/benign_data_3_7 /opt/stonesoup/workspace/testData/benign_data_3_8 /opt/stonesoup/workspace/testData/benign_data_3_9 /opt/stonesoup/workspace/testData/benign_data_3_10 "
+          value_type_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/good_3.txt
+          stage: pre_process
+        - stage: pre_process
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_1 && printf '/opt/stonesoup/workspace/testData/benign_data_3_1 generated\n'
+          source_enum: 7
+          ordinal: 3
+          source: script_input
+        - stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_1
+          ordinal: 1
+          source_enum: 7
+          source: script_input
+          stage: post_process
+        - stage: pre_process
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_2 && printf '/opt/stonesoup/workspace/testData/benign_data_3_2 generated\n'
+          ordinal: 4
+        - name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_2
+          source: script_input
+          source_enum: 7
+          stage_enum: 2
+          ordinal: 2
+          stage: post_process
+        - name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_3 && printf '/opt/stonesoup/workspace/testData/benign_data_3_3 generated\n'
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 7
+          ordinal: 5
+          source: script_input
+        - source_enum: 7
+          stage: post_process
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_3
+          stage_enum: 2
+          ordinal: 3
+        - ordinal: 6
+          stage: pre_process
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_4 && printf '/opt/stonesoup/workspace/testData/benign_data_3_4 generated\n'
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+        - source: script_input
+          source_enum: 7
+          stage: post_process
+          ordinal: 4
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_4
+          stage_enum: 2
+        - source_enum: 7
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_5 && printf '/opt/stonesoup/workspace/testData/benign_data_3_5 generated\n'
+          source: script_input
+          ordinal: 7
+          stage: pre_process
+        - source: script_input
+          source_enum: 7
+          ordinal: 5
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_5
+          stage: post_process
+        - stage: pre_process
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_6 && printf '/opt/stonesoup/workspace/testData/benign_data_3_6 generated\n'
+          stage_enum: 0
+          source_enum: 7
+          ordinal: 8
+          source: script_input
+        - stage_enum: 2
+          source: script_input
+          stage: post_process
+          source_enum: 7
+          ordinal: 6
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_6
+        - source: script_input
+          ordinal: 9
+          source_enum: 7
+          stage: pre_process
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_7 && printf '/opt/stonesoup/workspace/testData/benign_data_3_7 generated\n'
+        - source_enum: 7
+          stage: post_process
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_7
+          ordinal: 7
+          stage_enum: 2
+        - source: script_input
+          ordinal: 10
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_8 && printf '/opt/stonesoup/workspace/testData/benign_data_3_8 generated\n'
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 7
+        - stage_enum: 2
+          source_enum: 7
+          ordinal: 8
+          stage: post_process
+          source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_8
+        - name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_9 && printf '/opt/stonesoup/workspace/testData/benign_data_3_9 generated\n'
+          source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          source: script_input
+          ordinal: 11
+        - ordinal: 9
+          source_enum: 7
+          source: script_input
+          stage: post_process
+          stage_enum: 2
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_9
+        - ordinal: 12
+          source_enum: 7
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+          name: dd if=/dev/urandom bs=1024 count=70 | xxd -p | tr -dc 'a-zA-Z0-9' > /opt/stonesoup/workspace/testData/benign_data_3_10 && printf '/opt/stonesoup/workspace/testData/benign_data_3_10 generated\n'
+        - source: script_input
+          name: rm -rf /opt/stonesoup/workspace/testData/benign_data_3_10
+          source_enum: 7
+          stage: post_process
+          ordinal: 10
+          stage_enum: 2
+code_complexity_features:
+  - function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmpADbI7E_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - file_name: /tmp/tmpADbI7E_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: massoy_prejudicial
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - function_name: massoy_prejudicial
+    line_number: 0
+    feature_group: data_type
+    feature: union
+    file_name: /tmp/tmpADbI7E_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - line_number: 0
+    feature: address_alias_10
+    file_name: /tmp/tmpADbI7E_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: polyphylly_radiancy
+    feature_group: data_flow
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

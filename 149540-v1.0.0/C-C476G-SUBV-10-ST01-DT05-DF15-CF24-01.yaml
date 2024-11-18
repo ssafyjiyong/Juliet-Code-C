@@ -1,0 +1,94 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          id: source
+          name: BUBBLEMENT_NEOTHALAMUS
+          value: brah
+          ordinal: 1
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          value: dude
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          name: BUBBLEMENT_NEOTHALAMUS
+          id: source
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: BUBBLEMENT_NEOTHALAMUS
+          stage_enum: 0
+          ordinal: 1
+          value: bromigo
+          value_type_enum: 0
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: BUBBLEMENT_NEOTHALAMUS
+  exploits:
+    - inputs:
+        - value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          value_encoding: base64
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          id: source
+          name: BUBBLEMENT_NEOTHALAMUS
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          id: source
+          name: BUBBLEMENT_NEOTHALAMUS
+          source_enum: 2
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp8qw8oq_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp8qw8oq_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp8qw8oq_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmp8qw8oq_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump

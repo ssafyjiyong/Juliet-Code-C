@@ -1,0 +1,106 @@
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4637
+      size: 35
+      flags: 950
+  exploits:
+    - inputs:
+        - stage: pre_process
+          size: 35
+          flags: 950
+          stage_enum: 0
+          id: source
+          source: shared_memory_input
+          source_enum: 6
+          ordinal: 1
+          value_encoding: none
+          value: 10%20%3B%20ls -la
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 4637
+    - inputs:
+        - stage_enum: 0
+          id: source
+          source_enum: 6
+          ordinal: 1
+          stage: pre_process
+          key: 4637
+          flags: 950
+          size: 35
+          value_encoding: none
+          value: localhost%20%26%20echo Hello world
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: 10
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          size: 35
+          key: 4637
+          source_enum: 6
+          flags: 950
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          source_enum: 6
+          stage_enum: 0
+          id: source
+          value: google.com
+          stage: pre_process
+          key: 4637
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          flags: 950
+          value_type_enum: 0
+          size: 35
+    - inputs:
+        - flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: localhost
+          stage: pre_process
+          id: source
+          key: 4637
+          size: 35
+          ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp0X3FaX_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp0X3FaX_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmp0X3FaX_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - line_number: 0
+    feature_group: control_flow
+    feature: macros
+    file_name: /tmp/tmp0X3FaX_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style

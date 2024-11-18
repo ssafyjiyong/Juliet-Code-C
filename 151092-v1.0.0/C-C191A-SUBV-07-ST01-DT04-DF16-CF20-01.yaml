@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpmH5Ozl_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpmH5Ozl_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: data_type
+    function_name: skip_bom
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpmH5Ozl_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpmH5Ozl_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: 45
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: PRELATE_TRIPLOPY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: PRELATE_TRIPLOPY
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          value: 80
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          value: 8000
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: PRELATE_TRIPLOPY
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: PRELATE_TRIPLOPY
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          value: 8
+          id: source
+          name: PRELATE_TRIPLOPY
+          ordinal: 1
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          name: PRELATE_TRIPLOPY
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          id: source
+          value: 4
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

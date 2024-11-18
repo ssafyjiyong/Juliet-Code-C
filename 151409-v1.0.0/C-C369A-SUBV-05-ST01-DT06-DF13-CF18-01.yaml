@@ -1,0 +1,94 @@
+io_pair:
+  exploits:
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          name: OVERDRAPERY_DOSSMAN
+          ordinal: 1
+          value: 1024
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          id: source
+          name: OVERDRAPERY_DOSSMAN
+          ordinal: 1
+          value: -512
+          value_type: USE_TEXT_DIRECTLY
+  description: "Converts the input into an int using atoi.\n  Takes that number mod 4, then uses that as the divisor in another operation.  IF the original input value is 0 mod 4, this will result in a floating point error.  Good values: input mod 4 is not 0, Bad values: input mod 4 = 0\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: OVERDRAPERY_DOSSMAN
+  benigns:
+    - inputs:
+        - name: OVERDRAPERY_DOSSMAN
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value: 99
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: OVERDRAPERY_DOSSMAN
+          value: -2
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          name: OVERDRAPERY_DOSSMAN
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          value: 1023
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+code_complexity_features:
+  - file_name: /tmp/tmpLzkSoW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - line_number: 0
+    feature_group: data_type
+    feature: typedef
+    file_name: /tmp/tmpLzkSoW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+  - file_name: /tmp/tmpLzkSoW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpLzkSoW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

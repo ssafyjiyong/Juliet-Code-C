@@ -1,0 +1,100 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          port: 8887
+          value: 1st char does not appear again
+          value_encoding: none
+          stage: co_process
+          stage_enum: 1
+          id: source
+          source: socket_input
+          ordinal: 1
+          source_enum: 5
+          address: ss-localhost
+    - inputs:
+        - value_encoding: none
+          source_enum: 5
+          value_type_enum: 0
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          value: FEDCBA
+          source: socket_input
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          source_enum: 5
+          stage: co_process
+          address: ss-localhost
+          value: asdfasdf
+          stage_enum: 1
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          source: socket_input
+    - inputs:
+        - source: socket_input
+          port: 8887
+          address: ss-localhost
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          value_encoding: none
+          id: source
+          ordinal: 1
+          value: this string has an another t
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage: co_process
+          address: ss-localhost
+          port: 8887
+          source_enum: 5
+          ordinal: 1
+          id: source
+          stage_enum: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: 1st char is 1
+          value_type_enum: 0
+          source: socket_input
+code_complexity_features:
+  - file_name: /tmp/tmpFRxQuI_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: union
+    feature_group: data_type
+    file_name: /tmp/tmpFRxQuI_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+  - file_name: /tmp/tmpFRxQuI_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpFRxQuI_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

@@ -1,0 +1,100 @@
+code_complexity_features:
+  - file_name: /tmp/tmpVNx8gD_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - feature_group: data_type
+    feature: struct
+    file_name: /tmp/tmpVNx8gD_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+  - file_name: /tmp/tmpVNx8gD_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpVNx8gD_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          id: source
+          source: socket_input
+          address: ss-localhost
+          port: 8887
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: this is a string to be printed
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          id: source
+          value: c29tZSBiZW5pZ24gZm9ybWF0dGluZyBmb3IgY2hhciBzdHJpbmcgCg==
+          ordinal: 1
+          value_type_enum: 0
+          address: ss-localhost
+          port: 8887
+          value_encoding: base64
+    - inputs:
+        - source_enum: 5
+          stage: co_process
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          source: socket_input
+          address: ss-localhost
+          value: Cg==
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+  exploits:
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage: co_process
+          value_encoding: none
+          stage_enum: 1
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          address: ss-localhost
+          value: "%0500d"
+          port: 8887
+    - inputs:
+        - port: 8887
+          ordinal: 1
+          source_enum: 5
+          stage: co_process
+          address: ss-localhost
+          source: socket_input
+          value_type_enum: 0
+          stage_enum: 1
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: "%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Good inputs:1) environment variable is a string value with no formatting2) environement variable is a format string that doesn't expose application\tdataBad inputs:1) environment variable is a format string that exposes application data\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

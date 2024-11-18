@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151784,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "Metadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: STRUCT\n - Data Flow: ADDRESS_AS_CONSTANT\n - Control Flow: INDIRECTLY_RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C775A-SUBV-10-ST03-DT05-DF05-CF02-01.xml"
+          },
+          "length": 139688,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "f586ad33b0d1fb5c223e5d12c015c99a4af609edfb8755dc12d3e36863c6d721"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/types.c"
+          },
+          "length": 14937,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "fe6d93e008f6b46a41a1c2e3dad99e2e6da70e60ccb6896ddb8220faefa02e85"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "775",
+              "name": "Missing Release of File Descriptor or Handle after Effective Lifetime"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-775",
+          "message": {
+            "text": "Missing Release of File Descriptor or Handle after Effective Lifetime."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/types.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 408,
+                  "endLine": 420
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "775",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

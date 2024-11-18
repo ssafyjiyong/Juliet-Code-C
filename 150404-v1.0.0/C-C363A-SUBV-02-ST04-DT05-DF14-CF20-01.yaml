@@ -1,0 +1,223 @@
+code_complexity_features:
+  - file_name: /tmp/tmpF4gBCc_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    line_number: 0
+  - line_number: 0
+    file_name: /tmp/tmpF4gBCc_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature: struct
+    feature_group: data_type
+  - line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpF4gBCc_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - feature: sequence
+    feature_group: control_flow
+    function_name: svn_mutex__unlock
+    line_number: 0
+    file_name: /tmp/tmpF4gBCc_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      key: 1827
+      size: 50
+      stage: pre_process
+      id: source
+      source_enum: 6
+      ordinal: 1
+      flags: 950
+      stage_enum: 0
+  description: "This weakness expects a string in the form: '<filename> <data>' where filename is a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is not a symbolic link. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be replaced with a symbolic link to a file outside of the testData directory. The weakness notifies the test harness that the file should be replaced by a symbolic link by creating a file called testData/*.pid. \n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          id: source
+          key: 1827
+          source: shared_memory_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          size: 50
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          value_encoding: none
+          flags: 950
+          source_enum: 6
+          value_type_enum: 0
+        - stage: pre_process
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source_enum: 7
+          source: script_input
+          ordinal: 2
+        - stage_enum: 0
+          source: script_input
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source_enum: 7
+          ordinal: 3
+          id: background
+        - name: /opt/stonesoup/workspace/testData/badfile1
+          value_type: USE_TEXT_DIRECTLY
+          value: This is yet another file.
+          value_encoding: none
+          ordinal: 4
+          source_enum: 3
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+    - inputs:
+        - key: 1827
+          ordinal: 1
+          size: 50
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          flags: 950
+          source_enum: 6
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+        - id: background-complex
+          source: script_input
+          ordinal: 2
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source_enum: 7
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source_enum: 7
+          ordinal: 3
+          stage_enum: 0
+          source: script_input
+          id: background
+          stage: pre_process
+        - source: file_content_input
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/badfile2
+          stage: pre_process
+          ordinal: 4
+          value: This is also file.
+  benigns:
+    - inputs:
+        - key: 1827
+          size: 50
+          stage: pre_process
+          value_type_enum: 0
+          source: shared_memory_input
+          value_encoding: none
+          id: source
+          ordinal: 1
+          source_enum: 6
+          flags: 950
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+        - stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+        - ordinal: 3
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+        - value_type_enum: 0
+          ordinal: 4
+          source: file_content_input
+          value_encoding: none
+          source_enum: 3
+          value: A non-empty file.
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/goodfile1
+    - inputs:
+        - id: source
+          size: 50
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: shared_memory_input
+          ordinal: 1
+          flags: 950
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          stage_enum: 0
+          key: 1827
+          stage: pre_process
+          source_enum: 6
+          value_type_enum: 0
+        - source: script_input
+          id: background-complex
+          stage_enum: 0
+          source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+        - stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+        - ordinal: 4
+          value_encoding: none
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/goodfile2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_type_enum: 0
+          stage_enum: 0
+          value: This is a file.
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_type: USE_TEXT_DIRECTLY
+          key: 1827
+          size: 50
+          source_enum: 6
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+        - stage: pre_process
+          source_enum: 7
+          source: script_input
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          id: background-complex
+          ordinal: 2
+        - source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+          ordinal: 3
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value: This is another file.
+          value_encoding: none
+          ordinal: 4
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

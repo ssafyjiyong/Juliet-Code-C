@@ -1,0 +1,148 @@
+io_pair:
+  base_inputs:
+    - source_enum: 6
+      source: shared_memory_input
+      flags: 950
+      stage_enum: 0
+      key: 9052
+      size: 45
+      stage: pre_process
+      ordinal: 1
+      id: source
+  exploits:
+    - inputs:
+        - size: 45
+          flags: 950
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: shared_memory_input
+          stage: pre_process
+          stage_enum: 0
+          key: 9052
+          value_type_enum: 0
+          source_enum: 6
+          value_encoding: none
+          value: /dev/urandom
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          size: 45
+          source_enum: 6
+          key: 9052
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          flags: 950
+          source: shared_memory_input
+          ordinal: 1
+        - value_type_enum: 0
+          value: a
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/bad02.txt
+          source: file_content_input
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+        - source: script_input
+          stage: pre_process
+          ordinal: 3
+          source_enum: 7
+          stage_enum: 0
+          name: rm -rf /opt/stonesoup/workspace/testData/bad02.txt
+        - source: script_input
+          ordinal: 4
+          stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+          name: ln -s '/dev/urandom' /opt/stonesoup/workspace/testData/bad02.txt
+  benigns:
+    - inputs:
+        - source_enum: 6
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          source: shared_memory_input
+          size: 45
+          key: 9052
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+    - inputs:
+        - source: shared_memory_input
+          value_type_enum: 0
+          key: 9052
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          size: 45
+          stage: pre_process
+          flags: 950
+          source_enum: 6
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - name: /opt/stonesoup/workspace/testData/good02.txt
+          source: file_content_input
+          value: not an empty file
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          id: source
+          key: 9052
+          value_type_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          stage_enum: 0
+          source_enum: 6
+          size: 45
+          source: shared_memory_input
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          value: This should not be an empty file.  I really mean it.  This should definitely contain some sort of text or paragraph or something
+          source_enum: 3
+  description: "Runs a bunch of hashing algorithms on a files contents. If a file doesn't end, ex: '/dev/urandom', will fork and consume a lot of cpu on different cpus\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: SHARED_MEMORY
+    function_name: svn_mutex__unlock
+    feature_group: source_taint
+    line_number: 0
+    file_name: /tmp/tmpUkqyYE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - feature_group: data_type
+    feature: simple
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpUkqyYE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+  - function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_1
+    file_name: /tmp/tmpUkqyYE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - feature_group: control_flow
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpUkqyYE_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0

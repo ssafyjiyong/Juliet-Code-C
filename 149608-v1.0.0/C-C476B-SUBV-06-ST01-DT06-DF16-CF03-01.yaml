@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: svn_error_wrap_apr
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpv2gRJj_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: source_taint
+    line_number: 0
+  - function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: typedef
+    feature_group: data_type
+    file_name: /tmp/tmpv2gRJj_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - file_name: /tmp/tmpv2gRJj_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: buffer_address_array_index
+    feature_group: data_flow
+  - file_name: /tmp/tmpv2gRJj_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: infinite_loop
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          id: source
+          value: AAAAAaba
+          name: FORECASTLES_PREPARATION
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          name: FORECASTLES_PREPARATION
+          value: ABCabaD123
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+          name: FORECASTLES_PREPARATION
+          value_encoding: none
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          source: env_var_input
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          name: FORECASTLES_PREPARATION
+          value_type: USE_TEXT_DIRECTLY
+          value: A.A
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          id: source
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          name: FORECASTLES_PREPARATION
+          value_encoding: none
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+      id: source
+      stage: pre_process
+      name: FORECASTLES_PREPARATION

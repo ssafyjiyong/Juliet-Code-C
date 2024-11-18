@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          name: PLANETIST_URARTIC
+          id: source
+          stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          value: -8000000
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: PLANETIST_URARTIC
+          id: source
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          value: -16777215
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          value: 10
+          name: PLANETIST_URARTIC
+          source: env_var_input
+          id: source
+          stage: pre_process
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          value: 1000
+          source: env_var_input
+          name: PLANETIST_URARTIC
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          name: PLANETIST_URARTIC
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: 20
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+  base_inputs:
+    - id: source
+      stage: pre_process
+      name: PLANETIST_URARTIC
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+code_complexity_features:
+  - feature_group: source_taint
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpSs0or0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - feature_group: data_type
+    file_name: /tmp/tmpSs0or0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: simple
+  - feature_group: data_flow
+    file_name: /tmp/tmpSs0or0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: buffer_address_array_index
+  - feature_group: control_flow
+    file_name: /tmp/tmpSs0or0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: interprocedural_50

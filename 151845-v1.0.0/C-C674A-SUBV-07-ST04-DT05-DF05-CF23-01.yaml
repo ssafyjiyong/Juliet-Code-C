@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmp6Y45OT_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: source_taint
+    function_name: skip_bom
+    line_number: 0
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp6Y45OT_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: struct
+    feature_group: data_type
+  - file_name: /tmp/tmp6Y45OT_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: necessitatingly_coscinodiscus
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmp6Y45OT_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          key: 2951
+          value_type: USE_TEXT_DIRECTLY
+          value: 1st char does not appear again
+          source_enum: 6
+          ordinal: 1
+          size: 31
+          id: source
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          source: shared_memory_input
+    - inputs:
+        - stage: pre_process
+          key: 2951
+          stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 31
+          value_type_enum: 0
+          id: source
+          flags: 950
+          value: FEDCBA
+          value_encoding: none
+  base_inputs:
+    - stage: pre_process
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2951
+      size: 31
+      flags: 950
+  benigns:
+    - inputs:
+        - source_enum: 6
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source: shared_memory_input
+          key: 2951
+          size: 31
+          value: asdfasdf
+          id: source
+    - inputs:
+        - size: 31
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          key: 2951
+          ordinal: 1
+          value: this string has an another t
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+    - inputs:
+        - value: 1st char is 1
+          key: 2951
+          stage_enum: 0
+          size: 31
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          source_enum: 6
+          id: source
+          source: shared_memory_input
+          flags: 950
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"

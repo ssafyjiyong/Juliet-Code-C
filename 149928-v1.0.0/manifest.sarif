@@ -1,0 +1,122 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149928,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case looks for the substring 'aba' within the taint source. If it finds the substring, it sets a pointer called stonesoup_second_buff to the beginning of the 'aba' substring, and the weakness continues without incident. If it does not find the substring, stonesoup_second_buff retains its initial value of NULL. The weakness subsequently calculates the length of stonesoup_second_buff, using strlen. If stonesoup_second_buff is NULL, this causes a segmentation fault.\nMetadata\n - Base program: Subversion\n - Source Taint: SHARED_MEMORY\n - Data Type: ARRAY\n - Data Flow: BASIC\n - Control Flow: RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C476B-SUBV-03-ST04-DT01-DF11-CF19-01.xml"
+          },
+          "length": 78327,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "f95a0c00ec251c9cf0eb44ab62af43915d47ecddf476dda034cd194246aecf31"
+          }
+        },
+        {
+          "location": {
+            "uri": "scripts/shm_setup.c"
+          },
+          "length": 3155,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "15d311b07d65d83f38876f4ee427c355e2048145d6db756d5d71877405f24822"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/utf.c"
+          },
+          "length": 39261,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "bd468134073c8549f78b916710fb7322c028e7d926b69a0fa0d0473ef2c8f6ba"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "476",
+              "name": "NULL Pointer Dereference"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-476",
+          "message": {
+            "text": "NULL Pointer Dereference."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/utf.c",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 1036,
+                  "endLine": 1038
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "476",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

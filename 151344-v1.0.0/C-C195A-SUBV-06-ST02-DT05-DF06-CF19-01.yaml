@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          name: ALPHABETED_OSCULANT
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+        - name: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 2
+          value: Good_Bye_World
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          stage_enum: 0
+          name: ALPHABETED_OSCULANT
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+        - name: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          stage_enum: 0
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          value: abcd
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          name: ALPHABETED_OSCULANT
+          stage_enum: 0
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+        - value: short stmt
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          id: source
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  base_inputs:
+    - name: ALPHABETED_OSCULANT
+      value: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      value_encoding: none
+      ordinal: 1
+    - id: source
+      source: file_content_input
+      source_enum: 3
+      stage_enum: 0
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+      stage: pre_process
+  exploits:
+    - inputs:
+        - source: env_var_input
+          value: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          name: ALPHABETED_OSCULANT
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+        - name: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          id: source
+    - inputs:
+        - name: ALPHABETED_OSCULANT
+          value: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+        - id: source
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/motorising_paintbox/dorchester_hemlock.txt
+          stage: pre_process
+          value: this_string_is_greater_than_16_characters
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpblz5oE_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+    function_name: svn_error_wrap_apr
+  - file_name: /tmp/tmpblz5oE_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: struct
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmpblz5oE_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: address_as_function_return_value
+  - feature_group: control_flow
+    feature: recursive
+    line_number: 0
+    file_name: /tmp/tmpblz5oE_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr

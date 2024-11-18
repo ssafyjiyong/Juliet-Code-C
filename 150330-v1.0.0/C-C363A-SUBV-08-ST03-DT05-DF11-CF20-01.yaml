@@ -1,0 +1,217 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpC2JCZO_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: SOCKET
+    feature_group: source_taint
+  - file_name: /tmp/tmpC2JCZO_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpC2JCZO_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpC2JCZO_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  description: "This weakness expects a string in the form: '<filename> <data>' where filename is a file that will be read to delay execution, and data is a string containing no spaces. The data string is treated as a filename in the testData directory. The weakness checks that the filename does not have any slashes in it and that it is not a symbolic link. However, there is a time of check, time of use vulnerability after the file is checked but before it is opened allowing the file to be replaced with a symbolic link to a file outside of the testData directory. The weakness notifies the test harness that the file should be replaced by a symbolic link by creating a file called testData/*.pid. \n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile1
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          id: source
+          stage: co_process
+          ordinal: 1
+          address: ss-localhost
+        - id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+        - source: script_input
+          stage: pre_process
+          id: background
+          source_enum: 7
+          ordinal: 3
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          stage_enum: 0
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/badfile1
+          value: This is yet another file.
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 4
+          value_encoding: none
+          source_enum: 3
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - stage_enum: 1
+          source: socket_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          address: ss-localhost
+          value_type_enum: 0
+          port: 8887
+          stage: co_process
+          value: /opt/stonesoup/workspace/testData/fifo1 badfile2
+          value_encoding: none
+          source_enum: 5
+        - id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage_enum: 0
+          source: script_input
+          ordinal: 2
+          source_enum: 7
+          stage: pre_process
+        - stage_enum: 0
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          ordinal: 3
+          source: script_input
+          source_enum: 7
+          stage: pre_process
+        - value: This is also file.
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          ordinal: 4
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/badfile2
+          value_encoding: none
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+      stage: co_process
+  benigns:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 1
+          source_enum: 5
+          address: ss-localhost
+          stage: co_process
+          value: /opt/stonesoup/workspace/testData/file1 goodfile1
+          port: 8887
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          source: socket_input
+        - source: script_input
+          source_enum: 7
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          stage: pre_process
+          stage_enum: 0
+          id: background-complex
+          ordinal: 2
+        - source_enum: 3
+          source: file_content_input
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 4
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: A non-empty file.
+          name: /opt/stonesoup/workspace/testData/goodfile1
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          stage: co_process
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          value: /opt/stonesoup/workspace/testData/file1 goodfile2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 5
+          stage_enum: 1
+          source: socket_input
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          id: background-complex
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 3
+          stage: pre_process
+          stage_enum: 0
+        - name: /opt/stonesoup/workspace/testData/goodfile2
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 4
+          stage: pre_process
+          value: This is a file.
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          value_encoding: none
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          id: source
+          ordinal: 1
+          address: ss-localhost
+          port: 8887
+          stage: co_process
+          value: /opt/stonesoup/workspace/testData/file1 goodfile3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          ordinal: 2
+          id: background-complex
+          stage_enum: 0
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then REPLACE_FILE=\"${NEW_FILE%.pid}\"; sleep 1; echo \"Replacing: \" \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && rm -f \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && ln -s /etc/passwd \"/opt/stonesoup/workspace/testData/${REPLACE_FILE}\" && echo \"Replaced.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          source_enum: 7
+        - source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          stage: pre_process
+          ordinal: 3
+        - ordinal: 4
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/goodfile3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          value: This is another file.
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 3

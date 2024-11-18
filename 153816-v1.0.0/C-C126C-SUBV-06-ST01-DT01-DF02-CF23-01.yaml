@@ -1,0 +1,94 @@
+code_complexity_features:
+  - function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpEWvHrm_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - file_name: /tmp/tmpEWvHrm_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: data_type
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpEWvHrm_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_2
+  - file_name: /tmp/tmpEWvHrm_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      stage: pre_process
+      source_enum: 2
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SULFURETTED_NOSOTROPHY
+  description: "Has a fixed heap buffer of size 64, allocated within a struct When input has a larger size, the heap buffer will be over read\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          name: SULFURETTED_NOSOTROPHY
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          source: env_var_input
+    - inputs:
+        - value: Hello World!
+          ordinal: 1
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: SULFURETTED_NOSOTROPHY
+          id: source
+    - inputs:
+        - id: source
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          name: SULFURETTED_NOSOTROPHY
+          ordinal: 1
+          value_encoding: none
+          value: Short is good
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - name: SULFURETTED_NOSOTROPHY
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          name: SULFURETTED_NOSOTROPHY
+          source: env_var_input
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

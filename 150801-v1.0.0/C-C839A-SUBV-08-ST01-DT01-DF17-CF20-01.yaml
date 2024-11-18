@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: LOGOMACHICAL_INTERIOR
+          value: -8000000
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          name: LOGOMACHICAL_INTERIOR
+          value_encoding: none
+          value: -16777215
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 10
+          ordinal: 1
+          name: LOGOMACHICAL_INTERIOR
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+    - inputs:
+        - source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value: 1000
+          ordinal: 1
+          value_encoding: none
+          name: LOGOMACHICAL_INTERIOR
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - value: 20
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          name: LOGOMACHICAL_INTERIOR
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: LOGOMACHICAL_INTERIOR
+code_complexity_features:
+  - file_name: /tmp/tmpZ4rsGh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpZ4rsGh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: data_type
+    function_name: svn_config_read3
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpZ4rsGh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpZ4rsGh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: control_flow
+    function_name: svn_config_read3
+    line_number: 0
+    feature: sequence

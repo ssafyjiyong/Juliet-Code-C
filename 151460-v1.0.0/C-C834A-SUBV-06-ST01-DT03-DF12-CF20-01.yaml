@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpPZYhTV_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature_group: data_type
+    file_name: /tmp/tmpPZYhTV_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: void_pointer
+  - feature_group: data_flow
+    file_name: /tmp/tmpPZYhTV_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: var_arg_list
+  - line_number: 0
+    file_name: /tmp/tmpPZYhTV_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: control_flow
+    function_name: unirritant_demultiplexed
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  base_inputs:
+    - stage: pre_process
+      id: source
+      name: POSITIVISTIC_MISASSERT
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          name: POSITIVISTIC_MISASSERT
+          value_encoding: none
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: 68718952445
+    - inputs:
+        - value: 1301
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          name: POSITIVISTIC_MISASSERT
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          id: source
+    - inputs:
+        - id: source
+          source_enum: 2
+          stage: pre_process
+          value: 1073676288
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: POSITIVISTIC_MISASSERT
+          source: env_var_input
+          ordinal: 1
+  exploits:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          name: POSITIVISTIC_MISASSERT
+          ordinal: 1
+          value: 1073676287
+          value_encoding: none
+          id: source
+    - inputs:
+        - ordinal: 1
+          id: source
+          stage: pre_process
+          value: 2147483647
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: POSITIVISTIC_MISASSERT
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input

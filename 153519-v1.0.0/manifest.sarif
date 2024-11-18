@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153519,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case allocates a struct on the heap that contains an 8-character buffer, followed by a pointer. The pointer is set to point to the beginning of the 8-character buffer. The taint source is copied into the 8-character buffer, using strncpy, but the length is incorrectly capped at the length of the taint source rather than the length of the 8-character buffer. If the taint source is 8 characters or longer, the strncpy will overflow the 8-character buffer, over-writing the pointer that follows it. The test case then call strlen on the following pointer, and if this point is not valid (due to the overflow), this will cause a segmentation fault. \nMetadata\n - Base program: Subversion\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: STRUCT\n - Data Flow: BASIC\n - Control Flow: POINTER_TO_FUNCTION",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C805C-SUBV-09-ST01-DT05-DF11-CF18-01.xml"
+          },
+          "length": 63883,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "618367944ea3247f1710d27c31c1953b686ea0815b72415a57f94a2c8b60e0cb"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/cmdline.c"
+          },
+          "length": 43629,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "df6d22bee65c4c287957dbf501fa005431386d23299013fc88f3eda54ff37e8f"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "805",
+              "name": "Buffer Access with Incorrect Length Value"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-805",
+          "message": {
+            "text": "Buffer Access with Incorrect Length Value."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/cmdline.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1156,
+                  "endLine": 1164
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "805",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

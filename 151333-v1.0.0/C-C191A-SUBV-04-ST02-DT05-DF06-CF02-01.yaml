@@ -1,0 +1,154 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          value_encoding: none
+          ordinal: 1
+          name: UNECLIPTIC_KOWAL
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+        - source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          stage_enum: 0
+          value: 45
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          id: source
+          value_encoding: none
+          ordinal: 2
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: UNECLIPTIC_KOWAL
+          stage: pre_process
+        - value: 80
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          id: source
+          name: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          name: UNECLIPTIC_KOWAL
+          source: env_var_input
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          value_type_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 2
+          value: 8000
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: UNECLIPTIC_KOWAL
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+        - id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          value: 8
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+    - inputs:
+        - ordinal: 1
+          name: UNECLIPTIC_KOWAL
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+          value: 4
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - ordinal: 1
+      name: UNECLIPTIC_KOWAL
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/auxiliation_agonia/satisfier_subvened.txt
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmp4GLhjC_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmp4GLhjC_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmp4GLhjC_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature: indirectly_recursive
+    file_name: /tmp/tmp4GLhjC_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

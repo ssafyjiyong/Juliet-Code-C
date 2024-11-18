@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmp589hiA_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp589hiA_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmp589hiA_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmp589hiA_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: purohit_carid
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2588
+      size: 22
+      flags: 950
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value: 1 foo
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          size: 22
+          flags: 950
+          stage: pre_process
+          id: source
+          ordinal: 1
+          key: 2588
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 6
+          id: source
+          key: 2588
+          ordinal: 1
+          flags: 950
+          size: 22
+          value: 2 a b
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source: shared_memory_input
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          key: 2588
+          ordinal: 1
+          id: source
+          flags: 950
+          value_type_enum: 0
+          value: 3 alpha bravo charlie
+          value_type: USE_TEXT_DIRECTLY
+          size: 22
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          value_type_enum: 0
+          source: shared_memory_input
+          key: 2588
+          stage_enum: 0
+          size: 22
+          flags: 950
+          value: 2 a
+          ordinal: 1
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: 10 a b c
+          size: 22
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          key: 2588
+          flags: 950
+          value_type_enum: 0
+          value_encoding: none

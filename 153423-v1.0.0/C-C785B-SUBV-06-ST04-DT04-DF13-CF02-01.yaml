@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpnw35k2_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: source_taint
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpnw35k2_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: data_type
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: heap_pointer
+  - feature_group: data_flow
+    file_name: /tmp/tmpnw35k2_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpnw35k2_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: control_flow
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      size: 20
+      id: source
+      key: 4193
+      stage: pre_process
+      flags: 950
+  description: "Has a buffer declared on the heap. malloc(20*sizeOf(char)) If input is resolved to more  than 20 chars it will overflow\n\n"
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          value_type_enum: 0
+          value: /etc/passwd
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          flags: 950
+          key: 4193
+          value_encoding: none
+          size: 20
+          stage_enum: 0
+          id: source
+          source_enum: 6
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value: /etc/ssh/ssh_config
+          flags: 950
+          stage_enum: 0
+          size: 20
+          id: source
+          source: shared_memory_input
+          source_enum: 6
+          key: 4193
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - key: 4193
+          value_type_enum: 0
+          value_encoding: none
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value: /usr/bin/gcc
+          ordinal: 1
+          source_enum: 6
+          stage: pre_process
+          id: source
+          size: 20
+          source: shared_memory_input
+          stage_enum: 0
+  exploits:
+    - inputs:
+        - stage: pre_process
+          key: 4193
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          size: 20
+          ordinal: 1
+          flags: 950
+          id: source
+          value: ../testData
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          value_type_enum: 0
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          size: 20
+          source: shared_memory_input
+          stage_enum: 0
+          key: 4193
+          flags: 950
+          value_encoding: none
+          value: ../testOutput

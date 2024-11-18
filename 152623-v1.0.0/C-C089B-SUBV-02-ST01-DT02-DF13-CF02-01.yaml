@@ -1,0 +1,264 @@
+io_pair:
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"
+  base_inputs:
+    - stage: pre_process
+      source_enum: 2
+      source: env_var_input
+      ordinal: 1
+      id: source
+      name: RICHTON_UNATTACKED
+      stage_enum: 0
+  benigns:
+    - inputs:
+        - name: RICHTON_UNATTACKED
+          value: USA
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          id: source
+          source: env_var_input
+        - ordinal: 2
+          value_type_enum: 1
+          value: northwind
+          database: postgresql
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 1
+          source: database_content_input
+          source_enum: 0
+          stage: pre_process
+          value_encoding: none
+          server: ss-db-postgres
+          stage_enum: 0
+        - source: env_var_input
+          source_enum: 2
+          name: SS_DBPGDATABASE
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 3
+        - stage: post_process
+          server: ss-db-postgres
+          source: database_content_input
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 0
+          database: postgresql
+          value_type_enum: 0
+          ordinal: 1
+          database_enum: 1
+          stage_enum: 2
+    - inputs:
+        - source: env_var_input
+          id: source
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          name: RICHTON_UNATTACKED
+          value: Germany
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+        - source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          stage: pre_process
+          value: northwind
+          stage_enum: 0
+          server: ss-db-postgres
+          database: postgresql
+          ordinal: 2
+          value_type_enum: 1
+          value_encoding: none
+          source: database_content_input
+          database_enum: 1
+        - stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_DBPGDATABASE
+          value: SET_DYNAMIC_DB_NAME
+        - stage_enum: 2
+          database_enum: 1
+          ordinal: 1
+          value_type_enum: 0
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          server: ss-db-postgres
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          value_encoding: none
+          database: postgresql
+          source_enum: 0
+          stage: post_process
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          source: env_var_input
+          stage_enum: 0
+          name: RICHTON_UNATTACKED
+          value: Finland
+        - stage_enum: 0
+          source_enum: 0
+          value: northwind
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          database_enum: 1
+          value_encoding: none
+          source: database_content_input
+          database: postgresql
+          ordinal: 2
+          server: ss-db-postgres
+          stage: pre_process
+        - ordinal: 3
+          name: SS_DBPGDATABASE
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          source: env_var_input
+          value: SET_DYNAMIC_DB_NAME
+          stage: pre_process
+        - source: database_content_input
+          value_encoding: none
+          stage: post_process
+          database_enum: 1
+          stage_enum: 2
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          ordinal: 1
+          database: postgresql
+          server: ss-db-postgres
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: RICHTON_UNATTACKED
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          value: x' or 'x'='x
+          id: source
+          stage: pre_process
+          source_enum: 2
+        - source_enum: 0
+          database: postgresql
+          value_encoding: none
+          value: northwind
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 1
+          server: ss-db-postgres
+          ordinal: 2
+          stage_enum: 0
+          value_type_enum: 1
+          stage: pre_process
+          source: database_content_input
+        - ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          value: SET_DYNAMIC_DB_NAME
+          value_type_enum: 0
+          stage_enum: 0
+          name: SS_DBPGDATABASE
+        - value_type: USE_TEXT_DIRECTLY
+          database_enum: 1
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          database: postgresql
+          ordinal: 1
+          stage: post_process
+          stage_enum: 2
+          source: database_content_input
+          server: ss-db-postgres
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 0
+    - inputs:
+        - id: source
+          stage_enum: 0
+          source: env_var_input
+          name: RICHTON_UNATTACKED
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value: "x'; SELECT * FROM Orders; -- "
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - value_type_enum: 1
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 0
+          ordinal: 2
+          database_enum: 1
+          server: ss-db-postgres
+          source: database_content_input
+          database: postgresql
+          stage: pre_process
+        - name: SS_DBPGDATABASE
+          ordinal: 3
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+        - value_type_enum: 0
+          stage_enum: 2
+          source: database_content_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          database_enum: 1
+          server: ss-db-postgres
+          stage: post_process
+          database: postgresql
+          source_enum: 0
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_encoding: none
+code_complexity_features:
+  - feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    line_number: 0
+    file_name: /tmp/tmpDDrR8j_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+  - function_name: svn_mutex__unlock
+    file_name: /tmp/tmpDDrR8j_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - feature: address_as_linear_expression
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: data_flow
+    file_name: /tmp/tmpDDrR8j_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - file_name: /tmp/tmpDDrR8j_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: control_flow
+    line_number: 0
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

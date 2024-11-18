@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "Has a fixed heap buffer of size 64.  (char [64])\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8709
+      size: 596
+      flags: 950
+  benigns:
+    - inputs:
+        - flags: 950
+          size: 596
+          value_type_enum: 0
+          value: AAA
+          id: source
+          source_enum: 6
+          stage: pre_process
+          key: 8709
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: shared_memory_input
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          value: Hellow world!
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 596
+          flags: 950
+          key: 8709
+          source_enum: 6
+          stage: pre_process
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          size: 596
+          value: Good-bye cruel world!
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          flags: 950
+          key: 8709
+  exploits:
+    - inputs:
+        - id: source
+          stage: pre_process
+          stage_enum: 0
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          key: 8709
+          ordinal: 1
+          value_type_enum: 0
+          size: 596
+          flags: 950
+          value_encoding: none
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    - inputs:
+        - stage: pre_process
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          source: shared_memory_input
+          key: 8709
+          source_enum: 6
+          size: 596
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpzi9Xkn_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+  - file_name: /tmp/tmpzi9Xkn_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: data_type
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: typedef
+  - feature: basic
+    file_name: /tmp/tmpzi9Xkn_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpzi9Xkn_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: macros

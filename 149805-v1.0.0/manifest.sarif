@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 149805,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case reads entries from a comma-separated-value file. It expects to read 3 strings from a file in the format: double quote, up to 79 characters, double quote, comma; double quote, up to 79 characters, double quote, comma; and double quote, up to 79 characters, double quote. The test case then creates an array of 3 pointers, setting each pointer to NULL initially. It checks each string read from the file, and if the length of the string from the file is non-zero, it sets the corresponding pointer to that string. It then writes each of these three pointers to another file, using fputs. If the file is not in the format expected, the three strings will not be read in properly. Some of the pointers in the array of 3 pointers will then not be set correctly and will remain NULL. When the test case tries to write the strings to the output file, it will receive a segmentation fault on the fputs call. \nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: HEAP_POINTER\n - Data Flow: ADDRESS_AS_FUNCTION_RETURN_VALUE\n - Control Flow: MACROS",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C476A-SUBV-02-ST02-DT04-DF06-CF22-01.xml"
+          },
+          "length": 70159,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "62643e18fa45a3af1b9d19deca8c2568f566249e822d0d293ae5dcda68ffbd7f"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/mutex.c"
+          },
+          "length": 9291,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "b22154bfd969070aa88b8f93fda6fd0fe76dd37a53fec914d38b2a3f734f2a87"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "476",
+              "name": "NULL Pointer Dereference"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-476",
+          "message": {
+            "text": "NULL Pointer Dereference."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/mutex.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 216,
+                  "endLine": 225
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "476",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpAWdEax_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: source_taint
+    line_number: 0
+    feature: SHARED_MEMORY
+  - line_number: 0
+    file_name: /tmp/tmpAWdEax_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: data_type
+    feature: union
+  - line_number: 0
+    feature: index_alias_2
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpAWdEax_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_flow
+  - file_name: /tmp/tmpAWdEax_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: macros
+    line_number: 0
+    function_name: svn_mutex__unlock
+    feature_group: control_flow
+io_pair:
+  base_inputs:
+    - source_enum: 6
+      stage: pre_process
+      source: shared_memory_input
+      stage_enum: 0
+      flags: 950
+      size: 91
+      id: source
+      ordinal: 1
+      key: 5201
+  description: "Has a buffer declared on the heap. malloc(64*sizeOf(char)) If input is shorter than 64 it will overflowdue to using improper sizeof and strlen checking\n\n"
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          size: 91
+          flags: 950
+          stage: pre_process
+          source: shared_memory_input
+          key: 5201
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          ordinal: 1
+          value: AAAAAAAAAAAAAAA
+    - inputs:
+        - size: 91
+          source: shared_memory_input
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 6
+          flags: 950
+          value_encoding: none
+          ordinal: 1
+          value: Short is now bad
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          key: 5201
+          id: source
+  benigns:
+    - inputs:
+        - id: source
+          stage_enum: 0
+          flags: 950
+          value_encoding: none
+          size: 91
+          stage: pre_process
+          source_enum: 6
+          ordinal: 1
+          key: 5201
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAA
+          source: shared_memory_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          key: 5201
+          source_enum: 6
+          flags: 950
+          stage: pre_process
+          value_encoding: none
+          size: 91
+          source: shared_memory_input
+          value: Hello World!  If this statement isn't more than 64 characters, it will go badly
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          size: 91
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          key: 5201
+          source_enum: 6
+          value_type_enum: 0
+          source: shared_memory_input
+          flags: 950
+          value: Short is good for buffer overflows, unless you make a mistake and get it wrong
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

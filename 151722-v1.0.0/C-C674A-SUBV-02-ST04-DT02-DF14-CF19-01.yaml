@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpUXG6r__ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    line_number: 0
+  - feature_group: data_type
+    feature: simple
+    function_name: svn_mutex__unlock
+    line_number: 0
+    file_name: /tmp/tmpUXG6r__ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - file_name: /tmp/tmpUXG6r__ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - feature: recursive
+    feature_group: control_flow
+    line_number: 0
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpUXG6r__ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+io_pair:
+  exploits:
+    - inputs:
+        - flags: 950
+          key: 3060
+          ordinal: 1
+          stage_enum: 0
+          size: 31
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 6
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value: 1st char does not appear again
+    - inputs:
+        - source: shared_memory_input
+          key: 3060
+          ordinal: 1
+          stage_enum: 0
+          id: source
+          source_enum: 6
+          size: 31
+          stage: pre_process
+          value_type_enum: 0
+          flags: 950
+          value: FEDCBA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          key: 3060
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          size: 31
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: asdfasdf
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          id: source
+          key: 3060
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 31
+          value_type_enum: 0
+          flags: 950
+          value: this string has an another t
+          source_enum: 6
+          source: shared_memory_input
+    - inputs:
+        - size: 31
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          flags: 950
+          source: shared_memory_input
+          value: 1st char is 1
+          stage: pre_process
+          source_enum: 6
+          id: source
+          ordinal: 1
+          key: 3060
+          value_type_enum: 0
+  base_inputs:
+    - stage: pre_process
+      id: source
+      key: 3060
+      stage_enum: 0
+      source: shared_memory_input
+      source_enum: 6
+      ordinal: 1
+      size: 31
+      flags: 950

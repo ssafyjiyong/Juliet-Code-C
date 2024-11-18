@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - source: shared_memory_input
+          value_encoding: none
+          value: 0123456789
+          value_type_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          key: 6712
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source_enum: 6
+          size: 40
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          flags: 950
+          key: 6712
+          ordinal: 1
+          value: 10 chars..
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          size: 40
+          value_type_enum: 0
+  description: "Malloc a function pointer.  If the input length is not equal to 10, set the function pointer to a function.  Try to use the function pointer. This will seg fault if the input length is exactly 10.\n\n"
+  base_inputs:
+    - key: 6712
+      stage_enum: 0
+      stage: pre_process
+      size: 40
+      ordinal: 1
+      source_enum: 6
+      flags: 950
+      source: shared_memory_input
+      id: source
+  benigns:
+    - inputs:
+        - value: AAAAAAAAAAA
+          value_encoding: none
+          source: shared_memory_input
+          value_type_enum: 0
+          stage_enum: 0
+          size: 40
+          stage: pre_process
+          ordinal: 1
+          key: 6712
+          flags: 950
+          source_enum: 6
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          source_enum: 6
+          id: source
+          value_encoding: none
+          flags: 950
+          key: 6712
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          size: 40
+          source: shared_memory_input
+          value: 12345 Hello world!
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          source_enum: 6
+          size: 40
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          id: source
+          key: 6712
+          value: This string does not have 10 characters
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - feature: SHARED_MEMORY
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmphXfjjl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: source_taint
+    line_number: 0
+  - function_name: svn_mutex__unlock
+    file_name: /tmp/tmphXfjjl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_type
+    feature: simple
+    line_number: 0
+  - feature: address_as_function_return_value
+    file_name: /tmp/tmphXfjjl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_flow
+    function_name: svn_mutex__unlock
+    line_number: 0
+  - feature_group: control_flow
+    line_number: 0
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmphXfjjl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: recursive

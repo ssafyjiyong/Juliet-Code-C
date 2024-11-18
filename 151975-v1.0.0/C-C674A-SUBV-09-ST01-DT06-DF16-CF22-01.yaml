@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp7S_ibr_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp7S_ibr_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp7S_ibr_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmp7S_ibr_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+io_pair:
+  description: "Read a string from the input.  Get the first character of the string, and then search the string for another instance of that first character.If the character does not appear, go into uncontrolled recursion.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+          name: CLAUDIUS_MAKLUK
+          value_type_enum: 0
+          ordinal: 1
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          value: 1st char does not appear again
+    - inputs:
+        - name: CLAUDIUS_MAKLUK
+          value: FEDCBA
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - ordinal: 1
+      name: CLAUDIUS_MAKLUK
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  benigns:
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          name: CLAUDIUS_MAKLUK
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: asdfasdf
+          source_enum: 2
+          ordinal: 1
+    - inputs:
+        - value_type_enum: 0
+          value: this string has an another t
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          value_encoding: none
+          name: CLAUDIUS_MAKLUK
+          stage: pre_process
+    - inputs:
+        - stage_enum: 0
+          name: CLAUDIUS_MAKLUK
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          id: source
+          source: env_var_input
+          value: 1st char is 1

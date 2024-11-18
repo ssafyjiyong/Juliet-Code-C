@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      stage: pre_process
+      source_enum: 2
+      value: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+      value_encoding: none
+      value_type_enum: 0
+      ordinal: 1
+      value_type: USE_TEXT_DIRECTLY
+      name: DISSONANCE_SIMIANS
+      stage_enum: 0
+    - name: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+      id: source
+      source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      ordinal: 2
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          name: DISSONANCE_SIMIANS
+          stage_enum: 0
+        - stage_enum: 0
+          ordinal: 2
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          stage: pre_process
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: DISSONANCE_SIMIANS
+        - name: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          id: source
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          value: this_string_is_greater_than_16_characters
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: DISSONANCE_SIMIANS
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          stage: pre_process
+        - value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          id: source
+          value: Good_Bye_World
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - source_enum: 2
+          name: DISSONANCE_SIMIANS
+          ordinal: 1
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+        - source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          value_encoding: none
+          value: abcd
+          ordinal: 2
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          name: DISSONANCE_SIMIANS
+          value_type: USE_TEXT_DIRECTLY
+        - id: source
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/toruses_undersetter/orchestrating_lisette.txt
+          value: short stmt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+code_complexity_features:
+  - feature: FILE_CONTENTS
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpYOrWOF_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: source_taint
+    line_number: 0
+  - function_name: svn_mutex__unlock
+    feature_group: data_type
+    feature: void_pointer
+    file_name: /tmp/tmpYOrWOF_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+  - file_name: /tmp/tmpYOrWOF_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_flow
+    line_number: 0
+    feature: address_alias_10
+    function_name: svn_mutex__unlock
+  - file_name: /tmp/tmpYOrWOF_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: interprocedural_10
+    function_name: svn_mutex__unlock
+    feature_group: control_flow
+    line_number: 0

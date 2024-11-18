@@ -1,0 +1,254 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          name: WRITHY_OVERLAYED
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          ordinal: 1
+        - value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          source: file_content_input
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+        - source: file_content_input
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> hello World!
+          stage: pre_process
+          value_encoding: none
+          ordinal: 2
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          name: WRITHY_OVERLAYED
+          source_enum: 2
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          name: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          id: source
+          source_enum: 3
+          value_type_enum: 0
+          value_encoding: none
+        - source_enum: 3
+          value_encoding: none
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          ordinal: 1
+          source: file_content_input
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          source_enum: 3
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          source: file_content_input
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+          name: WRITHY_OVERLAYED
+          source: env_var_input
+          stage: pre_process
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source_enum: 3
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+          name: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          source: file_content_input
+          id: source
+        - value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type_enum: 0
+          stage: pre_process
+          source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_encoding: none
+          stage_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_encoding: none
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          stage: pre_process
+          value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: WRITHY_OVERLAYED
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+        - name: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          value_encoding: none
+          source_enum: 3
+        - source: file_content_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          ordinal: 2
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value: !<!> hello World!
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          name: WRITHY_OVERLAYED
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          ordinal: 1
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_encoding: none
+        - ordinal: 2
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          source: file_content_input
+          value_type_enum: 0
+          stage: pre_process
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          source_enum: 3
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  base_inputs:
+    - value_type: USE_TEXT_DIRECTLY
+      ordinal: 1
+      value_encoding: none
+      value_type_enum: 0
+      value: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+      name: WRITHY_OVERLAYED
+      source_enum: 2
+      source: env_var_input
+      stage_enum: 0
+      stage: pre_process
+    - source: file_content_input
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/improviso_muricid/propping_dissolves.txt
+      id: source
+      stage_enum: 0
+      stage: pre_process
+      source_enum: 3
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    function_name: svn_mutex__unlock
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpx6hybl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - file_name: /tmp/tmpx6hybl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: typedef
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: data_type
+  - file_name: /tmp/tmpx6hybl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature: address_alias_10
+    feature_group: data_flow
+    line_number: 0
+  - function_name: svn_mutex__unlock
+    line_number: 0
+    file_name: /tmp/tmpx6hybl_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: set_jump_long_jump
+    feature_group: control_flow

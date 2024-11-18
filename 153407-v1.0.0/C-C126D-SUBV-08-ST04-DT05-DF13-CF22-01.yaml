@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpymu9qY_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature: SHARED_MEMORY
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpymu9qY_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpymu9qY_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpymu9qY_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature: macros
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 3552
+      size: 596
+      flags: 950
+  benigns:
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          key: 3552
+          ordinal: 1
+          id: source
+          value: AAAAAAAAAAAAAAAAAAAAAAA
+          flags: 950
+          size: 596
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          source: shared_memory_input
+    - inputs:
+        - value: Hello World!
+          stage: pre_process
+          value_encoding: none
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          size: 596
+          source_enum: 6
+          key: 3552
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          flags: 950
+          ordinal: 1
+    - inputs:
+        - flags: 950
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          key: 3552
+          ordinal: 1
+          size: 596
+          value: Short is good
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          size: 596
+          id: source
+          stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          stage: pre_process
+          key: 3552
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          key: 3552
+          value_encoding: none
+          source: shared_memory_input
+          source_enum: 6
+          id: source
+          size: 596
+          stage_enum: 0
+          flags: 950
+          value: This is probably going to overflow a buffer of some sort.  Let's run it anyway and see what happens.  I hope that everything turns out ok, because I would love to see what this looks like in all CAPS.  Converting ASCII characters to upper case is easy, you can either call a system function, or just add the standard difference between the start of the two character sets.  But, I am sure there is a reason that system functions exist for this sort of functionality.
+          value_type_enum: 0
+  description: "Has a fixed stack buffer of size 64, allocated within a struct When input has a larger size, the stack buffer will be over read\n\n"

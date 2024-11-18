@@ -1,0 +1,194 @@
+io_pair:
+  description: "This weakness takes a filename from an untrusted source and uses a subprocess (via popen) to perform a search and replace of the text \"hello\" with \"Hello\".  The untrusted input is not properly sanitized, and may be used to perform an argument injection on the base command in order to run additional commands or functions.\n"
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: SHCHERBAKOV_ALLOGAMOUS
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          name: SHCHERBAKOV_ALLOGAMOUS
+          source_enum: 2
+          ordinal: 1
+          source: env_var_input
+        - value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage: pre_process
+          ordinal: 1
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+        - value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          stage_enum: 0
+          value: !<!> hello World!
+          source_enum: 3
+          ordinal: 2
+          stage: pre_process
+          value_encoding: none
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: SHCHERBAKOV_ALLOGAMOUS
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          id: source
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_encoding: none
+          stage_enum: 0
+        - value_encoding: none
+          ordinal: 1
+          source: file_content_input
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+        - name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          source_enum: 3
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          value_encoding: none
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          source: env_var_input
+          value_encoding: none
+          name: SHCHERBAKOV_ALLOGAMOUS
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/vim_inputs/sample3.txt
+          value_type_enum: 0
+          id: source
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          stage: pre_process
+          source: file_content_input
+          ordinal: 1
+          stage_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source_enum: 3
+        - ordinal: 2
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample3.txt
+          value_encoding: none
+          value: !<!> "Hello again, hello.  Just called to say hello.\n\nYou had me at \"hello\".\n\n"
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - name: SHCHERBAKOV_ALLOGAMOUS
+          value: --cmd 'silent !cat /etc/passwd' /opt/stonesoup/workspace/testData/vim_inputs/sample1.txt
+          stage: pre_process
+          id: source
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+        - name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          source: file_content_input
+          value_type_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+        - value: !<!> hello World!
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample1.txt
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          name: SHCHERBAKOV_ALLOGAMOUS
+          id: source
+          ordinal: 1
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value: --cmd 'silent !ls -la .' /opt/stonesoup/workspace/testData/vim_inputs/sample2.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - source_enum: 3
+          ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          name: !<!> $SS_TC_ROOT/testData/vim_scripts/hello.vim
+          value_type_enum: 0
+          value: !<!> ":silent %s/hello/Hello/g\n:wq\n"
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+        - source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+          value: !<!> "hello?\nhello.\nhello!\nhello..."
+          name: !<!> $SS_TC_ROOT/testData/vim_inputs/sample2.txt
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - file_name: /tmp/tmpsJpRND_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpsJpRND_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpsJpRND_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpsJpRND_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

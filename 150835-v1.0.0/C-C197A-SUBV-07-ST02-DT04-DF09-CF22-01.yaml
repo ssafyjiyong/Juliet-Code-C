@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmpt6zaGK_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpt6zaGK_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpt6zaGK_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_10
+  - file_name: /tmp/tmpt6zaGK_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    feature: macros
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: RETROTRACHEAL_VITALIZING
+          value: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          source_enum: 2
+          value_encoding: none
+        - source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+          value: 1
+          name: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          ordinal: 2
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          name: RETROTRACHEAL_VITALIZING
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+        - stage: pre_process
+          value_type_enum: 0
+          id: source
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          stage_enum: 0
+          value: 10
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          source_enum: 2
+          value_type_enum: 0
+          name: RETROTRACHEAL_VITALIZING
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+        - value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          ordinal: 2
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - value_type_enum: 0
+      ordinal: 1
+      name: RETROTRACHEAL_VITALIZING
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          name: RETROTRACHEAL_VITALIZING
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+        - source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          value: 65538
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          name: RETROTRACHEAL_VITALIZING
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/thursby_rider/stinesville_sosquil.txt
+          value: 131074
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

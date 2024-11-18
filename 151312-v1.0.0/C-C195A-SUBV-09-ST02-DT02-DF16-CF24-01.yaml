@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpNNDjat_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpNNDjat_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpNNDjat_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpNNDjat_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: COMPTNESS_GASTROGENITAL
+      source: env_var_input
+      source_enum: 2
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: COMPTNESS_GASTROGENITAL
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          value_encoding: none
+        - stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          value: Good_Bye_World
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 3
+          ordinal: 2
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          name: COMPTNESS_GASTROGENITAL
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+        - ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: abcd
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          id: source
+          name: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          name: COMPTNESS_GASTROGENITAL
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+        - id: source
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          source_enum: 3
+          stage: pre_process
+          value: short stmt
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+  exploits:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          name: COMPTNESS_GASTROGENITAL
+          source: env_var_input
+        - stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: COMPTNESS_GASTROGENITAL
+          source: env_var_input
+          source_enum: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/aella_paraenetical/fingerleaf_hybrida.txt
+          value: this_string_is_greater_than_16_characters
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

@@ -1,0 +1,184 @@
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          name: COLLATERALLY_GRX
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          ordinal: 1
+        - name: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          id: source
+          ordinal: 2
+          value: -5
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source: script_input
+          source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          value_type_enum: 0
+          stage_enum: 0
+          name: COLLATERALLY_GRX
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          value: -10
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          source_enum: 7
+          stage_enum: 0
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  base_inputs:
+    - stage: pre_process
+      source_enum: 2
+      source: env_var_input
+      value_type: USE_TEXT_DIRECTLY
+      value_encoding: none
+      value: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+      value_type_enum: 0
+      stage_enum: 0
+      name: COLLATERALLY_GRX
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          name: COLLATERALLY_GRX
+          value: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          ordinal: 1
+        - id: source
+          value_encoding: none
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          value: 50
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source: script_input
+          stage_enum: 0
+          source_enum: 7
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          name: COLLATERALLY_GRX
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+        - source: file_content_input
+          name: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value: 1000
+          value_encoding: none
+        - ordinal: 2
+          source_enum: 7
+          stage_enum: 0
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage: pre_process
+          source: script_input
+    - inputs:
+        - name: COLLATERALLY_GRX
+          value: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 2
+        - value_encoding: none
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/embira_waynesburg/unleakable_criobolium.txt
+          value: 20000
+          ordinal: 2
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source_enum: 7
+          ordinal: 2
+          source: script_input
+          stage: pre_process
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpeQbr57_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: source_taint
+  - feature_group: data_type
+    function_name: svn_mutex__unlock
+    feature: union
+    line_number: 0
+    file_name: /tmp/tmpeQbr57_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+  - line_number: 0
+    file_name: /tmp/tmpeQbr57_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature: address_as_constant
+    feature_group: data_flow
+  - feature: indirectly_recursive
+    file_name: /tmp/tmpeQbr57_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: fiches_nudenesses
+    line_number: 0
+    feature_group: control_flow

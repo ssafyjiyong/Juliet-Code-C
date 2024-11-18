@@ -1,0 +1,154 @@
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: INFANGTHIEF_QUERELE
+    - ordinal: 2
+      name: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+      source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          name: INFANGTHIEF_QUERELE
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          ordinal: 1
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value: "%0500d"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: INFANGTHIEF_QUERELE
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          value: "%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          name: INFANGTHIEF_QUERELE
+          ordinal: 1
+        - stage_enum: 0
+          source: file_content_input
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          id: source
+          value: this is a string to be printed
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          name: INFANGTHIEF_QUERELE
+          value: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_encoding: base64
+          value_type_enum: 0
+          value: c29tZSBiZW5pZ24gZm9ybWF0dGluZyBmb3IgY2hhciBzdHJpbmcgCg==
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: INFANGTHIEF_QUERELE
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+        - name: /opt/stonesoup/workspace/testData/pleurodynic_tobias/mcgaheysville_corruptible.txt
+          source_enum: 3
+          id: source
+          source: file_content_input
+          value_encoding: base64
+          stage: pre_process
+          ordinal: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: Cg==
+          value_type_enum: 0
+  description: "Good inputs:1) environment variable is a string value with no formatting2) environement variable is a format string that doesn't expose application\tdataBad inputs:1) environment variable is a format string that exposes application data\n\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: FILE_CONTENTS
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    file_name: /tmp/tmp72EW3u_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - feature_group: data_type
+    file_name: /tmp/tmp72EW3u_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: struct
+  - file_name: /tmp/tmp72EW3u_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - file_name: /tmp/tmp72EW3u_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: bustiest_coursey
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

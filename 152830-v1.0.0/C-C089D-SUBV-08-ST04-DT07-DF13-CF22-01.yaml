@@ -1,0 +1,276 @@
+code_complexity_features:
+  - file_name: /tmp/tmp7Mw7JT_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmp7Mw7JT_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmp7Mw7JT_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: data_flow
+    function_name: svn_config_read3
+    line_number: 0
+    feature: address_as_linear_expression
+  - function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmp7Mw7JT_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature: macros
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6590
+      size: 73
+      flags: 950
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value: BadShipper'), ('80','BadShipper2
+          source: shared_memory_input
+          size: 73
+          source_enum: 6
+          flags: 950
+          ordinal: 1
+          id: source
+          key: 6590
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - database: postgresql
+          database_enum: 1
+          ordinal: 2
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          server: ss-db-postgres
+          source: database_content_input
+          value_encoding: none
+          value_type_enum: 1
+          source_enum: 0
+          value: northwind
+          stage: pre_process
+        - value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          ordinal: 3
+          source: env_var_input
+          stage: pre_process
+          name: SS_DBPGDATABASE
+          value_type_enum: 0
+        - database: postgresql
+          value_type_enum: 0
+          stage: post_process
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_encoding: none
+          source_enum: 0
+          server: ss-db-postgres
+          database_enum: 1
+          stage_enum: 2
+          ordinal: 1
+          source: database_content_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          stage_enum: 0
+          stage: pre_process
+          source: shared_memory_input
+          ordinal: 1
+          source_enum: 6
+          size: 73
+          value: ShippersRUs'), ('20','BadShips'), ('65','ShipAttack'), ('45', 'MultiShip
+          key: 6590
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          flags: 950
+          value_type_enum: 0
+        - ordinal: 2
+          database_enum: 1
+          source: database_content_input
+          database: postgresql
+          stage_enum: 0
+          server: ss-db-postgres
+          value_type_enum: 1
+          source_enum: 0
+          value: northwind
+          value_type: USE_CONTENTS_OF_FILE
+          value_encoding: none
+          stage: pre_process
+        - value_encoding: none
+          stage_enum: 0
+          name: SS_DBPGDATABASE
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+        - stage: post_process
+          source_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 2
+          database_enum: 1
+          ordinal: 1
+          value_type_enum: 0
+          server: ss-db-postgres
+          database: postgresql
+          source: database_content_input
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+  benigns:
+    - inputs:
+        - flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          size: 73
+          value: shipper1
+          key: 6590
+          source: shared_memory_input
+        - source_enum: 0
+          stage: pre_process
+          source: database_content_input
+          value: northwind
+          value_type_enum: 1
+          value_type: USE_CONTENTS_OF_FILE
+          stage_enum: 0
+          database: postgresql
+          database_enum: 1
+          ordinal: 2
+          value_encoding: none
+          server: ss-db-postgres
+        - source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBPGDATABASE
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 3
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+        - database: postgresql
+          stage: post_process
+          server: ss-db-postgres
+          stage_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          database_enum: 1
+          ordinal: 1
+          value_encoding: none
+          source: database_content_input
+          value_type_enum: 0
+          source_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          size: 73
+          ordinal: 1
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          key: 6590
+          source_enum: 6
+          value_encoding: none
+          value: NewShipper
+          value_type_enum: 0
+          flags: 950
+        - value_type: USE_CONTENTS_OF_FILE
+          stage: pre_process
+          value_type_enum: 1
+          stage_enum: 0
+          database_enum: 1
+          source_enum: 0
+          value: northwind
+          source: database_content_input
+          ordinal: 2
+          database: postgresql
+          value_encoding: none
+          server: ss-db-postgres
+        - value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          name: SS_DBPGDATABASE
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+          value_type_enum: 0
+          value: SET_DYNAMIC_DB_NAME
+        - database: postgresql
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: post_process
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 2
+          database_enum: 1
+          source_enum: 0
+          server: ss-db-postgres
+          source: database_content_input
+    - inputs:
+        - source: shared_memory_input
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          key: 6590
+          stage: pre_process
+          ordinal: 1
+          source_enum: 6
+          size: 73
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: ShippingCompany
+        - database: postgresql
+          database_enum: 1
+          source: database_content_input
+          stage_enum: 0
+          value_type_enum: 1
+          value: northwind
+          source_enum: 0
+          ordinal: 2
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_CONTENTS_OF_FILE
+          server: ss-db-postgres
+        - value_type: USE_TEXT_DIRECTLY
+          name: SS_DBPGDATABASE
+          value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: SET_DYNAMIC_DB_NAME
+          ordinal: 3
+          source: env_var_input
+          value_type_enum: 0
+        - stage_enum: 2
+          database: postgresql
+          database_enum: 1
+          stage: post_process
+          ordinal: 1
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          server: ss-db-postgres
+          value_encoding: none
+          source_enum: 0
+          source: database_content_input
+  description: "Good inputs: 1) name of shipper for use in Sql databaseBad inputs:SQL argument injection \n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

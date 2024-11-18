@@ -1,0 +1,154 @@
+io_pair:
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: CALLIDA_YADE
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          name: CALLIDA_YADE
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          name: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          ordinal: 2
+          value: 50
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          stage: pre_process
+          ordinal: 1
+          name: CALLIDA_YADE
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+        - name: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          ordinal: 2
+          source: file_content_input
+          id: source
+          stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: 100
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          name: CALLIDA_YADE
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+        - ordinal: 2
+          name: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          source: file_content_input
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          value: 10000
+          value_encoding: none
+  exploits:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 1
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: CALLIDA_YADE
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          value: 46400
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: CALLIDA_YADE
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/ascanius_lebban/flindosy_uwcsa.txt
+          value: 55000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpe0fRvM_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+  - file_name: /tmp/tmpe0fRvM_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: equivalency_noahic
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature: heap_pointer
+    feature_group: data_type
+    file_name: /tmp/tmpe0fRvM_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: equivalency_noahic
+    line_number: 0
+  - feature: address_alias_2
+    file_name: /tmp/tmpe0fRvM_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: morphophonemic_conspicuousness
+    line_number: 0
+    feature_group: data_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

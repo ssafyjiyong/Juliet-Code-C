@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150950,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This weakness reads a number and attempts to modify the two high bytes of it, if it is greater than 65535. If the calculation to modify the two high bytes is performed, it will happen incorrectly due to the placement of the pointer modification and it instead changes the bytes on function pointers that were created instead. When these function pointers are then called, it results in an error. If the calculation doesn't take place, then the function calls will execute without a problem. \nMetadata\n - Base program: Subversion\n - Source Taint: ENVIRONMENT_VARIABLE\n - Data Type: VOID_POINTER\n - Data Flow: ADDRESS_AS_VARIABLE\n - Control Flow: RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C682A-SUBV-02-ST01-DT03-DF15-CF19-01.xml"
+          },
+          "length": 67670,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "8ec76f0f37baf4acb57e081714e9c455229f2179efccb863fb2b94f65a6b8d59"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/mutex.c"
+          },
+          "length": 10201,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "5e489c26e5ff143d827e8b306d04e1865892a653948f75b8d164b7095857760f"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "682",
+              "name": "Incorrect Calculation"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-682",
+          "message": {
+            "text": "Incorrect Calculation."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/mutex.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 202,
+                  "endLine": 206
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "682",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

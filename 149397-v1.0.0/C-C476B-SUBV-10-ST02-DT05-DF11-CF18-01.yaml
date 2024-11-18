@@ -1,0 +1,154 @@
+io_pair:
+  exploits:
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          name: SOMETHINGNESS_OVERWINTER
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          value: A.A
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SOMETHINGNESS_OVERWINTER
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          name: SOMETHINGNESS_OVERWINTER
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          value: AAAAAaba
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: SOMETHINGNESS_OVERWINTER
+          value_encoding: none
+        - ordinal: 2
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          id: source
+          value: ABCabaD123
+          name: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: SOMETHINGNESS_OVERWINTER
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+        - value_type_enum: 0
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage: pre_process
+          id: source
+          ordinal: 2
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+          stage_enum: 0
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+      value: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SOMETHINGNESS_OVERWINTER
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/titan_engluts/meuniere_commoved.txt
+code_complexity_features:
+  - file_name: /tmp/tmpejbrYh_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+  - file_name: /tmp/tmpejbrYh_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpejbrYh_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpejbrYh_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: pointer_to_function
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

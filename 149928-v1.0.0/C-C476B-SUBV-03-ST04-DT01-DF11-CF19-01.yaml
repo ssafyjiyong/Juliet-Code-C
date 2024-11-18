@@ -1,0 +1,106 @@
+io_pair:
+  exploits:
+    - inputs:
+        - flags: 950
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          source_enum: 6
+          key: 2580
+          value: A.A
+          value_encoding: none
+          size: 66
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          id: source
+          key: 2580
+          ordinal: 1
+          flags: 950
+          size: 66
+          value: AAAAAAAHHHHHHHHHHHH!
+          source: shared_memory_input
+  description: "If a value is seen that doesn't contain 'aba', the taint buffer gets set to null and strlen is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2580
+      size: 66
+      flags: 950
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          flags: 950
+          id: source
+          key: 2580
+          stage_enum: 0
+          value_type_enum: 0
+          size: 66
+          value: AAAAAaba
+          stage: pre_process
+          value_encoding: none
+          source_enum: 6
+          ordinal: 1
+    - inputs:
+        - flags: 950
+          stage_enum: 0
+          id: source
+          source_enum: 6
+          ordinal: 1
+          stage: pre_process
+          size: 66
+          value_type_enum: 0
+          value: ABCabaD123
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          key: 2580
+          source: shared_memory_input
+    - inputs:
+        - source_enum: 6
+          size: 66
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUabaVWXYZabcdefghijklmnopqrstuvwxyz
+          value_encoding: none
+          flags: 950
+          source: shared_memory_input
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          ordinal: 1
+          key: 2580
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpsLa3fj_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+  - file_name: /tmp/tmpsLa3fj_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: basic
+    feature_group: data_flow
+    file_name: /tmp/tmpsLa3fj_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmpsLa3fj_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive

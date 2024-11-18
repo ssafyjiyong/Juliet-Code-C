@@ -1,0 +1,100 @@
+io_pair:
+  base_inputs:
+    - stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+      source: socket_input
+      source_enum: 5
+      stage: co_process
+  description: "Malloc a buffer.  Copy the input string to the buffer.  Search for 'e' in the string.  Upon finding 'e', free the buffer, using a pointer that points to that 'e'.  If 'e' is the first character in the buffer, everything is OK.  However, if e is not the first character in the buffer, this will seg fault.\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          port: 8887
+          address: ss-localhost
+          stage: co_process
+          value: aaa
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - port: 8887
+          value_encoding: none
+          stage_enum: 1
+          id: source
+          address: ss-localhost
+          ordinal: 1
+          source: socket_input
+          source_enum: 5
+          value_type_enum: 0
+          stage: co_process
+          value: this string has doe not begin with an e
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          address: ss-localhost
+          ordinal: 1
+          stage: co_process
+          port: 8887
+          source_enum: 5
+          stage_enum: 1
+          source: socket_input
+          value_encoding: none
+          value: eAAA
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - port: 8887
+          stage: co_process
+          address: ss-localhost
+          value_type_enum: 0
+          id: source
+          stage_enum: 1
+          value: e12345 Hello world!
+          source: socket_input
+          ordinal: 1
+          value_encoding: none
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - id: source
+          stage_enum: 1
+          source_enum: 5
+          value: e This string begins with an e
+          stage: co_process
+          address: ss-localhost
+          ordinal: 1
+          port: 8887
+          source: socket_input
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature: SOCKET
+    feature_group: source_taint
+    function_name: stonesoup_handle_taint
+    file_name: /tmp/tmplOX2i__ss_testcase/src-rose/subversion/libsvn_subr/config.c
+  - file_name: /tmp/tmplOX2i__ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmplOX2i__ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_2
+  - file_name: /tmp/tmplOX2i__ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: control_flow
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: sequence

@@ -1,0 +1,146 @@
+io_pair:
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          key: 6845
+          size: 149
+          flags: 950
+          value_encoding: none
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Dirt_McGert
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - id: background
+          stage: pre_process
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          source_enum: 7
+          ordinal: 2
+    - inputs:
+        - value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 @the_longest_hashtag_that_ever_existed_on_the_face_of_the_earth
+          ordinal: 1
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          size: 149
+          key: 6845
+          stage_enum: 0
+          value_type_enum: 0
+          flags: 950
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+        - stage_enum: 0
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          id: background
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - key: 6845
+          size: 149
+          flags: 950
+          source: shared_memory_input
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 Silly_rabbit,_tricks_are_for_kids
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          ordinal: 1
+        - stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+          ordinal: 2
+        - name: /opt/stonesoup/workspace/testData/file2
+          ordinal: 3
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+  exploits:
+    - inputs:
+        - value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 @the_longest_hashtag_that_ever_existed_on_the_face_of_the_earth
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          flags: 950
+          source: shared_memory_input
+          ordinal: 1
+          key: 6845
+          size: 149
+        - stage: pre_process
+          source_enum: 7
+          id: background
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          size: 149
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          flags: 950
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 1234567890_0987654321_1029384756_5647382910_0192837465_6574839201
+          id: source
+          source_enum: 6
+          ordinal: 1
+          key: 6845
+          value_encoding: none
+          stage: pre_process
+        - source: script_input
+          stage: pre_process
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          source_enum: 7
+          id: background
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certan benign cases), file1 and file2 are files used to delay the execution, and data is a string containing no spaces. A lack of syncronization leads to an underread/write for certain inputs. For the weakness to occur, FIFO files must be provided in the correct order (controlled by the runFifo.py script), the input must begin with a character with ASCII value less than 'A' and be 2 or more characters long.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6845
+      size: 149
+      flags: 950
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmprDQnAt_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+  - file_name: /tmp/tmprDQnAt_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmprDQnAt_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmprDQnAt_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence

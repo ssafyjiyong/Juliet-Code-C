@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature: FILE_CONTENTS
+    line_number: 0
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpca6LkP_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: source_taint
+  - line_number: 0
+    function_name: svn_mutex__unlock
+    file_name: /tmp/tmpca6LkP_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpca6LkP_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature_group: data_flow
+    feature: index_alias_50
+    line_number: 0
+  - file_name: /tmp/tmpca6LkP_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_2
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      name: PYROLYTIC_DNIREN
+      stage: pre_process
+      value: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+      ordinal: 1
+      source_enum: 2
+      stage_enum: 0
+      value_encoding: none
+    - stage_enum: 0
+      source_enum: 3
+      name: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+      source: file_content_input
+      id: source
+      ordinal: 2
+      stage: pre_process
+  benigns:
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          value_type_enum: 0
+          name: PYROLYTIC_DNIREN
+          stage: pre_process
+          source_enum: 2
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          value: 10
+          source_enum: 3
+          ordinal: 2
+          id: source
+          source: file_content_input
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          name: PYROLYTIC_DNIREN
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+        - stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          source: file_content_input
+          value: google.com
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          source_enum: 3
+          value_encoding: none
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: PYROLYTIC_DNIREN
+          value: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          stage_enum: 0
+          value_encoding: none
+          value: localhost
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"
+  exploits:
+    - inputs:
+        - source: env_var_input
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: PYROLYTIC_DNIREN
+          source_enum: 2
+          stage_enum: 0
+        - stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          source: file_content_input
+          id: source
+          ordinal: 2
+          stage: pre_process
+          value: 10%20%3B%20ls -la
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: PYROLYTIC_DNIREN
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          ordinal: 1
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+        - stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/sandstay_ordains/scrivelloes_abolishing.txt
+          source: file_content_input
+          id: source
+          ordinal: 2
+          stage: pre_process
+          value: localhost%20%26%20echo Hello world
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

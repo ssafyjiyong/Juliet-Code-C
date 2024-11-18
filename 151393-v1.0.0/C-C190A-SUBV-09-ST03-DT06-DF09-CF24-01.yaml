@@ -1,0 +1,100 @@
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          value: 50
+          value_encoding: none
+          address: ss-localhost
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          stage_enum: 1
+          source_enum: 5
+          ordinal: 1
+          port: 8887
+    - inputs:
+        - source: socket_input
+          address: ss-localhost
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          value_encoding: none
+          source_enum: 5
+          port: 8887
+          value: 100
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+    - inputs:
+        - source_enum: 5
+          port: 8887
+          id: source
+          source: socket_input
+          value_type_enum: 0
+          stage_enum: 1
+          ordinal: 1
+          address: ss-localhost
+          value: 10000
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: co_process
+  exploits:
+    - inputs:
+        - stage: co_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          value_encoding: none
+          address: ss-localhost
+          stage_enum: 1
+          source_enum: 5
+          id: source
+          port: 8887
+          value: 46400
+          ordinal: 1
+    - inputs:
+        - value_type_enum: 0
+          port: 8887
+          ordinal: 1
+          source: socket_input
+          stage: co_process
+          source_enum: 5
+          id: source
+          address: ss-localhost
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: 55000
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmprsDzQc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    line_number: 0
+    function_name: stonesoup_handle_taint
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmprsDzQc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmprsDzQc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_10
+  - function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+    file_name: /tmp/tmprsDzQc_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c

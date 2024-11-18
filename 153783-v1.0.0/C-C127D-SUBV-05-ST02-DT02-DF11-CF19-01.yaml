@@ -1,0 +1,204 @@
+code_complexity_features:
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpib1CJ8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: source_taint
+  - file_name: /tmp/tmpib1CJ8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpib1CJ8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpib1CJ8_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  exploits:
+    - inputs:
+        - stage: pre_process
+          name: IERNA_KOHN
+          value: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+        - value: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUGugIE=
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: base64
+          name: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          source_enum: 3
+          stage: pre_process
+          id: source
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+          value_type_enum: 0
+        - ordinal: 2
+          source_enum: 2
+          value_encoding: none
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          name: INPUT_STRING
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          stage_enum: 0
+          source: env_var_input
+          name: IERNA_KOHN
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          value: SGVsbKUgV6lybGSI
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_encoding: none
+          ordinal: 2
+          name: INPUT_STRING
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a stack buffer of size 128 within a struct.  reads in an ascii string from an environmentvariable and increments the corresponding values in the stack buffer.  Then reads in an input and prints out the count of the characters from the stack buff of those in the input.  If input contains extended ascii characters, they will be wrapped around to negative values and the buffer will be under read\n\n"
+  base_inputs:
+    - name: IERNA_KOHN
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          name: IERNA_KOHN
+          stage_enum: 0
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_type_enum: 0
+          source_enum: 3
+          ordinal: 2
+          id: source
+          value_encoding: none
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          ordinal: 2
+          name: INPUT_STRING
+          source: env_var_input
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          stage: pre_process
+          source_enum: 2
+          name: IERNA_KOHN
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          value: This is probably not going to overflow a buffer of some sort.  Let's run it anyway and see what happens.
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+        - name: INPUT_STRING
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 2
+          source_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          name: IERNA_KOHN
+          value: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          source_enum: 2
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+        - value: As long as this statement has more than 128 characters, then nothing bad should happen
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/jger_luminodynamist/lanolines_ungushing.txt
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+        - source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: INPUT_STRING
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 2
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

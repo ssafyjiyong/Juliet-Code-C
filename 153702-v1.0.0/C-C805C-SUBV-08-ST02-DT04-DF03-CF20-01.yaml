@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpjwh2qn_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpjwh2qn_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpjwh2qn_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - file_name: /tmp/tmpjwh2qn_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          name: TARSOCLASIS_DEPOSING
+          value: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          value: This_input_is_too_long_to_be_contained_in_buffer
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: TARSOCLASIS_DEPOSING
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          value_type: USE_TEXT_DIRECTLY
+          name: TARSOCLASIS_DEPOSING
+          ordinal: 1
+        - value_encoding: none
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          id: source
+          value: Hello
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: TARSOCLASIS_DEPOSING
+        - source: file_content_input
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          ordinal: 2
+          value: a
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - source: env_var_input
+          value: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          name: TARSOCLASIS_DEPOSING
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - name: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+          source: file_content_input
+          stage_enum: 0
+          id: source
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: ok_str
+          value_type_enum: 0
+  description: "Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: TARSOCLASIS_DEPOSING
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/furnacite_moisturizer/plumbicon_submanagership.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

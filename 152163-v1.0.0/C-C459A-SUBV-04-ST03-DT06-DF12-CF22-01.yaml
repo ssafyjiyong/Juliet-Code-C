@@ -1,0 +1,100 @@
+io_pair:
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          value_encoding: none
+          port: 8887
+          address: ss-localhost
+          value: 10
+          ordinal: 1
+          value_type_enum: 0
+    - inputs:
+        - value: 42
+          value_encoding: none
+          stage: co_process
+          stage_enum: 1
+          source_enum: 5
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_type_enum: 0
+          address: ss-localhost
+          source: socket_input
+    - inputs:
+        - address: ss-localhost
+          ordinal: 1
+          port: 8887
+          stage_enum: 1
+          source_enum: 5
+          stage: co_process
+          id: source
+          value_encoding: none
+          value: 37
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+  exploits:
+    - inputs:
+        - source_enum: 5
+          stage: co_process
+          id: source
+          address: ss-localhost
+          value: 20000
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          source: socket_input
+          stage_enum: 1
+    - inputs:
+        - value: 6000
+          stage: co_process
+          source_enum: 5
+          source: socket_input
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          address: ss-localhost
+          stage_enum: 1
+          ordinal: 1
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpEi6LuB_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    line_number: 0
+    function_name: stonesoup_handle_taint
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpEi6LuB_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpEi6LuB_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - line_number: 0
+    feature_group: control_flow
+    feature: macros
+    file_name: /tmp/tmpEi6LuB_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: prenotifies_unabridged
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

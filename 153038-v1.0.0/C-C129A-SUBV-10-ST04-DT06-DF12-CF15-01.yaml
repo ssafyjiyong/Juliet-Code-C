@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpBgpcf2_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature_group: source_taint
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpBgpcf2_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpBgpcf2_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - function_name: misdividing_throop
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+    file_name: /tmp/tmpBgpcf2_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  description: "Good input:1) environment variable contains only alphanumeric charactersBad input:1) environment variable contains * or -.  + causes infinte loop\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5660
+      size: 19
+      flags: 950
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          value: exampleofgoodinput
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          size: 19
+          ordinal: 1
+          flags: 950
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          source_enum: 6
+          key: 5660
+    - inputs:
+        - size: 19
+          flags: 950
+          stage_enum: 0
+          value: abcd12345ABCDE
+          stage: pre_process
+          id: source
+          ordinal: 1
+          source: shared_memory_input
+          source_enum: 6
+          key: 5660
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+          id: source
+          size: 19
+          value: R0G3RR4881T
+          key: 5660
+          value_encoding: none
+          flags: 950
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - value: "{a+b|c+d}"
+          size: 19
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          key: 5660
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 6
+          key: 5660
+          flags: 950
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: "!a*b(c*d-1)"
+          value_type_enum: 0
+          size: 19
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none

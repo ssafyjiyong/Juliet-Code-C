@@ -1,0 +1,146 @@
+io_pair:
+  benigns:
+    - inputs:
+        - key: 4428
+          flags: 950
+          size: 141
+          source: shared_memory_input
+          source_enum: 6
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          ordinal: 1
+        - id: background
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 7
+    - inputs:
+        - value: 60 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          value_encoding: none
+          value_type_enum: 0
+          source: shared_memory_input
+          id: source
+          flags: 950
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          key: 4428
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          size: 141
+        - source_enum: 7
+          stage: pre_process
+          ordinal: 2
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 4428
+          size: 141
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIlly_rabbit,_tricks_are_for_kids.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+        - source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          ordinal: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file2
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are names of either FIFO files or regular files, and data is a string containing no spaces. Using a second sem_post after a single sem_wait causes the counting semaphore to allow two proccess into the critical section instead of just one when the critical resource is unlocked, leading to a null pointer dereference. This behavior is triggered by providing two FIFO files <file1 file2> controlled by the runFifos.py script in order, and an input string containing any capitalized alpha character (A-Z). Providing this weakness with two FIFO files <file2 file1> (reverse order) controlled by runFifos.py will prevent the weakness from occuring. Providing this weakness with two regular files is nondeterministic, however a larger qsize will increase the likelyhood that the weakness will not occure.\n\n"
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 4428
+      size: 141
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          flags: 950
+          source_enum: 6
+          value_encoding: none
+          ordinal: 1
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          value_type: USE_TEXT_DIRECTLY
+          size: 141
+          source: shared_memory_input
+          key: 4428
+        - stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          id: background
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          key: 4428
+          size: 141
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          id: source
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_encoding: none
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source_enum: 7
+          stage_enum: 0
+          source: script_input
+          ordinal: 2
+          id: background
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SHARED_MEMORY
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    file_name: /tmp/tmpnefyLC_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - file_name: /tmp/tmpnefyLC_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpnefyLC_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpnefyLC_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

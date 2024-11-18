@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          name: DISUNIFORM_GENIOHYOGLOSSAL
+          value: 46400
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          stage_enum: 0
+          stage: pre_process
+          value: 55000
+          ordinal: 1
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 2
+          name: DISUNIFORM_GENIOHYOGLOSSAL
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: DISUNIFORM_GENIOHYOGLOSSAL
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: 50
+          id: source
+          name: DISUNIFORM_GENIOHYOGLOSSAL
+          source: env_var_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: DISUNIFORM_GENIOHYOGLOSSAL
+          stage: pre_process
+          source: env_var_input
+          value: 100
+          source_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - value_type_enum: 0
+          name: DISUNIFORM_GENIOHYOGLOSSAL
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: 10000
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+code_complexity_features:
+  - file_name: /tmp/tmpwhCXwY_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpwhCXwY_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpwhCXwY_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - function_name: levitically_putting
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpwhCXwY_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature: infinite_loop

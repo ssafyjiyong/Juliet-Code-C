@@ -1,0 +1,194 @@
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: POLITICIST_MILLER
+      source: env_var_input
+      source_enum: 2
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+  exploits:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          name: POLITICIST_MILLER
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          ordinal: 1
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+        - name: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          value_encoding: none
+          source: file_content_input
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          ordinal: 2
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 7
+          ordinal: 2
+          source: script_input
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          id: background
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          name: POLITICIST_MILLER
+          source: env_var_input
+          source_enum: 2
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          id: background
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          ordinal: 2
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are names of either FIFO files or regular files, and data is a string containing no spaces. If the data string contains non alpha-numeric characters, spawn two threads underscores, spawn two threads.  Using a sem_post before ever calling sem_wait causes the counting semaphore to allow two processes into the critical section instead of just one when the previous process unblocks. In order to hit the weakness, qsize >= 5000000, and the data string must have non-alphanumeric characters it.\n\n"
+  benigns:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          name: POLITICIST_MILLER
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+        - name: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          id: source
+          ordinal: 2
+          source_enum: 3
+          value_type_enum: 0
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          source_enum: 7
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          ordinal: 2
+          id: background
+    - inputs:
+        - value_type_enum: 0
+          ordinal: 1
+          name: POLITICIST_MILLER
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          value_encoding: none
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          value: 60 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source_enum: 7
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          id: background
+          ordinal: 2
+          stage_enum: 0
+          source: script_input
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          name: POLITICIST_MILLER
+          stage: pre_process
+        - value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIllyrabbittricksareforkids
+          source: file_content_input
+          value_encoding: none
+          id: source
+          ordinal: 2
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/housers_eyeground/stilwell_thysanura.txt
+          stage_enum: 0
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/file1
+        - source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          stage: pre_process
+code_complexity_features:
+  - file_name: /tmp/tmpczo2Bw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+    file_name: /tmp/tmpczo2Bw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - file_name: /tmp/tmpczo2Bw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpczo2Bw_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

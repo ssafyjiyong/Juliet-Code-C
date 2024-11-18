@@ -1,0 +1,94 @@
+code_complexity_features:
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmp07OAGc_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - function_name: goniatites_okeghem
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmp07OAGc_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: source_taint
+  - file_name: /tmp/tmp07OAGc_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: goniatites_okeghem
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmp07OAGc_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: infeof_lordships
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+io_pair:
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          name: PATCHWORKY_BATFUL
+          stage_enum: 0
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: PATCHWORKY_BATFUL
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          value: this_string_is_greater_than_16_characters
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  base_inputs:
+    - ordinal: 1
+      name: PATCHWORKY_BATFUL
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  benigns:
+    - inputs:
+        - id: source
+          value_encoding: none
+          source: env_var_input
+          ordinal: 1
+          name: PATCHWORKY_BATFUL
+          source_enum: 2
+          stage: pre_process
+          value: Good_Bye_World
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          id: source
+          value: abcd
+          name: PATCHWORKY_BATFUL
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+          ordinal: 1
+          name: PATCHWORKY_BATFUL
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: short stmt
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

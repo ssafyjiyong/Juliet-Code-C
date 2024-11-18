@@ -1,0 +1,324 @@
+io_pair:
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: ANGLOPHONE_ARTUKOVIC
+          source: env_var_input
+        - ordinal: 2
+          value: x' or 'x'='x
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+        - database_enum: 1
+          database: postgresql
+          stage_enum: 0
+          source: database_content_input
+          server: ss-db-postgres
+          value_type_enum: 1
+          stage: pre_process
+          value_encoding: none
+          ordinal: 2
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          source_enum: 0
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBPGDATABASE
+          value_type_enum: 0
+          ordinal: 3
+        - stage: post_process
+          stage_enum: 2
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          database: postgresql
+          database_enum: 1
+          server: ss-db-postgres
+          value_encoding: none
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          source: database_content_input
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          stage_enum: 0
+          name: ANGLOPHONE_ARTUKOVIC
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+        - source: file_content_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          value_type_enum: 0
+          stage: pre_process
+          value: "x'; SELECT * FROM Orders; -- "
+          stage_enum: 0
+          id: source
+          ordinal: 2
+        - source_enum: 0
+          stage: pre_process
+          server: ss-db-postgres
+          value_type_enum: 1
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 1
+          database: postgresql
+          value_encoding: none
+          source: database_content_input
+          stage_enum: 0
+          ordinal: 2
+          value: northwind
+        - value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBPGDATABASE
+        - database: postgresql
+          database_enum: 1
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          ordinal: 1
+          source_enum: 0
+          stage: post_process
+          stage_enum: 2
+          server: ss-db-postgres
+          source: database_content_input
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: ANGLOPHONE_ARTUKOVIC
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          name: ANGLOPHONE_ARTUKOVIC
+        - value: USA
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          stage_enum: 0
+          value_encoding: none
+          source: file_content_input
+        - source_enum: 0
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          ordinal: 2
+          value: northwind
+          value_type_enum: 1
+          value_encoding: none
+          source: database_content_input
+          stage: pre_process
+          server: ss-db-postgres
+          database: postgresql
+          database_enum: 1
+        - value_encoding: none
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_DBPGDATABASE
+          stage: pre_process
+          ordinal: 3
+        - value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          source_enum: 0
+          ordinal: 1
+          source: database_content_input
+          database: postgresql
+          value_encoding: none
+          stage_enum: 2
+          value_type_enum: 0
+          server: ss-db-postgres
+          value_type: USE_TEXT_DIRECTLY
+          database_enum: 1
+          stage: post_process
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          value_encoding: none
+          value_type_enum: 0
+          name: ANGLOPHONE_ARTUKOVIC
+          ordinal: 1
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          source: file_content_input
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          value: Germany
+          stage: pre_process
+          value_encoding: none
+        - source_enum: 0
+          value: northwind
+          database: postgresql
+          value_encoding: none
+          server: ss-db-postgres
+          database_enum: 1
+          ordinal: 2
+          source: database_content_input
+          value_type_enum: 1
+          value_type: USE_CONTENTS_OF_FILE
+          stage_enum: 0
+          stage: pre_process
+        - name: SS_DBPGDATABASE
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value: SET_DYNAMIC_DB_NAME
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+        - database_enum: 1
+          database: postgresql
+          source_enum: 0
+          stage: post_process
+          server: ss-db-postgres
+          ordinal: 1
+          source: database_content_input
+          stage_enum: 2
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: ANGLOPHONE_ARTUKOVIC
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/infit_furrower/tricyanide_justles.txt
+          value: Finland
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          stage: pre_process
+          database_enum: 1
+          value: northwind
+          database: postgresql
+          value_encoding: none
+          value_type: USE_CONTENTS_OF_FILE
+          source: database_content_input
+          ordinal: 2
+          server: ss-db-postgres
+          value_type_enum: 1
+          source_enum: 0
+        - value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+          stage: pre_process
+          value_type_enum: 0
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          name: SS_DBPGDATABASE
+          source_enum: 2
+        - ordinal: 1
+          source_enum: 0
+          source: database_content_input
+          stage: post_process
+          server: ss-db-postgres
+          stage_enum: 2
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          database: postgresql
+          database_enum: 1
+code_complexity_features:
+  - file_name: /tmp/tmpZ30_sj_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpZ30_sj_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: union
+  - file_name: /tmp/tmpZ30_sj_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: watershed_haustellous
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpZ30_sj_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature: interprocedural_2
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

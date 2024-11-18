@@ -1,0 +1,276 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 1966
+      size: 73
+      flags: 950
+  description: "Good inputs: 1) name of shipper for use in Sql databaseBad inputs:SQL argument injection \n\n"
+  exploits:
+    - inputs:
+        - flags: 950
+          size: 73
+          ordinal: 1
+          source: shared_memory_input
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          key: 1966
+          stage: pre_process
+          source_enum: 6
+          id: source
+          value: BadShipper'), ('80','BadShipper2
+        - stage: pre_process
+          server: ss-db-mysql
+          value_encoding: none
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          database: mysql
+          ordinal: 2
+          database_enum: 0
+          source: database_content_input
+          value_type_enum: 1
+          stage_enum: 0
+          source_enum: 0
+        - source: env_var_input
+          name: SS_DBMYSQLDATABASE
+          stage_enum: 0
+          ordinal: 3
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+        - database_enum: 0
+          server: ss-db-mysql
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 2
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          value_encoding: none
+          database: mysql
+          ordinal: 1
+          stage: post_process
+          source_enum: 0
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          id: source
+          stage_enum: 0
+          source_enum: 6
+          value_type_enum: 0
+          key: 1966
+          flags: 950
+          size: 73
+          value: ShippersRUs'), ('20','BadShips'), ('65','ShipAttack'), ('45', 'MultiShip
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          database: mysql
+          stage: pre_process
+          value: northwind
+          server: ss-db-mysql
+          ordinal: 2
+          source_enum: 0
+          value_encoding: none
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          source: database_content_input
+          database_enum: 0
+        - ordinal: 3
+          name: SS_DBMYSQLDATABASE
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          ordinal: 1
+          stage: post_process
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          stage_enum: 2
+          value_type_enum: 0
+          value_encoding: none
+          database_enum: 0
+          server: ss-db-mysql
+          database: mysql
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 1
+          value: shipper1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          key: 1966
+          size: 73
+        - value_encoding: none
+          value_type_enum: 1
+          stage: pre_process
+          source_enum: 0
+          database_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          stage_enum: 0
+          source: database_content_input
+          server: ss-db-mysql
+          value: northwind
+          ordinal: 2
+          database: mysql
+        - source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          name: SS_DBMYSQLDATABASE
+          ordinal: 3
+          value_type_enum: 0
+        - value_encoding: none
+          stage: post_process
+          ordinal: 1
+          server: ss-db-mysql
+          database: mysql
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          database_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          stage_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          size: 73
+          stage: pre_process
+          source: shared_memory_input
+          key: 1966
+          source_enum: 6
+          ordinal: 1
+          value: NewShipper
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          flags: 950
+          id: source
+        - source: database_content_input
+          value_encoding: none
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          stage: pre_process
+          value_type_enum: 1
+          database_enum: 0
+          database: mysql
+          server: ss-db-mysql
+          ordinal: 2
+          source_enum: 0
+          stage_enum: 0
+        - name: SS_DBMYSQLDATABASE
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: SET_DYNAMIC_DB_NAME
+          stage: pre_process
+          source: env_var_input
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          ordinal: 1
+          value_encoding: none
+          stage: post_process
+          database: mysql
+          stage_enum: 2
+          database_enum: 0
+          server: ss-db-mysql
+          source_enum: 0
+    - inputs:
+        - key: 1966
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          ordinal: 1
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          stage_enum: 0
+          id: source
+          value_type_enum: 0
+          value_encoding: none
+          size: 73
+          value: ShippingCompany
+        - value_type_enum: 1
+          stage_enum: 0
+          database_enum: 0
+          database: mysql
+          source_enum: 0
+          value_encoding: none
+          server: ss-db-mysql
+          source: database_content_input
+          ordinal: 2
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          stage: pre_process
+        - value_type_enum: 0
+          value_encoding: none
+          name: SS_DBMYSQLDATABASE
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+        - stage_enum: 2
+          value_encoding: none
+          server: ss-db-mysql
+          value_type_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          database: mysql
+          source_enum: 0
+          ordinal: 1
+          database_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmp8J1J5P_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - feature_group: data_type
+    file_name: /tmp/tmp8J1J5P_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmp8J1J5P_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature: set_jump_long_jump
+    file_name: /tmp/tmp8J1J5P_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow

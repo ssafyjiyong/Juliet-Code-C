@@ -1,0 +1,204 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: BRONTEUM_NONMODERATENESS
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+        - stage: pre_process
+          id: source
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/good01.csv
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+        - source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          value: !<!> "\"this\",\"is\",\"data\""
+          name: /opt/stonesoup/workspace/testData/good01.csv
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 2
+          value_encoding: none
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          name: BRONTEUM_NONMODERATENESS
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value_type_enum: 0
+          source_enum: 3
+          value: /opt/stonesoup/workspace/testData/good02.csv
+          value_encoding: none
+        - source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+          value: !<!> "\"hello\",\"world\",\"!!!!\""
+          name: /opt/stonesoup/workspace/testData/good02.csv
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          name: BRONTEUM_NONMODERATENESS
+        - ordinal: 2
+          id: source
+          value: /opt/stonesoup/workspace/testData/good03.csv
+          name: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          value_encoding: none
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/good03.csv
+          stage_enum: 0
+          value: !<!> "\"one\",\"two\",\"three\""
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          source: file_content_input
+  description: "Reads file name of a csv containing 3, fully quoted, comma separated, columns.Opens file and reads each value and sets it to index in array. If a value isn'tfully quoted program will skip that value and eventually seg fault when dereferencingarray index for printing\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: BRONTEUM_NONMODERATENESS
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          name: BRONTEUM_NONMODERATENESS
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+        - stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          value: /opt/stonesoup/workspace/testData/bad01.csv
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          id: source
+        - source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> "\"this\",\"is\",data"
+          name: /opt/stonesoup/workspace/testData/bad01.csv
+          value_type_enum: 0
+          ordinal: 2
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: BRONTEUM_NONMODERATENESS
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/enquirer_wardman/extraditing_faso.txt
+          value: /opt/stonesoup/workspace/testData/bad02.csv
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - value_type_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/bad02.csv
+          ordinal: 2
+          value: !<!> "\"malformed values with spaces\",\"because no\",quotes"
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - file_name: /tmp/tmpXDAtm__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+  - file_name: /tmp/tmpXDAtm__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: underrun_striature
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpXDAtm__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: data_type
+    feature: union
+    function_name: underrun_striature
+    line_number: 0
+  - file_name: /tmp/tmpXDAtm__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: chrysamminic_faussebraie
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index

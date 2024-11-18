@@ -1,0 +1,100 @@
+io_pair:
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+  exploits:
+    - inputs:
+        - address: ss-localhost
+          stage: co_process
+          stage_enum: 1
+          value_encoding: none
+          id: source
+          ordinal: 1
+          source: socket_input
+          source_enum: 5
+          port: 8887
+          value: -8000000
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source_enum: 5
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          value: -16777215
+          ordinal: 1
+          id: source
+          port: 8887
+          stage_enum: 1
+          value_encoding: none
+          value_type_enum: 0
+          stage: co_process
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - value: 10
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 5
+          stage_enum: 1
+          source: socket_input
+          address: ss-localhost
+          id: source
+          ordinal: 1
+          port: 8887
+    - inputs:
+        - source: socket_input
+          stage: co_process
+          stage_enum: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value: 1000
+          value_encoding: none
+          address: ss-localhost
+          port: 8887
+          source_enum: 5
+          ordinal: 1
+    - inputs:
+        - source: socket_input
+          source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          value: 20
+          stage_enum: 1
+          ordinal: 1
+          value_type_enum: 0
+          port: 8887
+          value_encoding: none
+          address: ss-localhost
+          id: source
+          stage: co_process
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpWC96eP_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpWC96eP_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpWC96eP_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpWC96eP_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: macros

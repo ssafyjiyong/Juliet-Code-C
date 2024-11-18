@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp3cNNiW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - line_number: 0
+    feature: heap_pointer
+    feature_group: data_type
+    file_name: /tmp/tmp3cNNiW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+  - file_name: /tmp/tmp3cNNiW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmp3cNNiW_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: control_flow
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: macros
+io_pair:
+  benigns:
+    - inputs:
+        - id: source
+          name: OBD_URTITE
+          value_encoding: none
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value: 0
+          id: source
+          name: OBD_URTITE
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+    - inputs:
+        - stage_enum: 0
+          value: FFFF
+          source: env_var_input
+          name: OBD_URTITE
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - value: 10000
+          id: source
+          value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          name: OBD_URTITE
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          ordinal: 1
+          id: source
+          name: OBD_URTITE
+          value: FFFFFF
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: OBD_URTITE
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"

@@ -1,0 +1,122 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150292,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case takes the name of an externally accessible file as input, and treats the file as a global mutex lock. The test case will attempt to 'grab' the mutex lock by checking for the files existence, and creating it if it doesn't exist. The creation of the file is treated as grabbing the lock, and if the test case is able to do so it will enter the critical section and return, deleting the file to 'release' the lock, and finishing execution without error. However, if the file already exists, the test case will continually poll the existence of the file, waiting to be able to 'grab' the lock by creating the file, resulting in a paused state for as long as the file exists. \nMetadata\n - Base program: Subversion\n - Source Taint: SHARED_MEMORY\n - Data Type: UNION\n - Data Flow: INDEX_ALIAS_50\n - Control Flow: UNCONDITIONAL_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C412A-SUBV-05-ST04-DT07-DF10-CF24-01.xml"
+          },
+          "length": 86733,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "f1781092334a5bb7abfb8be53cae3db0c20b3da071a41b1710b7a37f71ad2e91"
+          }
+        },
+        {
+          "location": {
+            "uri": "scripts/shm_setup.c"
+          },
+          "length": 3155,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "15d311b07d65d83f38876f4ee427c355e2048145d6db756d5d71877405f24822"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/string.c"
+          },
+          "length": 44617,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "326cb1039c8f85e08348511ab0fad60a3fa411c039b682061917f683e265ee79"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "412",
+              "name": "Unrestricted Externally Accessible Lock"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-412",
+          "message": {
+            "text": "Unrestricted Externally Accessible Lock."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/string.c",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 706,
+                  "endLine": 711
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "412",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

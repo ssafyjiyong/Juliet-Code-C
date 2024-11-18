@@ -1,0 +1,100 @@
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source: socket_input
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 5
+          stage: co_process
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 1
+          port: 8887
+          value_encoding: none
+          value: 20
+    - inputs:
+        - stage: co_process
+          address: ss-localhost
+          source: socket_input
+          id: source
+          value_type_enum: 0
+          value: 511
+          value_encoding: none
+          source_enum: 5
+          stage_enum: 1
+          port: 8887
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - port: 8887
+          address: ss-localhost
+          value_encoding: none
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+          value: 1
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          id: source
+          value_type_enum: 0
+          ordinal: 1
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  exploits:
+    - inputs:
+        - id: source
+          value_encoding: none
+          value: 1000
+          ordinal: 1
+          port: 8887
+          source: socket_input
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 1
+          stage: co_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          source: socket_input
+          id: source
+          value: 5000
+          address: ss-localhost
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpcYF8_S_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpcYF8_S_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpcYF8_S_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+    file_name: /tmp/tmpcYF8_S_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: stonesoup_handle_taint
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

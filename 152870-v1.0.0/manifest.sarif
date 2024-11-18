@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152870,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements an unchecked write into a stack allocated buffer. The buffer is declared as a fixed size local variable within a function. Untrusted input is not properly sanitized or restricted before being copied into the target buffer, resulting in a buffer overflow. The overflow potentially modifies other local variables, depending on the layout of the stack. If the stack grows downward, the overflow will eventually overwrite %eip, smashing the stack or setting it to a valid instruction. \nMetadata\n - Base program: Subversion\n - Source Taint: FILE_CONTENTS\n - Data Type: TYPEDEF\n - Data Flow: VAR_ARG_LIST\n - Control Flow: UNCONDITIONAL_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C120A-SUBV-04-ST02-DT06-DF12-CF24-01.xml"
+          },
+          "length": 68700,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "9dbd60a5010add51a69fd208f337fd90b2754bbaf3a60b9121d8b1583e152f79"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/stream.c"
+          },
+          "length": 55975,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "b61788caf54e4b38257947186908af356b59572b4c5a060ae76b0af531714c51"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "120",
+              "name": "Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-120",
+          "message": {
+            "text": "Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/stream.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1835,
+                  "endLine": 1837
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "120",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

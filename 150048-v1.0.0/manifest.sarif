@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 150048,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements a non-reentrant function that is called by a signal handler. The test case takes a control file and input string as input. The control file is used for timing and the input string is used as data for the test case to manipulate. The test case assigns a signal handler that calls a non-reentrant function that locks a mutex lock and manipulates the input data. If the test case is currently executing the non-reentrant function when the signal handler is called, it will re-enter the function and deadlock on the call to lock the mutex.  \nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: ARRAY\n - Data Flow: ADDRESS_AS_FUNCTION_RETURN_VALUE\n - Control Flow: RECURSIVE",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C479A-SUBV-01-ST03-DT01-DF06-CF19-01.xml"
+          },
+          "length": 82322,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "521d349d9f2795b075581e14496662d6324f244bc67ca417b36d076572189301"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/dirent_uri.c"
+          },
+          "length": 74620,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "30a9aa8f0d5c15bd5bbd992fe6cf0ef713526196702fd5c77e89aee6830137c3"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "479",
+              "name": "Signal Handler Use of a Non-reentrant Function"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-479",
+          "message": {
+            "text": "Signal Handler Use of a Non-reentrant Function."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/dirent_uri.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 195,
+                  "endLine": 197
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "479",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

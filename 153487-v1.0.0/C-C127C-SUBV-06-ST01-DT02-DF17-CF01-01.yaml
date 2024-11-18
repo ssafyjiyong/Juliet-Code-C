@@ -1,0 +1,144 @@
+io_pair:
+  base_inputs:
+    - name: CHAMPIGNONS_UNLEASHES
+      stage: pre_process
+      id: source
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      ordinal: 1
+  exploits:
+    - inputs:
+        - name: CHAMPIGNONS_UNLEASHES
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+          value: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUGugIE=
+          ordinal: 1
+          value_encoding: base64
+          source: env_var_input
+          stage: pre_process
+        - source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          stage_enum: 0
+          name: INPUT_STRING
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+    - inputs:
+        - stage: pre_process
+          name: CHAMPIGNONS_UNLEASHES
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+          value: SGVsbKUgV6lybGSI
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: base64
+        - stage_enum: 0
+          source_enum: 2
+          name: INPUT_STRING
+          stage: pre_process
+          value_type_enum: 0
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          source: env_var_input
+          value_encoding: none
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage_enum: 0
+          name: CHAMPIGNONS_UNLEASHES
+          source: env_var_input
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_type_enum: 0
+          id: source
+          stage: pre_process
+        - stage_enum: 0
+          source: env_var_input
+          value_type_enum: 0
+          name: INPUT_STRING
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+          ordinal: 2
+          value_encoding: none
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          ordinal: 1
+          name: CHAMPIGNONS_UNLEASHES
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: This is probably not going to overflow a buffer of some sort.  Let's run it anyway and see what happens.
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+        - source: env_var_input
+          ordinal: 2
+          stage_enum: 0
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          name: INPUT_STRING
+    - inputs:
+        - value_type_enum: 0
+          value: As long as this statement has more than 64 characters, then nothing bad should happen
+          value_encoding: none
+          id: source
+          name: CHAMPIGNONS_UNLEASHES
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+        - source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: AAAABVVCUYEOAISDHGUEHGU:WOJOQIUFGUYGBJdjsafihuegakdlfm9238946665232kmemiucyds78fy2
+          name: INPUT_STRING
+          value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          source: env_var_input
+  description: "Has a heap buffer of size 128 within a struct.  reads in an ascii string from an environmentvariable and increments the corresponding values in the heap buffer.  Then reads in an input and prints out the count of the characters from the heap buff of those in the input.  If input contains extended ascii characters, they will be wrapped around to negative values and the buffer will be under read\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: control_flow
+    file_name: /tmp/tmp2MLt7j_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: callback
+  - feature_group: source_taint
+    file_name: /tmp/tmp2MLt7j_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: ilysanthes_threshel
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+  - feature_group: data_type
+    file_name: /tmp/tmp2MLt7j_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: ilysanthes_threshel
+    line_number: 0
+    feature: simple
+  - file_name: /tmp/tmp2MLt7j_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature_group: data_flow
+    function_name: christiania_sophta
+    line_number: 0
+    feature: buffer_address_array_index

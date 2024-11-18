@@ -1,0 +1,106 @@
+code_complexity_features:
+  - feature_group: source_taint
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpSdDF2J_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - file_name: /tmp/tmpSdDF2J_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: typedef
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmpSdDF2J_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpSdDF2J_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: infinite_loop
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - id: source
+      stage: pre_process
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      size: 10
+      flags: 950
+      key: 9863
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source_enum: 6
+          id: source
+          value_encoding: none
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: shared_memory_input
+          flags: 950
+          size: 10
+          stage_enum: 0
+          stage: pre_process
+          key: 9863
+    - inputs:
+        - value: 1000
+          flags: 950
+          value_encoding: none
+          source_enum: 6
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          key: 9863
+          size: 10
+    - inputs:
+        - source: shared_memory_input
+          flags: 950
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: 20
+          size: 10
+          ordinal: 1
+          key: 9863
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: -8000000
+          id: source
+          value_type_enum: 0
+          key: 9863
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          flags: 950
+          size: 10
+    - inputs:
+        - size: 10
+          value: -16777215
+          id: source
+          source: shared_memory_input
+          stage: pre_process
+          source_enum: 6
+          ordinal: 1
+          stage_enum: 0
+          flags: 950
+          key: 9863
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0

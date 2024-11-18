@@ -1,0 +1,100 @@
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  description: "Read a hex integer from the input.  If hexinteger is negative, ignore.  If hexinteger < 0x0000FFFF, do nothing.  If hexinteger >= 0x0000FFFF try to zero-out the upper two bytes using char pointers.  Perform an incorrect calculation, and rather than zero-ing out the upper two bytes, zero out two different bytes, which corrupts pointers on the stack and results in a seg fault.\n\n"
+  exploits:
+    - inputs:
+        - id: source
+          source_enum: 5
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          value_type_enum: 0
+          ordinal: 1
+          stage: co_process
+          port: 8887
+          address: ss-localhost
+          value: 10000
+          value_encoding: none
+    - inputs:
+        - id: source
+          stage_enum: 1
+          stage: co_process
+          address: ss-localhost
+          value: FFFFFF
+          ordinal: 1
+          source: socket_input
+          value_encoding: none
+          port: 8887
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+  benigns:
+    - inputs:
+        - source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          port: 8887
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: 10
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          source: socket_input
+          stage: co_process
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          ordinal: 1
+          address: ss-localhost
+          stage_enum: 1
+    - inputs:
+        - port: 8887
+          value_type_enum: 0
+          source: socket_input
+          address: ss-localhost
+          id: source
+          stage: co_process
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: FFFF
+          stage_enum: 1
+          source_enum: 5
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpjCXtam_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpjCXtam_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpjCXtam_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_10
+  - feature: infinite_loop
+    function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpjCXtam_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: control_flow
+    line_number: 0

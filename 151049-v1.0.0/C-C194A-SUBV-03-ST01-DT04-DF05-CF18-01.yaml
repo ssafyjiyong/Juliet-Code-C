@@ -1,0 +1,124 @@
+code_complexity_features:
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpXQzTTA_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: heap_pointer
+    feature_group: data_type
+    file_name: /tmp/tmpXQzTTA_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmpXQzTTA_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: outpourings_anthos
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpXQzTTA_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature: pointer_to_function
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          id: source
+          stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          value: 50
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: HARTUNGEN_ALUDELS
+          value_type_enum: 0
+          stage_enum: 0
+        - stage: pre_process
+          source_enum: 7
+          stage_enum: 0
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          source: script_input
+    - inputs:
+        - ordinal: 1
+          value: 1000
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          name: HARTUNGEN_ALUDELS
+          value_type_enum: 0
+        - source_enum: 7
+          ordinal: 2
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+    - inputs:
+        - name: HARTUNGEN_ALUDELS
+          value_encoding: none
+          value: 20000
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          source: script_input
+          source_enum: 7
+          stage: pre_process
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: HARTUNGEN_ALUDELS
+  description: "Converting a short to a unsigned int produces an incorrect value when the short is negative.  This causes a buffer overflow which seg faults.  Good inputs: 0 or greater.  Bad inputs: -1 or less\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          name: HARTUNGEN_ALUDELS
+          source: env_var_input
+          id: source
+          value_encoding: none
+          source_enum: 2
+          ordinal: 1
+          value: -5
+          stage: pre_process
+        - source: script_input
+          name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 7
+          stage: pre_process
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: HARTUNGEN_ALUDELS
+          id: source
+          value: -10
+          source: env_var_input
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+        - name: dd if=/dev/urandom of=/opt/stonesoup/workspace/testData/myfile.txt bs=1 count=1M
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+          source_enum: 7

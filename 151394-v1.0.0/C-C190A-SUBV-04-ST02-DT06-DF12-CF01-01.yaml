@@ -1,0 +1,154 @@
+io_pair:
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+  benigns:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          name: OSPHRESIOMETRY_UNCONTESTEDLY
+          source: env_var_input
+          source_enum: 2
+        - ordinal: 2
+          value_encoding: none
+          value: 50
+          name: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          id: source
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: OSPHRESIOMETRY_UNCONTESTEDLY
+        - value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          stage_enum: 0
+          source: file_content_input
+          source_enum: 3
+          value: 100
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          value_type_enum: 0
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+          name: OSPHRESIOMETRY_UNCONTESTEDLY
+          ordinal: 1
+        - stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          id: source
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value: 10000
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: OSPHRESIOMETRY_UNCONTESTEDLY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+  exploits:
+    - inputs:
+        - name: OSPHRESIOMETRY_UNCONTESTEDLY
+          ordinal: 1
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          stage: pre_process
+          value_encoding: none
+        - source: file_content_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          value: 46400
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: OSPHRESIOMETRY_UNCONTESTEDLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/eremiteship_catpipe/scragginess_notiosorex.txt
+          value: 55000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: control_flow
+    file_name: /tmp/tmpE18UbE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature: callback
+  - line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmpE18UbE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: sensitivities_tremandraceae
+  - file_name: /tmp/tmpE18UbE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: sensitivities_tremandraceae
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpE18UbE_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: shushing_vomitwort
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list

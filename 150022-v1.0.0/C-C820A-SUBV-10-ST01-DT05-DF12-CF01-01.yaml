@@ -1,0 +1,134 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpsF5yQS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature: callback
+  - file_name: /tmp/tmpsF5yQS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: reapproved_formicine
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - line_number: 0
+    feature_group: data_type
+    feature: struct
+    file_name: /tmp/tmpsF5yQS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: reapproved_formicine
+  - file_name: /tmp/tmpsF5yQS_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: bridesman_resaying
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+io_pair:
+  benigns:
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          source: env_var_input
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Dirt_McGert
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: TERRY_METAPOPHYSEAL
+          stage_enum: 0
+          stage: pre_process
+          id: source
+        - source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          id: background
+          stage_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 @the_longest_hashtag_that_ever_existed_on_the_face_of_the_earth
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          id: source
+          name: TERRY_METAPOPHYSEAL
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - id: background
+          stage_enum: 0
+          source: script_input
+          ordinal: 2
+          source_enum: 7
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          ordinal: 1
+          name: TERRY_METAPOPHYSEAL
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 Silly_rabbit,_tricks_are_for_kids
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file1
+        - source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file2
+          ordinal: 3
+          stage_enum: 0
+          source: file_content_input
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+      id: source
+      ordinal: 1
+      name: TERRY_METAPOPHYSEAL
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certan benign cases), file1 and file2 are files used to delay the execution, and data is a string containing no spaces. A lack of syncronization leads to an underread/write for certain inputs. For the weakness to occur, FIFO files must be provided in the correct order (controlled by the runFifo.py script), the input must begin with a character with ASCII value less than 'A' and be 2 or more characters long.\n\n"
+  exploits:
+    - inputs:
+        - source_enum: 2
+          ordinal: 1
+          name: TERRY_METAPOPHYSEAL
+          id: source
+          stage_enum: 0
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 @the_longest_hashtag_that_ever_existed_on_the_face_of_the_earth
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          ordinal: 2
+          id: background
+          source_enum: 7
+          source: script_input
+    - inputs:
+        - name: TERRY_METAPOPHYSEAL
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 1234567890_0987654321_1029384756_5647382910_0192837465_6574839201
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+        - stage: pre_process
+          source: script_input
+          stage_enum: 0
+          ordinal: 2
+          id: background
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2

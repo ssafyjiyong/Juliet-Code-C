@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmppCz2az_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmppCz2az_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmppCz2az_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmppCz2az_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+io_pair:
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: MOBILE_FRACTIONING
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+  benigns:
+    - inputs:
+        - name: MOBILE_FRACTIONING
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 3
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value: 10
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+    - inputs:
+        - name: MOBILE_FRACTIONING
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+        - value: 42
+          source: file_content_input
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          ordinal: 2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value_encoding: none
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          name: MOBILE_FRACTIONING
+          stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+        - name: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 3
+          id: source
+          value: 37
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - name: MOBILE_FRACTIONING
+          value: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value: 20000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: MOBILE_FRACTIONING
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/mesole_boondogglers/spiriter_geophytic.txt
+          value: 6000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

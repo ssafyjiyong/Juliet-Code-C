@@ -1,0 +1,156 @@
+code_complexity_features:
+  - feature_group: source_taint
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmptZJpP0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - file_name: /tmp/tmptZJpP0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: typedef
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmptZJpP0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: index_alias_2
+  - function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: sequence
+    feature_group: control_flow
+    file_name: /tmp/tmptZJpP0_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - size: 45
+          stage_enum: 0
+          key: 7872
+          value: /opt/stonesoup/workspace/testData/good01.csv
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 1
+          value_encoding: none
+          flags: 950
+          source: shared_memory_input
+          value_type_enum: 0
+          source_enum: 6
+        - source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/good01.csv
+          stage: pre_process
+          value: !<!> "\"this\",\"is\",\"data\""
+          source_enum: 3
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - id: source
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          source_enum: 6
+          size: 45
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/good02.csv
+          key: 7872
+          flags: 950
+        - stage: pre_process
+          value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good02.csv
+          value: !<!> "\"hello\",\"world\",\"!!!!\""
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+    - inputs:
+        - source: shared_memory_input
+          value_type_enum: 0
+          size: 45
+          value_encoding: none
+          flags: 950
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/good03.csv
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source_enum: 6
+          value_type: USE_TEXT_DIRECTLY
+          key: 7872
+        - source_enum: 3
+          value: !<!> "\"one\",\"two\",\"three\""
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/good03.csv
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source: file_content_input
+  exploits:
+    - inputs:
+        - id: source
+          key: 7872
+          value: /opt/stonesoup/workspace/testData/bad01.csv
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          size: 45
+          flags: 950
+          ordinal: 1
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/bad01.csv
+          value: !<!> "\"this\",\"is\",data"
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/bad02.csv
+          source_enum: 6
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          key: 7872
+          stage_enum: 0
+          size: 45
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          ordinal: 1
+          value_type_enum: 0
+        - name: /opt/stonesoup/workspace/testData/bad02.csv
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> "\"malformed values with spaces\",\"because no\",quotes"
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 3
+          stage: pre_process
+  description: "Reads file name of a csv containing 3, fully quoted, comma separated, columns.Opens file and reads each value and sets it to index in array. If a value isn'tfully quoted program will skip that value and eventually seg fault when dereferencingarray index for printing\n\n"
+  base_inputs:
+    - id: source
+      stage: pre_process
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      size: 45
+      flags: 950
+      key: 7872

@@ -1,0 +1,94 @@
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          name: EMPEXA_SWARTZITE
+          stage: pre_process
+          source: env_var_input
+          id: source
+          stage_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          id: source
+          source: env_var_input
+          value: This is probably not going to overflow a buffer of some sort.
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          name: EMPEXA_SWARTZITE
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value: This statement has less than 64 characters, then nothing bad.
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          name: EMPEXA_SWARTZITE
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: EMPEXA_SWARTZITE
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          value_type_enum: 0
+          name: EMPEXA_SWARTZITE
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          name: EMPEXA_SWARTZITE
+          id: source
+          value_encoding: none
+          value: The quick brown fox jumps over the lazy dog.  Why?  I don't know, because he was in a rush and trying to get somewhere.
+          stage_enum: 0
+  description: "Has a heap buffer of size 64.  Reads in an ascii string from an environment variable and copies the final 63 characters into the heap buffer.  Then  reads the variable back from the heap buffer in reverse order, but incorrectly uses the size of the original string.  If the original string is longer than 63characters, this will result in an underread.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpwPzhOD_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpwPzhOD_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: data_type
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpwPzhOD_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: amortises_scillonian
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+    file_name: /tmp/tmpwPzhOD_ss_testcase/src-rose/subversion/libsvn_subr/string.c

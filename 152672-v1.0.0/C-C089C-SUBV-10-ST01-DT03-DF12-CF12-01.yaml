@@ -1,0 +1,264 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmp8nDwbd_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: ENVIRONMENT_VARIABLE
+    feature_group: source_taint
+  - file_name: /tmp/tmp8nDwbd_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature_group: data_type
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmp8nDwbd_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - function_name: antipapism_truceless
+    line_number: 0
+    file_name: /tmp/tmp8nDwbd_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value: shipper1
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: MICROARCHITECTS_FIDGE
+          source: env_var_input
+          source_enum: 2
+        - database: mysql
+          server: ss-db-mysql
+          stage: pre_process
+          database_enum: 0
+          ordinal: 2
+          value_encoding: none
+          source: database_content_input
+          value: northwind
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          source_enum: 0
+        - ordinal: 3
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          name: SS_DBMYSQLDATABASE
+        - stage_enum: 2
+          ordinal: 1
+          server: ss-db-mysql
+          value_encoding: none
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          database_enum: 0
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          source_enum: 0
+          value_type_enum: 0
+          database: mysql
+    - inputs:
+        - name: MICROARCHITECTS_FIDGE
+          value: NewShipper
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+        - value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 1
+          source: database_content_input
+          database_enum: 0
+          ordinal: 2
+          value: northwind
+          database: mysql
+          source_enum: 0
+          server: ss-db-mysql
+          value_type: USE_CONTENTS_OF_FILE
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: env_var_input
+          value_type_enum: 0
+          value_encoding: none
+          value: SET_DYNAMIC_DB_NAME
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 3
+          name: SS_DBMYSQLDATABASE
+        - value_type_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          database_enum: 0
+          value_encoding: none
+          database: mysql
+          ordinal: 1
+          server: ss-db-mysql
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          stage: post_process
+          source: database_content_input
+          stage_enum: 2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          id: source
+          name: MICROARCHITECTS_FIDGE
+          value_type_enum: 0
+          value: ShippingCompany
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+        - stage: pre_process
+          value_type_enum: 1
+          source_enum: 0
+          stage_enum: 0
+          source: database_content_input
+          server: ss-db-mysql
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 0
+          database: mysql
+          ordinal: 2
+          value_encoding: none
+          value: northwind
+        - source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          ordinal: 3
+          stage: pre_process
+          value: SET_DYNAMIC_DB_NAME
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_DBMYSQLDATABASE
+        - database_enum: 0
+          value_type_enum: 0
+          source: database_content_input
+          source_enum: 0
+          database: mysql
+          stage_enum: 2
+          server: ss-db-mysql
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          ordinal: 1
+          value_encoding: none
+  description: "Good inputs: 1) name of shipper for use in Sql databaseBad inputs:SQL argument injection \n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: MICROARCHITECTS_FIDGE
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value: BadShipper'), ('80','BadShipper2
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          id: source
+          source: env_var_input
+          name: MICROARCHITECTS_FIDGE
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          source_enum: 0
+          stage_enum: 0
+          database: mysql
+          value_encoding: none
+          source: database_content_input
+          value_type_enum: 1
+          database_enum: 0
+          value: northwind
+          value_type: USE_CONTENTS_OF_FILE
+          stage: pre_process
+          server: ss-db-mysql
+        - value_type_enum: 0
+          name: SS_DBMYSQLDATABASE
+          stage_enum: 0
+          value: SET_DYNAMIC_DB_NAME
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 3
+        - value_encoding: none
+          database_enum: 0
+          value_type_enum: 0
+          stage: post_process
+          stage_enum: 2
+          ordinal: 1
+          database: mysql
+          source_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          server: ss-db-mysql
+    - inputs:
+        - value_encoding: none
+          name: MICROARCHITECTS_FIDGE
+          value: ShippersRUs'), ('20','BadShips'), ('65','ShipAttack'), ('45', 'MultiShip
+          value_type_enum: 0
+          source_enum: 2
+          id: source
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+        - ordinal: 2
+          value_type_enum: 1
+          server: ss-db-mysql
+          value: northwind
+          database: mysql
+          source: database_content_input
+          value_type: USE_CONTENTS_OF_FILE
+          database_enum: 0
+          source_enum: 0
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+        - ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBMYSQLDATABASE
+          source: env_var_input
+          stage: pre_process
+        - source_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          stage: post_process
+          ordinal: 1
+          source: database_content_input
+          stage_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          database: mysql
+          server: ss-db-mysql
+          database_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;

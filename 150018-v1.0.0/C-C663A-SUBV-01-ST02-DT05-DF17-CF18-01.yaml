@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: SMARAGDUS_ALY
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          stage: pre_process
+        - stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+          value: 3 hephalump
+          name: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          value_type_enum: 0
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          name: SMARAGDUS_ALY
+          source_enum: 2
+          source: env_var_input
+        - stage: pre_process
+          source_enum: 3
+          id: source
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          value: 1 Sniffles_and_whiffles,_yo.
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          name: SMARAGDUS_ALY
+          value: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+        - source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          stage_enum: 0
+          source_enum: 3
+          value_type_enum: 0
+          ordinal: 2
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          id: source
+  exploits:
+    - inputs:
+        - ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source: env_var_input
+          name: SMARAGDUS_ALY
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          value_encoding: none
+        - source_enum: 3
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SMARAGDUS_ALY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SMARAGDUS_ALY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/peepers_vasoconstrictor/soixantine_pseudopolitical.txt
+code_complexity_features:
+  - file_name: /tmp/tmpLuLfkR_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpLuLfkR_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpLuLfkR_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpLuLfkR_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function

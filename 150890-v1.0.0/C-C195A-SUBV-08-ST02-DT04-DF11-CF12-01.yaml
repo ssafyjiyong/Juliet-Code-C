@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpX6DR24_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature: FILE_CONTENTS
+    feature_group: source_taint
+  - function_name: svn_config_read3
+    file_name: /tmp/tmpX6DR24_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpX6DR24_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpX6DR24_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: EPICUREAN_ISOGENOTYPIC
+        - id: source
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: EPICUREAN_ISOGENOTYPIC
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          value: this_string_is_greater_than_16_characters
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+  benigns:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          value_encoding: none
+          ordinal: 1
+          name: EPICUREAN_ISOGENOTYPIC
+          value_type_enum: 0
+        - stage: pre_process
+          value: Good_Bye_World
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - source_enum: 2
+          value_encoding: none
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: EPICUREAN_ISOGENOTYPIC
+        - id: source
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          value: abcd
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          name: EPICUREAN_ISOGENOTYPIC
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+        - value_type: USE_TEXT_DIRECTLY
+          value: short stmt
+          value_type_enum: 0
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+          value_encoding: none
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: EPICUREAN_ISOGENOTYPIC
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/pilum_unniggard/filister_pandanaceae.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

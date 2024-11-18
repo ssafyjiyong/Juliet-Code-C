@@ -1,0 +1,94 @@
+io_pair:
+  exploits:
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+          name: DONI_INEPTNESSES
+          value: 1000
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: DONI_INEPTNESSES
+          value: 5000
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          id: source
+          ordinal: 1
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: DONI_INEPTNESSES
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value: 20
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          name: DONI_INEPTNESSES
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - name: DONI_INEPTNESSES
+          value: 511
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          name: DONI_INEPTNESSES
+          value_type_enum: 0
+          value: 1
+          value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpZk08IV_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpZk08IV_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpZk08IV_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmpZk08IV_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: cryptogenetic_moros
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive

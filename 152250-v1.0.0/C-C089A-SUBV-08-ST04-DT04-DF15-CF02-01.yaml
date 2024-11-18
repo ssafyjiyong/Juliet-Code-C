@@ -1,0 +1,276 @@
+code_complexity_features:
+  - file_name: /tmp/tmpD9R1va_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpD9R1va_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpD9R1va_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - feature: indirectly_recursive
+    file_name: /tmp/tmpD9R1va_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  benigns:
+    - inputs:
+        - stage: pre_process
+          value: USA
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          flags: 950
+          source_enum: 6
+          key: 5586
+          ordinal: 1
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          size: 30
+        - value: northwind
+          database_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          stage_enum: 0
+          source: database_content_input
+          server: ss-db-mysql
+          value_encoding: none
+          source_enum: 0
+          database: mysql
+          stage: pre_process
+          ordinal: 2
+        - ordinal: 3
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBMYSQLDATABASE
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+        - value_type_enum: 0
+          source_enum: 0
+          value_encoding: none
+          database_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          server: ss-db-mysql
+          database: mysql
+          stage: post_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          source: database_content_input
+          stage_enum: 2
+    - inputs:
+        - id: source
+          stage: pre_process
+          source: shared_memory_input
+          flags: 950
+          source_enum: 6
+          ordinal: 1
+          value: Germany
+          stage_enum: 0
+          key: 5586
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          size: 30
+        - value_encoding: none
+          database_enum: 0
+          source_enum: 0
+          stage_enum: 0
+          server: ss-db-mysql
+          value: northwind
+          source: database_content_input
+          value_type_enum: 1
+          ordinal: 2
+          stage: pre_process
+          value_type: USE_CONTENTS_OF_FILE
+          database: mysql
+        - name: SS_DBMYSQLDATABASE
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 3
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+        - stage_enum: 2
+          database: mysql
+          server: ss-db-mysql
+          source_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          database_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - key: 5586
+          source_enum: 6
+          value_encoding: none
+          source: shared_memory_input
+          stage_enum: 0
+          size: 30
+          stage: pre_process
+          id: source
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value: Finland
+          value_type_enum: 0
+        - database_enum: 0
+          database: mysql
+          source: database_content_input
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 1
+          server: ss-db-mysql
+          value_type: USE_CONTENTS_OF_FILE
+          value: northwind
+          source_enum: 0
+          value_encoding: none
+        - source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 3
+          value_encoding: none
+          name: SS_DBMYSQLDATABASE
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+        - ordinal: 1
+          value_encoding: none
+          stage: post_process
+          stage_enum: 2
+          source: database_content_input
+          value_type: USE_TEXT_DIRECTLY
+          database_enum: 0
+          value_type_enum: 0
+          database: mysql
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          server: ss-db-mysql
+          source_enum: 0
+  exploits:
+    - inputs:
+        - size: 30
+          ordinal: 1
+          key: 5586
+          stage: pre_process
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          id: source
+          flags: 950
+          value: x' or 'x'='x
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source: database_content_input
+          value_type: USE_CONTENTS_OF_FILE
+          stage_enum: 0
+          database_enum: 0
+          value_encoding: none
+          database: mysql
+          ordinal: 2
+          value_type_enum: 1
+          stage: pre_process
+          value: northwind
+          source_enum: 0
+          server: ss-db-mysql
+        - stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+          name: SS_DBMYSQLDATABASE
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+          value_type_enum: 0
+        - stage_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          server: ss-db-mysql
+          database: mysql
+          stage: post_process
+          ordinal: 1
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          source: database_content_input
+          database_enum: 0
+          source_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+    - inputs:
+        - stage_enum: 0
+          id: source
+          source: shared_memory_input
+          ordinal: 1
+          key: 5586
+          size: 30
+          flags: 950
+          value_type_enum: 0
+          value: "x'; Select * from Orders; -- "
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+        - stage_enum: 0
+          source_enum: 0
+          database_enum: 0
+          value: northwind
+          stage: pre_process
+          database: mysql
+          value_type: USE_CONTENTS_OF_FILE
+          server: ss-db-mysql
+          ordinal: 2
+          value_encoding: none
+          source: database_content_input
+          value_type_enum: 1
+        - value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 3
+          value_type: USE_TEXT_DIRECTLY
+          value: SET_DYNAMIC_DB_NAME
+          source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+          name: SS_DBMYSQLDATABASE
+        - stage_enum: 2
+          stage: post_process
+          source: database_content_input
+          source_enum: 0
+          value: DROP DATABASE IF EXISTS $SS_DBMYSQLDATABASE;
+          server: ss-db-mysql
+          value_type_enum: 0
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          database_enum: 0
+          database: mysql
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 5586
+      size: 30
+      flags: 950
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

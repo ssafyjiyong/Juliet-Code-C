@@ -1,0 +1,106 @@
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmpFvUjr6_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: SHARED_MEMORY
+  - feature_group: data_type
+    function_name: skip_bom
+    line_number: 0
+    feature: void_pointer
+    file_name: /tmp/tmpFvUjr6_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+  - feature: var_arg_list
+    file_name: /tmp/tmpFvUjr6_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+  - file_name: /tmp/tmpFvUjr6_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: overhonestly_ochoa
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8343
+      size: 20
+      flags: 950
+  benigns:
+    - inputs:
+        - source_enum: 6
+          stage_enum: 0
+          id: source
+          size: 20
+          value: /etc/passwd
+          ordinal: 1
+          key: 8343
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_encoding: none
+          value_type_enum: 0
+          source: shared_memory_input
+          stage: pre_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          stage_enum: 0
+          id: source
+          value: /etc/ssh/ssh_config
+          ordinal: 1
+          stage: pre_process
+          source: shared_memory_input
+          size: 20
+          source_enum: 6
+          value_type_enum: 0
+          value_encoding: none
+          key: 8343
+    - inputs:
+        - key: 8343
+          ordinal: 1
+          stage: pre_process
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          size: 20
+          id: source
+          flags: 950
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /usr/bin/gcc
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          value_type_enum: 0
+          source_enum: 6
+          key: 8343
+          stage: pre_process
+          source: shared_memory_input
+          value_encoding: none
+          ordinal: 1
+          id: source
+          flags: 950
+          size: 20
+          value: ../testData
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - key: 8343
+          flags: 950
+          stage_enum: 0
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          ordinal: 1
+          source_enum: 6
+          value: ../testOutput
+          value_encoding: none
+          size: 20
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  description: "Has a buffer declared on the heap. malloc(20*sizeOf(char)) If input is resolved to more  than 20 chars it will overflow\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

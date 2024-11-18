@@ -1,0 +1,184 @@
+code_complexity_features:
+  - file_name: /tmp/tmpAqTxIo_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: source_taint
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpAqTxIo_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpAqTxIo_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpAqTxIo_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump
+io_pair:
+  base_inputs:
+    - name: PHILEM_UNSCRIPTURAL
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          name: PHILEM_UNSCRIPTURAL
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - name: PHILEM_UNSCRIPTURAL
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: PHILEM_UNSCRIPTURAL
+          value_type_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          source_enum: 3
+          id: source
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          source: file_content_input
+        - source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: This file is not empty.
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good01.txt
+    - inputs:
+        - stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value_type_enum: 0
+          ordinal: 1
+          name: PHILEM_UNSCRIPTURAL
+        - value_encoding: none
+          source_enum: 3
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          value_type_enum: 0
+          source: file_content_input
+        - value_encoding: none
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value: Hello world!  And, good-bye.
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 3
+          ordinal: 2
+          source: file_content_input
+    - inputs:
+        - name: PHILEM_UNSCRIPTURAL
+          value: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          name: /opt/stonesoup/workspace/testData/aleck_isolex/repriever_lictor.txt
+          value_encoding: none
+        - value: Yet another file.
+          value_encoding: none
+          source_enum: 3
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

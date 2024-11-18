@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: FILE_CONTENTS
+    file_name: /tmp/tmplVBhUH_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+  - feature_group: data_type
+    file_name: /tmp/tmplVBhUH_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: typedef
+  - file_name: /tmp/tmplVBhUH_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - function_name: underinstrument_shackly
+    line_number: 0
+    feature: set_jump_long_jump
+    feature_group: control_flow
+    file_name: /tmp/tmplVBhUH_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          value_type_enum: 0
+          name: BAPTISTERIES_IDYLLISTS
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          value: 68718952445
+          value_type_enum: 0
+          id: source
+          stage_enum: 0
+          source: file_content_input
+          value_encoding: none
+          source_enum: 3
+          ordinal: 2
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          source_enum: 2
+          value_encoding: none
+          name: BAPTISTERIES_IDYLLISTS
+          value_type_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          id: source
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          stage_enum: 0
+          ordinal: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 1301
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          name: BAPTISTERIES_IDYLLISTS
+          stage_enum: 0
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          value_encoding: none
+        - name: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value: 1073676288
+          value_encoding: none
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      stage: pre_process
+      source_enum: 2
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: BAPTISTERIES_IDYLLISTS
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+  description: "Takes an integer as input, and determine if the integer is prime using the truly stupid method of seeing if every natural number less than it will divide into it.  If the integer is a large prime number, the program will loop excessively.\n\n"
+  exploits:
+    - inputs:
+        - name: BAPTISTERIES_IDYLLISTS
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          value: 1073676287
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: BAPTISTERIES_IDYLLISTS
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/clotured_strophical/apasttra_fireworms.txt
+          value: 2147483647
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0

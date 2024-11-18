@@ -1,0 +1,100 @@
+code_complexity_features:
+  - function_name: stonesoup_handle_taint
+    file_name: /tmp/tmpl6lX3B_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpl6lX3B_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpl6lX3B_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature: set_jump_long_jump
+    file_name: /tmp/tmpl6lX3B_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          stage: co_process
+          id: source
+          address: ss-localhost
+          ordinal: 1
+          value_encoding: none
+          source: socket_input
+          port: 8887
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          stage_enum: 1
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value: 1000
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 5
+          port: 8887
+          id: source
+          source: socket_input
+          address: ss-localhost
+          stage: co_process
+          stage_enum: 1
+    - inputs:
+        - id: source
+          value_encoding: none
+          source_enum: 5
+          stage: co_process
+          source: socket_input
+          port: 8887
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 1
+          address: ss-localhost
+          value: 20
+          ordinal: 1
+  exploits:
+    - inputs:
+        - value: -8000000
+          value_encoding: none
+          source: socket_input
+          value_type_enum: 0
+          source_enum: 5
+          port: 8887
+          address: ss-localhost
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: -16777215
+          source_enum: 5
+          stage_enum: 1
+          source: socket_input
+          stage: co_process
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          port: 8887
+          value_type_enum: 0
+  description: "Read an integer from the input.  If integer >= 4096, do nothing.Else malloc a buffer of 4096 bytes.  Memset the buffer to 'a'. Memset bytes of buffer from input_integer to 4095 to 'b'. Print the buffer.  This all works correctly if the input_integer is 0 or greater.  If input_integer is negative, we will try to memset a random place in memory.  If the input_integer is sufficiently large, this is unaddressable, and we get a segfault.\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"

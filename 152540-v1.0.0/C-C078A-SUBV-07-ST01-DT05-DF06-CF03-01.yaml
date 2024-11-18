@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: OUTLANDISHLIKE_MCHEN
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      stage: pre_process
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          name: OUTLANDISHLIKE_MCHEN
+          ordinal: 1
+          source_enum: 2
+          value: 10; ls -la
+          source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - source_enum: 2
+          name: OUTLANDISHLIKE_MCHEN
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          id: source
+          value: localhost; echo Hello world
+          value_encoding: none
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value: 10
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+          name: OUTLANDISHLIKE_MCHEN
+          ordinal: 1
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          source: env_var_input
+          id: source
+          name: OUTLANDISHLIKE_MCHEN
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          value: google.com
+    - inputs:
+        - source_enum: 2
+          value: localhost
+          ordinal: 1
+          name: OUTLANDISHLIKE_MCHEN
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+code_complexity_features:
+  - file_name: /tmp/tmpbRsAaM_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpbRsAaM_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpbRsAaM_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - file_name: /tmp/tmpbRsAaM_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop

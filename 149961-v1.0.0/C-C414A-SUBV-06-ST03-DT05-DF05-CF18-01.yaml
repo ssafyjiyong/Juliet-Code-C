@@ -1,0 +1,140 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmph4iHXI_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+  - file_name: /tmp/tmph4iHXI_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmph4iHXI_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function
+    file_name: /tmp/tmph4iHXI_ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: forbare_susuidae
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          value: 1 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 May_the_force_be_with_you.
+          port: 8887
+          id: source
+          address: ss-localhost
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+          stage_enum: 1
+          value_encoding: none
+        - stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage_enum: 0
+          source: script_input
+          id: background
+          ordinal: 2
+          source_enum: 7
+    - inputs:
+        - source: socket_input
+          stage: co_process
+          id: source
+          value_encoding: none
+          port: 8887
+          source_enum: 5
+          ordinal: 1
+          address: ss-localhost
+          stage_enum: 1
+          value: 72 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          id: background
+          stage: pre_process
+          ordinal: 2
+          source_enum: 7
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          port: 8887
+          value: 10 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hephalump
+          source: socket_input
+          address: ss-localhost
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 5
+          id: source
+          stage: co_process
+          stage_enum: 1
+        - source_enum: 7
+          stage: pre_process
+          source: script_input
+          ordinal: 2
+          id: background
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Sniffles_and_whiffles
+          port: 8887
+          ordinal: 1
+          value_encoding: none
+          address: ss-localhost
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+        - stage_enum: 0
+          source_enum: 7
+          source: script_input
+          stage: pre_process
+          ordinal: 2
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+    - inputs:
+        - address: ss-localhost
+          value: 5000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 sIlly_rabbit,_tricks_are_for_kids.
+          ordinal: 1
+          value_encoding: none
+          stage: co_process
+          source: socket_input
+          port: 8887
+          stage_enum: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          source_enum: 5
+        - source: file_content_input
+          ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file2
+          stage_enum: 0
+          ordinal: 3
+          source: file_content_input
+          stage: pre_process
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution on certain benign cases), file1 and file2 are files to be read (also used to delay execution) and data is a string containing no spaces.  The string is used for processing, but the contents of the string are unimportant. Two threads are created, and they fail to check for a mutex lock on a critical section, possibly causing a null pointer dereference.\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887

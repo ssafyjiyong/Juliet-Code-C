@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          id: source
+          ordinal: 1
+          name: FROWST_DEFINED
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value: 46400
+    - inputs:
+        - source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          name: FROWST_DEFINED
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          value_type_enum: 0
+          value: 55000
+          value_encoding: none
+          ordinal: 1
+  base_inputs:
+    - source_enum: 2
+      stage_enum: 0
+      source: env_var_input
+      name: FROWST_DEFINED
+      ordinal: 1
+      id: source
+      stage: pre_process
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          name: FROWST_DEFINED
+          source_enum: 2
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value: 50
+          value_type_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: FROWST_DEFINED
+          stage_enum: 0
+          value: 100
+          source_enum: 2
+          value_encoding: none
+          source: env_var_input
+          id: source
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          name: FROWST_DEFINED
+          value: 10000
+          value_encoding: none
+          id: source
+  description: "INT_MAX=2147483647  Any input that is more than the square root of INT_MAX will cause an integer overflow.  Good inputs are any number less than or equal to 46340.  Bad inputs are greater than 46341.  If an overflow occurs, it will result in an infinite loop\n\n"
+code_complexity_features:
+  - feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmp3xiKAh_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: source_taint
+  - function_name: svn_mutex__unlock
+    line_number: 0
+    feature: struct
+    file_name: /tmp/tmp3xiKAh_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmp3xiKAh_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    feature: address_as_variable
+    line_number: 0
+  - feature_group: control_flow
+    feature: pointer_to_function
+    file_name: /tmp/tmp3xiKAh_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+    function_name: svn_mutex__unlock

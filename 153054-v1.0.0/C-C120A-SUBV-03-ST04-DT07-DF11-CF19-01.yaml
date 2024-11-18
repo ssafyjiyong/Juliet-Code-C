@@ -1,0 +1,106 @@
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpnidDTr_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+  - line_number: 0
+    feature_group: data_type
+    feature: union
+    file_name: /tmp/tmpnidDTr_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+  - file_name: /tmp/tmpnidDTr_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpnidDTr_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  description: "Has a fixed stack buffer of size 64.  (char [64])\n\n"
+  exploits:
+    - inputs:
+        - value: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          stage: pre_process
+          source: shared_memory_input
+          ordinal: 1
+          flags: 950
+          value_type_enum: 0
+          size: 1001
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          id: source
+          stage_enum: 0
+          key: 9682
+          value_encoding: none
+    - inputs:
+        - key: 9682
+          stage_enum: 0
+          flags: 950
+          source_enum: 6
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          ordinal: 1
+          value: I've reached a point where I feel the need to express my disappointment with Gov. Common W Enumeration. There are a number of reasons Gov. Enumeration isn't telling us as to why he wants to obfuscate the issue so that one can't see what ought to be completely obvious to all. In this letter, I will expose those reasons one-by-one, on the principle that his argument that the sky is falling is hopelessly flawed and thoroughly circuitous. His cold, analytical approach to philistinism doesn't take into account the human element. In particular, those who have been hurt by philistinism know that Gov. Enumeration's jobations emblematize an increasing deturpation of cultural standards and a triumph of the meretricious. Get that straight, please. Any other thinking is blame-shoving or responsibility-dodging. Furthermore, Gov. Enumeration wants to eavesdrop on all types of private conversations. Why he wants that, I don't know, but that's what he wants.
+          value_type: USE_TEXT_DIRECTLY
+          size: 1001
+          value_encoding: none
+          value_type_enum: 0
+  base_inputs:
+    - flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9682
+      size: 1001
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value: AAA
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          key: 9682
+          id: source
+          source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          size: 1001
+          stage_enum: 0
+          ordinal: 1
+    - inputs:
+        - size: 1001
+          flags: 950
+          key: 9682
+          value: Hellow world!
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+          id: source
+          flags: 950
+          ordinal: 1
+          stage: pre_process
+          size: 1001
+          key: 9682
+          value: Good-bye cruel world!
+          value_encoding: none
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmplJh284_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmplJh284_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmplJh284_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_alias_2
+  - file_name: /tmp/tmplJh284_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+io_pair:
+  description: "Good inputs:1) environment variable is a string value with no formatting2) environement variable is a format string that doesn't expose application\tdataBad inputs:1) environment variable is a format string that exposes application data\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          id: source
+          value_encoding: none
+          value: this is a string to be printed
+          key: 6256
+          value_type: USE_TEXT_DIRECTLY
+          size: 76
+          flags: 950
+          stage_enum: 0
+          value_type_enum: 0
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_encoding: base64
+          id: source
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          flags: 950
+          ordinal: 1
+          key: 6256
+          size: 76
+          value: c29tZSBiZW5pZ24gZm9ybWF0dGluZyBmb3IgY2hhciBzdHJpbmcgCg==
+    - inputs:
+        - id: source
+          source_enum: 6
+          size: 76
+          key: 6256
+          value: Cg==
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          flags: 950
+  exploits:
+    - inputs:
+        - key: 6256
+          size: 76
+          value: "%0500d"
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          flags: 950
+          id: source
+          ordinal: 1
+    - inputs:
+        - id: source
+          ordinal: 1
+          size: 76
+          stage: pre_process
+          stage_enum: 0
+          flags: 950
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          key: 6256
+          value_type_enum: 0
+          source_enum: 6
+          value: "%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x%.08x"
+          value_encoding: none
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 6256
+      size: 76
+      flags: 950
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

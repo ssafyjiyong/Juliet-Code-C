@@ -1,0 +1,124 @@
+code_complexity_features:
+  - file_name: /tmp/tmpWvPgoZ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpWvPgoZ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpWvPgoZ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - feature: infinite_loop
+    file_name: /tmp/tmpWvPgoZ_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: discompt_supplementer
+    line_number: 0
+    feature_group: control_flow
+io_pair:
+  base_inputs:
+    - ordinal: 1
+      name: TRUCEMAKING_TUPUNA
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+  benigns:
+    - inputs:
+        - value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          name: TRUCEMAKING_TUPUNA
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          ordinal: 1
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+          source: file_content_input
+          value: This file is not empty.
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          name: TRUCEMAKING_TUPUNA
+          value_encoding: none
+          source: env_var_input
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_type_enum: 0
+        - value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value: Hello world!  And, good-bye.
+          source_enum: 3
+          ordinal: 2
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_type_enum: 0
+          name: TRUCEMAKING_TUPUNA
+          ordinal: 1
+          stage: pre_process
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_type: USE_TEXT_DIRECTLY
+        - value_type_enum: 0
+          stage_enum: 0
+          value: Yet another file.
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value_encoding: none
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/bad01.txt
+          value_encoding: none
+          name: TRUCEMAKING_TUPUNA
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          ordinal: 1
+          source: env_var_input
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+    - inputs:
+        - source_enum: 2
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          stage: pre_process
+          value_type_enum: 0
+          name: TRUCEMAKING_TUPUNA
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

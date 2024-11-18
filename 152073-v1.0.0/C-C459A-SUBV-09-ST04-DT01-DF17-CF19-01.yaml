@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpG0FWcI_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+  - file_name: /tmp/tmpG0FWcI_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    feature_group: data_type
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmpG0FWcI_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+    function_name: svn_cmdline_init
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - function_name: svn_cmdline_init
+    line_number: 0
+    feature: recursive
+    feature_group: control_flow
+    file_name: /tmp/tmpG0FWcI_ss_testcase/src-rose/subversion/libsvn_subr/cmdline.c
+io_pair:
+  description: "Takes an input integer and creates temporary files, filling them with a large string. It then attempts cleanup, but if more than 50 files were created, then only the last 50 will be cleaned up. Given a large enough input the program will use up a significant ammount of disk space creating temporary files and not cleaning them up.\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 6
+          source: shared_memory_input
+          flags: 950
+          value: 10
+          stage: pre_process
+          id: source
+          value_encoding: none
+          key: 7021
+          ordinal: 1
+          size: 6
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          key: 7021
+          value_type_enum: 0
+          id: source
+          size: 6
+          flags: 950
+          source_enum: 6
+          source: shared_memory_input
+          value: 42
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          source_enum: 6
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          id: source
+          size: 6
+          value: 37
+          key: 7021
+          value_encoding: none
+          flags: 950
+          source: shared_memory_input
+  exploits:
+    - inputs:
+        - size: 6
+          source: shared_memory_input
+          value_encoding: none
+          stage: pre_process
+          source_enum: 6
+          stage_enum: 0
+          key: 7021
+          flags: 950
+          ordinal: 1
+          value: 20000
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - size: 6
+          value_encoding: none
+          flags: 950
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          source: shared_memory_input
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          key: 7021
+          ordinal: 1
+          value: 6000
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 7021
+      size: 6
+      flags: 950

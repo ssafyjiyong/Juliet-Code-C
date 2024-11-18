@@ -1,0 +1,194 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpFwjTni_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpFwjTni_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    feature: array
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+  - file_name: /tmp/tmpFwjTni_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpFwjTni_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive
+io_pair:
+  exploits:
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: PREACHES_TODIES
+          ordinal: 1
+        - stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          id: source
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          value: 50 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 This_will_surely_break_things.
+        - id: background
+          stage_enum: 0
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          ordinal: 2
+          stage: pre_process
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: PREACHES_TODIES
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          value: 75 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 asdfasdfasdfasdfasdfasdfasdfasdfasdf
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - id: background
+          stage_enum: 0
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          ordinal: 2
+          stage: pre_process
+          source: script_input
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: PREACHES_TODIES
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are files to be read (also to delay execution), and data is a string containing no spaces.  It does a double checked lock which can allow a second thread to return an uninitialized struct while the first thread is in the process of initialization, leading to a null pointer dereference.\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          name: PREACHES_TODIES
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          value: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - stage: pre_process
+          value_encoding: none
+          source: file_content_input
+          source_enum: 3
+          id: source
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 a1s2d3f4
+        - source: script_input
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          ordinal: 2
+          stage_enum: 0
+          id: background
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          source: env_var_input
+          name: PREACHES_TODIES
+          value: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          ordinal: 1
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+        - value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 25 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 waffles
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          id: background
+          stage_enum: 0
+          ordinal: 2
+          source_enum: 7
+          source: script_input
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          value_encoding: none
+          ordinal: 1
+          name: PREACHES_TODIES
+          source_enum: 2
+          source: env_var_input
+          value_type_enum: 0
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/almeta_rectitude/skeery_bundelkhand.txt
+          stage_enum: 0
+          value_type_enum: 0
+          value: 5000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 bannana.
+          ordinal: 2
+          source_enum: 3
+          value_encoding: none
+        - name: /opt/stonesoup/workspace/testData/file1
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 2
+        - stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          ordinal: 3
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file2

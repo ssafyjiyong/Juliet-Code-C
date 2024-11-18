@@ -1,0 +1,184 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          ordinal: 1
+          source: env_var_input
+          name: UNSEWED_CADUKE
+          stage_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: UNSEWED_CADUKE
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - name: UNSEWED_CADUKE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+  description: "Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists.Bad input: 1) environment variable is set to a filename that does not exist.\n\n"
+  benigns:
+    - inputs:
+        - source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value_type_enum: 0
+          value_encoding: none
+          name: UNSEWED_CADUKE
+          source_enum: 2
+        - source_enum: 3
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+          name: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          stage: pre_process
+          ordinal: 2
+          source: file_content_input
+          stage_enum: 0
+        - stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: This file is not empty.
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 3
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          name: UNSEWED_CADUKE
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+        - stage_enum: 0
+          id: source
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+        - ordinal: 2
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/good02.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: Hello world!  And, good-bye.
+          source_enum: 3
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+          value_type_enum: 0
+          source_enum: 2
+          value_encoding: none
+          source: env_var_input
+          name: UNSEWED_CADUKE
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - id: source
+          value: /opt/stonesoup/workspace/testData/good03.txt
+          value_encoding: none
+          ordinal: 2
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/numb_zoopraxiscope/trueblue_phytosterol.txt
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: Yet another file.
+          value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good03.txt
+          value_type_enum: 0
+          stage_enum: 0
+code_complexity_features:
+  - file_name: /tmp/tmpgVSM2C_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpgVSM2C_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpgVSM2C_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpgVSM2C_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function

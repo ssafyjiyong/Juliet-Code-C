@@ -1,0 +1,100 @@
+io_pair:
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  benigns:
+    - inputs:
+        - source_enum: 5
+          port: 8887
+          stage_enum: 1
+          stage: co_process
+          id: source
+          ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: Good_Bye_World
+          value_type_enum: 0
+          address: ss-localhost
+          source: socket_input
+    - inputs:
+        - ordinal: 1
+          source_enum: 5
+          stage_enum: 1
+          stage: co_process
+          value_encoding: none
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          value_type_enum: 0
+          id: source
+          port: 8887
+          value: abcd
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage: co_process
+          stage_enum: 1
+          value_type_enum: 0
+          source_enum: 5
+          source: socket_input
+          value_encoding: none
+          ordinal: 1
+          value: short stmt
+          port: 8887
+          address: ss-localhost
+  exploits:
+    - inputs:
+        - source_enum: 5
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          stage: co_process
+          stage_enum: 1
+          value_type_enum: 0
+          ordinal: 1
+          id: source
+          port: 8887
+          value_encoding: none
+          address: ss-localhost
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+    - inputs:
+        - source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: co_process
+          id: source
+          source_enum: 5
+          stage_enum: 1
+          address: ss-localhost
+          ordinal: 1
+          value: this_string_is_greater_than_16_characters
+          port: 8887
+          value_type_enum: 0
+  description: "Allocates a buffer of size 16 to copy taint source into.  Checks that the the taint source length is less than 16, but if it is not, returns a -1.  The -1 is silently converted to size_t, which is unsigned, resulting in a huge positive number.  Then copies that many bytes into the buffer of size 16, causing a seg fault. Good inputs: taint source has length less than 16Bad inputs: taint source has greater than or equal to 16\n\n"
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmpiTJ4Mu_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+  - feature_group: data_type
+    file_name: /tmp/tmpiTJ4Mu_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpiTJ4Mu_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpiTJ4Mu_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive

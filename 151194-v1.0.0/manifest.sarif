@@ -1,0 +1,122 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 151194,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case takes an integer and mods it by four. That resulting number is then used to divide the number 1024, and the result is then printed. If the source integer is directly divisible by 4, this will result in a divide by zero error. \nMetadata\n - Base program: Subversion\n - Source Taint: SHARED_MEMORY\n - Data Type: VOID_POINTER\n - Data Flow: ADDRESS_ALIAS_10\n - Control Flow: INTERPROCEDURAL_2",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C369A-SUBV-04-ST04-DT03-DF03-CF13-01.xml"
+          },
+          "length": 84452,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "e717983045df9ad4a0e3fe32255ba610d97622b11becbeee5c1a80e9804a4fb6"
+          }
+        },
+        {
+          "location": {
+            "uri": "scripts/shm_setup.c"
+          },
+          "length": 3155,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "15d311b07d65d83f38876f4ee427c355e2048145d6db756d5d71877405f24822"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/stream.c"
+          },
+          "length": 56010,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "4d840a74320963e0044f0047ee14034c7f8c0a995370c2ce64bc5d87e577da32"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "369",
+              "name": "Divide By Zero"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-369",
+          "message": {
+            "text": "Divide By Zero."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/stream.c",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 1835,
+                  "endLine": 1836
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "369",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

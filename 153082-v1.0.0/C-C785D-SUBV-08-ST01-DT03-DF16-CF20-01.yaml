@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpKD2WAe_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - feature: void_pointer
+    file_name: /tmp/tmpKD2WAe_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_type
+  - file_name: /tmp/tmpKD2WAe_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpKD2WAe_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: svn_config_read3
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence
+io_pair:
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          id: source
+          name: GYBED_GOODYSHIP
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value: /etc/passwd
+    - inputs:
+        - value_encoding: none
+          name: GYBED_GOODYSHIP
+          source: env_var_input
+          value: /etc/ssh/ssh_config
+          id: source
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+    - inputs:
+        - value_encoding: none
+          value: /usr/bin/gcc
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: GYBED_GOODYSHIP
+          value_type_enum: 0
+  description: "Has a buffer declared on the stack in a struct. char[20]) If input is resolved to more  than 20 chars it will overflow\n\n"
+  exploits:
+    - inputs:
+        - value: ../testData
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          stage: pre_process
+          source_enum: 2
+          id: source
+          name: GYBED_GOODYSHIP
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - name: GYBED_GOODYSHIP
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: ../testOutput
+          value_type_enum: 0
+          source: env_var_input
+          ordinal: 1
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: GYBED_GOODYSHIP
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

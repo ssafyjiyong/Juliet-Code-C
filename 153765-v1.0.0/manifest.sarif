@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 153765,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case implements an unchecked read from a buffer. The buffer is declared as a fixed size buffer on the stack. Untrusted input is not properly sanitized or restricted before being used as an index of the buffer to read. This allows inputs containing non-ascii characters to wrap around to negative indexes and under read the buffer, printing the contents of the memory located before the buffer on the stack to the output stream. \nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: UNION\n - Data Flow: ADDRESS_AS_NONLINEAR_EXPRESSION\n - Control Flow: SET_JUMP_LONG_JUMP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C127A-SUBV-02-ST03-DT07-DF14-CF23-01.xml"
+          },
+          "length": 71628,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "722cdbb4a7dbd611255e93cd17814244de4934bdd458ce1d68ea9611ac34b0c5"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/mutex.c"
+          },
+          "length": 8222,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "1ab3bd855d413c6176849acb7e8741cdb829836abf764e599d62d69e14b910f5"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "127",
+              "name": "Buffer Under-read"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-127",
+          "message": {
+            "text": "Buffer Under-read."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/mutex.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 191,
+                  "endLine": 198
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "127",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

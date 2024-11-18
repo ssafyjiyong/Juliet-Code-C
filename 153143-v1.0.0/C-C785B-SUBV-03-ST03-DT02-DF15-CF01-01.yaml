@@ -1,0 +1,100 @@
+io_pair:
+  description: "Has a buffer declared on the heap. malloc(20*sizeOf(char)) If input is resolved to more  than 20 chars it will overflow\n\n"
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      id: source
+      ordinal: 1
+      address: ss-localhost
+      port: 8887
+  exploits:
+    - inputs:
+        - value: ../testData
+          value_encoding: none
+          id: source
+          source_enum: 5
+          source: socket_input
+          stage_enum: 1
+          ordinal: 1
+          stage: co_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          address: ss-localhost
+          port: 8887
+    - inputs:
+        - stage_enum: 1
+          port: 8887
+          ordinal: 1
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: ../testOutput
+          value_type_enum: 0
+          source_enum: 5
+          source: socket_input
+          address: ss-localhost
+          value_encoding: none
+          stage: co_process
+  benigns:
+    - inputs:
+        - value_encoding: none
+          stage_enum: 1
+          ordinal: 1
+          id: source
+          address: ss-localhost
+          port: 8887
+          value: /etc/passwd
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          source_enum: 5
+          stage: co_process
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          port: 8887
+          stage_enum: 1
+          source_enum: 5
+          value_encoding: none
+          source: socket_input
+          value: /etc/ssh/ssh_config
+          ordinal: 1
+          id: source
+          stage: co_process
+          value_type_enum: 0
+          address: ss-localhost
+    - inputs:
+        - value: /usr/bin/gcc
+          source_enum: 5
+          port: 8887
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          ordinal: 1
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+          address: ss-localhost
+          value_type: USE_TEXT_DIRECTLY
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+    file_name: /tmp/tmpTXlXDN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmpTXlXDN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: source_taint
+    feature: SOCKET
+  - file_name: /tmp/tmpTXlXDN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpTXlXDN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable

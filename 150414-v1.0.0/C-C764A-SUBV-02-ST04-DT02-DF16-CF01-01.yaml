@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpxm4H3b_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - feature: SHARED_MEMORY
+    file_name: /tmp/tmpxm4H3b_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: odalisks_retrocervical
+    line_number: 0
+    feature_group: source_taint
+  - feature_group: data_type
+    file_name: /tmp/tmpxm4H3b_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: odalisks_retrocervical
+    line_number: 0
+    feature: simple
+  - function_name: pitressin_ergotin
+    feature: buffer_address_array_index
+    feature_group: data_flow
+    file_name: /tmp/tmpxm4H3b_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+io_pair:
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
+  benigns:
+    - inputs:
+        - ordinal: 1
+          size: 24
+          source_enum: 6
+          value: aTest
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          key: 9456
+          value_encoding: none
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 6
+          value: abigwordwithoutspaces
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 1
+          size: 24
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          key: 9456
+          id: source
+          source: shared_memory_input
+          value_encoding: none
+    - inputs:
+        - size: 24
+          flags: 950
+          key: 9456
+          stage: pre_process
+          value: anotherTestWithoutSpace
+          stage_enum: 0
+          source: shared_memory_input
+          value_encoding: none
+          id: source
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 6
+  exploits:
+    - inputs:
+        - size: 24
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          key: 9456
+          ordinal: 1
+          stage_enum: 0
+          flags: 950
+          value_type_enum: 0
+          value_encoding: none
+          source: shared_memory_input
+          stage: pre_process
+          value: This is a bad test.
+    - inputs:
+        - key: 9456
+          ordinal: 1
+          source: shared_memory_input
+          size: 24
+          stage: pre_process
+          value: A NEW TEST
+          id: source
+          source_enum: 6
+          value_encoding: none
+          value_type_enum: 0
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+  base_inputs:
+    - source: shared_memory_input
+      id: source
+      stage_enum: 0
+      size: 24
+      ordinal: 1
+      flags: 950
+      stage: pre_process
+      key: 9456
+      source_enum: 6

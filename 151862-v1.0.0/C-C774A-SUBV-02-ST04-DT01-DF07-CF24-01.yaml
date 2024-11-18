@@ -1,0 +1,106 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - feature: SHARED_MEMORY
+    file_name: /tmp/tmpN9mtXI_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: source_taint
+    line_number: 0
+    function_name: svn_mutex__unlock
+  - file_name: /tmp/tmpN9mtXI_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature: array
+    feature_group: data_type
+  - file_name: /tmp/tmpN9mtXI_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: index_alias_1
+    feature_group: data_flow
+    function_name: svn_mutex__unlock
+    line_number: 0
+  - function_name: svn_mutex__unlock
+    feature: unconditional_jump
+    feature_group: control_flow
+    file_name: /tmp/tmpN9mtXI_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    line_number: 0
+io_pair:
+  base_inputs:
+    - size: 5
+      ordinal: 1
+      source_enum: 6
+      stage_enum: 0
+      source: shared_memory_input
+      stage: pre_process
+      flags: 950
+      key: 3012
+      id: source
+  exploits:
+    - inputs:
+        - value: FFF
+          ordinal: 1
+          source: shared_memory_input
+          stage_enum: 0
+          value_type_enum: 0
+          stage: pre_process
+          flags: 950
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          size: 5
+          key: 3012
+          id: source
+    - inputs:
+        - flags: 950
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          size: 5
+          value_encoding: none
+          source_enum: 6
+          key: 3012
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: shared_memory_input
+          value: FFFF
+          value_type_enum: 0
+  description: "Read an unsigned hex int from the input.  If unsigned is > FFFF, do nothing. Otherwise, open that many files for writing, without closing the file handles.  Output if any of the opens fail. The opens will fail if we try to open more than 1021 files.\n\n"
+  benigns:
+    - inputs:
+        - stage: pre_process
+          source: shared_memory_input
+          value: FF
+          flags: 950
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 6
+          key: 3012
+          size: 5
+          stage_enum: 0
+          value_type_enum: 0
+          value_encoding: none
+    - inputs:
+        - flags: 950
+          key: 3012
+          ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          source: shared_memory_input
+          value_type_enum: 0
+          size: 5
+          value: 20
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source_enum: 6
+    - inputs:
+        - value_type_enum: 0
+          stage: pre_process
+          flags: 950
+          value: 1
+          source: shared_memory_input
+          ordinal: 1
+          value_encoding: none
+          source_enum: 6
+          stage_enum: 0
+          key: 3012
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          size: 5

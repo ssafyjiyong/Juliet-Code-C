@@ -1,0 +1,146 @@
+code_complexity_features:
+  - file_name: /tmp/tmpPlYzb__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: callback
+  - file_name: /tmp/tmpPlYzb__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: flaglike_propagandising
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpPlYzb__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: flaglike_propagandising
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - feature: buffer_address_array_index
+    file_name: /tmp/tmpPlYzb__ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: saltier_auguster
+    line_number: 0
+    feature_group: data_flow
+io_pair:
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certain benign cases), file1 and file2 are files to be read (also to delay execution), and data is an integer to count up to to exercise the blocking queue that contains the weakness. This weakness uses a singleton pattern to initiate a blocking queue that has the possibility of returning multiple instances of the queue if a thread attempts to initialize the queue while another is thread inside the initializer, but has not yet allocated memory for the queue.\n\n"
+  exploits:
+    - inputs:
+        - key: 9206
+          size: 91
+          stage_enum: 0
+          value_encoding: none
+          value: 15 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 66
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          id: source
+          source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          ordinal: 1
+        - ordinal: 2
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source_enum: 7
+          id: background
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          value: 74 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 51
+          source_enum: 6
+          size: 91
+          flags: 950
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+          key: 9206
+          value_type_enum: 0
+        - ordinal: 2
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+  benigns:
+    - inputs:
+        - key: 9206
+          id: source
+          size: 91
+          ordinal: 1
+          source: shared_memory_input
+          flags: 950
+          value: 0 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 50
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+        - source_enum: 7
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source: script_input
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - flags: 950
+          size: 91
+          value: 12 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 13
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          source_enum: 6
+          stage_enum: 0
+          ordinal: 1
+          source: shared_memory_input
+          key: 9206
+          stage: pre_process
+        - source: script_input
+          stage: pre_process
+          id: background
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          source_enum: 7
+          stage_enum: 0
+          ordinal: 2
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 9206
+          size: 91
+          flags: 950
+          value: 1254312 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 61
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/file1
+        - stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          stage_enum: 0
+          ordinal: 3
+          name: /opt/stonesoup/workspace/testData/file2
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9206
+      size: 91
+      flags: 950
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

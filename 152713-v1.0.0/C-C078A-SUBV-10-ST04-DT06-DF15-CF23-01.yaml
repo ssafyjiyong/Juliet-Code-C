@@ -1,0 +1,106 @@
+io_pair:
+  base_inputs:
+    - source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8007
+      size: 28
+      flags: 950
+      source: shared_memory_input
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          flags: 950
+          value: 10
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source_enum: 6
+          key: 8007
+          ordinal: 1
+          size: 28
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - flags: 950
+          size: 28
+          stage_enum: 0
+          key: 8007
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: google.com
+          source: shared_memory_input
+          id: source
+          ordinal: 1
+          source_enum: 6
+          stage: pre_process
+          value_type_enum: 0
+    - inputs:
+        - id: source
+          value_type_enum: 0
+          source_enum: 6
+          stage_enum: 0
+          key: 8007
+          size: 28
+          ordinal: 1
+          flags: 950
+          source: shared_memory_input
+          value_encoding: none
+          value: localhost
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+  exploits:
+    - inputs:
+        - size: 28
+          value: 10; ls -la
+          source_enum: 6
+          source: shared_memory_input
+          key: 8007
+          stage: pre_process
+          id: source
+          ordinal: 1
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+    - inputs:
+        - stage_enum: 0
+          source_enum: 6
+          id: source
+          stage: pre_process
+          ordinal: 1
+          flags: 950
+          value: localhost; echo Hello world
+          size: 28
+          value_type: USE_TEXT_DIRECTLY
+          source: shared_memory_input
+          value_encoding: none
+          value_type_enum: 0
+          key: 8007
+  description: "Read a string from the input.  Do nslookup on that string, without checking first if it has any command separators.  This allows the user to run arbitrary commands.\n\n"
+code_complexity_features:
+  - feature: SHARED_MEMORY
+    file_name: /tmp/tmpymxQ5L_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: source_taint
+  - file_name: /tmp/tmpymxQ5L_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpymxQ5L_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpymxQ5L_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: control_flow
+    feature: set_jump_long_jump
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

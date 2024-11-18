@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpSisUMl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - line_number: 0
+    feature_group: data_type
+    feature: void_pointer
+    file_name: /tmp/tmpSisUMl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+  - file_name: /tmp/tmpSisUMl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - function_name: henden_inchoatively
+    feature_group: control_flow
+    line_number: 0
+    feature: set_jump_long_jump
+    file_name: /tmp/tmpSisUMl_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - id: source
+      ordinal: 1
+      name: SHOOPILTIE_BAITTLE
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+  benigns:
+    - inputs:
+        - value: 10
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: SHOOPILTIE_BAITTLE
+          value_type_enum: 0
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          value_encoding: none
+          stage: pre_process
+          source: env_var_input
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: google.com
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+          name: SHOOPILTIE_BAITTLE
+    - inputs:
+        - value_type_enum: 0
+          id: source
+          value: localhost
+          value_type: USE_TEXT_DIRECTLY
+          name: SHOOPILTIE_BAITTLE
+          ordinal: 1
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+  exploits:
+    - inputs:
+        - name: SHOOPILTIE_BAITTLE
+          stage: pre_process
+          id: source
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          value_type_enum: 0
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 10%20%3B%20ls -la
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          name: SHOOPILTIE_BAITTLE
+          ordinal: 1
+          source_enum: 2
+          value: localhost%20%26%20echo Hello world
+          source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+  description: "Read a string from the input.  Check first if it has any command separators and then run it though a URL decoding algorithm.  Then use this string to perform an nslookup by appending it to the end of the command. This allows the user to run arbitrary commands by suplying command separators encoded in url encoding.\n\n"

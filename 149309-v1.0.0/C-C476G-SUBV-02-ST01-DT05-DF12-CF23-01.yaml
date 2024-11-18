@@ -1,0 +1,94 @@
+code_complexity_features:
+  - file_name: /tmp/tmpukKbWu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: ENVIRONMENT_VARIABLE
+    function_name: svn_mutex__unlock
+    line_number: 0
+    feature_group: source_taint
+  - function_name: svn_mutex__unlock
+    feature_group: data_type
+    line_number: 0
+    file_name: /tmp/tmpukKbWu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: struct
+  - feature_group: data_flow
+    line_number: 0
+    file_name: /tmp/tmpukKbWu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature: var_arg_list
+    function_name: svn_mutex__unlock
+  - function_name: superuniversal_musicality
+    file_name: /tmp/tmpukKbWu_ss_testcase/src-rose/subversion/libsvn_subr/mutex.c
+    feature_group: control_flow
+    feature: set_jump_long_jump
+    line_number: 0
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  exploits:
+    - inputs:
+        - value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          value_type_enum: 0
+          ordinal: 1
+          source: env_var_input
+          stage: pre_process
+          value_encoding: base64
+          name: NONSYMPTOMATIC_BAJULATE
+          stage_enum: 0
+          id: source
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - name: NONSYMPTOMATIC_BAJULATE
+          value_type_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          stage: pre_process
+          source_enum: 2
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          source: env_var_input
+  benigns:
+    - inputs:
+        - name: NONSYMPTOMATIC_BAJULATE
+          stage_enum: 0
+          id: source
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: brah
+          value_type_enum: 0
+    - inputs:
+        - stage: pre_process
+          name: NONSYMPTOMATIC_BAJULATE
+          stage_enum: 0
+          value: dude
+          ordinal: 1
+          source: env_var_input
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+    - inputs:
+        - ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+          value: bromigo
+          stage_enum: 0
+          name: NONSYMPTOMATIC_BAJULATE
+          id: source
+          source_enum: 2
+          stage: pre_process
+          source: env_var_input
+  base_inputs:
+    - source_enum: 2
+      name: NONSYMPTOMATIC_BAJULATE
+      stage: pre_process
+      id: source
+      source: env_var_input
+      ordinal: 1
+      stage_enum: 0

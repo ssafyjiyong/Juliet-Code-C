@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpZrpSkd_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+  - file_name: /tmp/tmpZrpSkd_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpZrpSkd_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpZrpSkd_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  description: "If a non alphanumeric value is seen, the taint buffer gets set to null and the a strcpy is called, causing a null pointer dereference\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SATISFACIENDUM_SUBALGEBRAIC
+  benigns:
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          value: AAAAA
+          id: source
+          source: env_var_input
+          source_enum: 2
+          name: SATISFACIENDUM_SUBALGEBRAIC
+    - inputs:
+        - value_type_enum: 0
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          value: ABCD123
+          name: SATISFACIENDUM_SUBALGEBRAIC
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+          name: SATISFACIENDUM_SUBALGEBRAIC
+          source_enum: 2
+          stage: pre_process
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 1234564760ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+          ordinal: 1
+  exploits:
+    - inputs:
+        - stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          id: source
+          name: SATISFACIENDUM_SUBALGEBRAIC
+          value_encoding: none
+          value: A.A
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          id: source
+          stage_enum: 0
+          name: SATISFACIENDUM_SUBALGEBRAIC
+          value_encoding: none
+          ordinal: 1
+          value: AAAAAAAHHHHHHHHHHHH!
+          value_type: USE_TEXT_DIRECTLY

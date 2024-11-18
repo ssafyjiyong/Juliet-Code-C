@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpwnLuxK_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpwnLuxK_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpwnLuxK_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_2
+  - line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop
+    file_name: /tmp/tmpwnLuxK_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: SHEWER_AGR
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+  benigns:
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          name: SHEWER_AGR
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          source: env_var_input
+        - stage_enum: 0
+          value: exampleofgoodinput
+          stage: pre_process
+          id: source
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          value_encoding: none
+          ordinal: 2
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          name: SHEWER_AGR
+          stage: pre_process
+          source: env_var_input
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          source_enum: 2
+        - value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          source_enum: 3
+          value: abcd12345ABCDE
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          stage: pre_process
+          source: file_content_input
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SHEWER_AGR
+          ordinal: 1
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          source: file_content_input
+          source_enum: 3
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          value: R0G3RR4881T
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          name: SHEWER_AGR
+        - source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          value: a-b+c*d
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: SHEWER_AGR
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/pelargonic_wycliffist/bunkery_unlays.txt
+          value: 3.14159
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Good input:1) environment variable contains only alphanumeric charactersBad input:1) environment variable contains non alphanumeric characters\n\n"

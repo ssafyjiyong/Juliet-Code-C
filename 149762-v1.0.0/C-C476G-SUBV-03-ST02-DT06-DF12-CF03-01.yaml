@@ -1,0 +1,154 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: UNGLACIAL_ONLINESS
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+  benigns:
+    - inputs:
+        - ordinal: 1
+          name: UNGLACIAL_ONLINESS
+          source_enum: 2
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          value_type_enum: 0
+          value_encoding: none
+          stage: pre_process
+        - value_type_enum: 0
+          value: brah
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          value_encoding: none
+          source_enum: 3
+          stage_enum: 0
+          source: file_content_input
+          stage: pre_process
+          ordinal: 2
+    - inputs:
+        - stage_enum: 0
+          name: UNGLACIAL_ONLINESS
+          stage: pre_process
+          source: env_var_input
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          ordinal: 1
+        - ordinal: 2
+          id: source
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: dude
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          source: file_content_input
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+          name: UNGLACIAL_ONLINESS
+          stage_enum: 0
+        - ordinal: 2
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          id: source
+          stage_enum: 0
+          source_enum: 3
+          value: bromigo
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage: pre_process
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: UNGLACIAL_ONLINESS
+          source: env_var_input
+          ordinal: 1
+        - stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          value_encoding: base64
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: UNGLACIAL_ONLINESS
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/gone_wrencher/venosities_bloop.txt
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmpg2YZC8_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpg2YZC8_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpg2YZC8_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+  - function_name: corrosives_thrope
+    line_number: 0
+    feature_group: control_flow
+    file_name: /tmp/tmpg2YZC8_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature: infinite_loop

@@ -1,0 +1,146 @@
+io_pair:
+  description: "read cmd doesn't null terminate input so strcpy reads past end of buffer until NULL char found Good inputs: 1) environment variable is not set. 2) environment variable is set to a filename that exists and    whose contents contain a null character in first 32 bytes3) environment variable is set to a filename that does not exist.Bad input: 1) environment variable is set to a filename that exists and    whose contents do not contain a null charater in first 32 bytes\n\n"
+  benigns:
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          ordinal: 1
+          key: 9553
+          size: 50
+          flags: 950
+          stage_enum: 0
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/good01.txt
+          value_type_enum: 0
+        - source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/good01.txt
+          ordinal: 2
+          value: This file is not empty.
+          value_encoding: none
+          stage: pre_process
+          source: file_content_input
+    - inputs:
+        - value_type_enum: 0
+          flags: 950
+          source: shared_memory_input
+          source_enum: 6
+          key: 9553
+          ordinal: 1
+          id: source
+          stage_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/good02.txt
+          stage: pre_process
+          size: 50
+          value_type: USE_TEXT_DIRECTLY
+        - value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          source: file_content_input
+          ordinal: 2
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          name: /opt/stonesoup/workspace/testData/good02.txt
+    - inputs:
+        - source_enum: 6
+          stage: pre_process
+          source: shared_memory_input
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/badfilename.txt
+          value_encoding: none
+          value_type_enum: 0
+          key: 9553
+          stage_enum: 0
+          flags: 950
+          id: source
+          size: 50
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 9553
+      size: 50
+      flags: 950
+  exploits:
+    - inputs:
+        - source_enum: 6
+          key: 9553
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/bad01.txt
+          value_encoding: none
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          flags: 950
+          value_type_enum: 0
+          size: 50
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          ordinal: 2
+          stage_enum: 0
+          value_encoding: none
+          value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/bad01.txt
+          source: file_content_input
+    - inputs:
+        - source_enum: 6
+          source: shared_memory_input
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          size: 50
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/bad02.txt
+          value_type_enum: 0
+          key: 9553
+          flags: 950
+        - name: /opt/stonesoup/workspace/testData/bad02.txt
+          source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+code_complexity_features:
+  - file_name: /tmp/tmpj8MBsz_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpj8MBsz_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpj8MBsz_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpj8MBsz_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature: sequence
+    feature_group: control_flow
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

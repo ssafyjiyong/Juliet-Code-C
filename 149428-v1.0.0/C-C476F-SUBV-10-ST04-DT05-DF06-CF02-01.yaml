@@ -1,0 +1,106 @@
+io_pair:
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          id: source
+          source_enum: 6
+          key: 8213
+          ordinal: 1
+          source: shared_memory_input
+          size: 5
+          stage_enum: 0
+          flags: 950
+          value_encoding: none
+          value: 1000
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage_enum: 0
+          source_enum: 6
+          value_encoding: none
+          stage: pre_process
+          value: 5000
+          key: 8213
+          value_type_enum: 0
+          source: shared_memory_input
+          id: source
+          size: 5
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 8213
+      size: 5
+      flags: 950
+  benigns:
+    - inputs:
+        - ordinal: 1
+          stage_enum: 0
+          stage: pre_process
+          key: 8213
+          flags: 950
+          size: 5
+          value_type: USE_TEXT_DIRECTLY
+          value: 20
+          source_enum: 6
+          value_encoding: none
+          id: source
+          source: shared_memory_input
+          value_type_enum: 0
+    - inputs:
+        - source: shared_memory_input
+          key: 8213
+          size: 5
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          value: 511
+          stage: pre_process
+          flags: 950
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 6
+    - inputs:
+        - source_enum: 6
+          value_type_enum: 0
+          flags: 950
+          stage_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          id: source
+          size: 5
+          value: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage: pre_process
+          key: 8213
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SHARED_MEMORY
+    file_name: /tmp/tmpfkyPmb_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+  - file_name: /tmp/tmpfkyPmb_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpfkyPmb_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature_group: control_flow
+    file_name: /tmp/tmpfkyPmb_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: indirectly_recursive

@@ -1,0 +1,146 @@
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          stage: pre_process
+          flags: 950
+          value: 5 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 Another_test_case
+          id: source
+          ordinal: 1
+          key: 2274
+          source: shared_memory_input
+          value_encoding: none
+          size: 204
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 6
+        - stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          id: background
+          ordinal: 2
+          stage_enum: 0
+          source: script_input
+          source_enum: 7
+    - inputs:
+        - size: 204
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value: 1 /opt/stonesoup/workspace/testData/fifo2 /opt/stonesoup/workspace/testData/fifo1 hello_world
+          ordinal: 1
+          id: source
+          value_type_enum: 0
+          source: shared_memory_input
+          value_encoding: none
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          key: 2274
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source_enum: 7
+          ordinal: 2
+          stage_enum: 0
+          source: script_input
+          id: background
+    - inputs:
+        - source: shared_memory_input
+          source_enum: 6
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          key: 2274
+          size: 204
+          flags: 950
+          value: 6000000 /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 1,_2,_skip_to_my_lou
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 2
+        - stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file2
+          ordinal: 3
+          stage: pre_process
+          source_enum: 3
+  exploits:
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          flags: 950
+          value_type_enum: 0
+          value_encoding: none
+          key: 2274
+          source: shared_memory_input
+          value: 508 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 As_he_lay_watching_the_fireflies_over_head,_he_couldn't_shake_the_feeling_that_maybe_it_was_they_who_were_watching_him.
+          size: 204
+          id: source
+          source_enum: 6
+          stage: pre_process
+        - stage_enum: 0
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          id: background
+          ordinal: 2
+    - inputs:
+        - value_encoding: none
+          stage: pre_process
+          ordinal: 1
+          key: 2274
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 99 /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 Answering_question_after_question,_our_unlikely_hero_was_finally_winning_the_scholastic_challenge_for_us.
+          size: 204
+          stage_enum: 0
+          id: source
+          flags: 950
+          source_enum: 6
+          source: shared_memory_input
+        - source_enum: 7
+          id: background
+          ordinal: 2
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2
+          stage: pre_process
+          source: script_input
+          stage_enum: 0
+  description: "This weakness expects a string in the form: '<qsize> <file1> <file2> <data>' where qsize is the size of the quick sort (used to delay execution in certan benign cases), file1 and file2 are files used to dealy execution and data is a string containing no spaces. If the input starts with an A and is greater than 50 characters in length, and the qsize is large enough, incorrect syncronization (two separate locks) will lead to division by zero.  For the weakness to occur, the input must begin with an 'A', be greater than 50 characters in length, and file1 and file2 must be FIFO files controlled by runFifo.py fifo1 fifo2.\n\n"
+  base_inputs:
+    - source: shared_memory_input
+      source_enum: 6
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 2274
+      size: 204
+      flags: 950
+code_complexity_features:
+  - feature_group: control_flow
+    function_name: svn_tristate__from_word
+    line_number: 0
+    feature: callback
+    file_name: /tmp/tmpFfwtDL_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+  - file_name: /tmp/tmpFfwtDL_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: ikebanas_nonaries
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpFfwtDL_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: ikebanas_nonaries
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpFfwtDL_ss_testcase/src-rose/subversion/libsvn_subr/types.c
+    function_name: unexaggerating_nabathaean
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"

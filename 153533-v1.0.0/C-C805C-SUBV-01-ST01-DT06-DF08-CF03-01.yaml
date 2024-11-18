@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SILKMEN_OVEREMPIRICALLY
+  description: "Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  exploits:
+    - inputs:
+        - source_enum: 2
+          name: SILKMEN_OVEREMPIRICALLY
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          value: This_input_is_too_long_to_be_contained_in_buffer
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+    - inputs:
+        - stage_enum: 0
+          ordinal: 1
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          name: SILKMEN_OVEREMPIRICALLY
+          source_enum: 2
+          source: env_var_input
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - id: source
+          ordinal: 1
+          value: Hello
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          name: SILKMEN_OVEREMPIRICALLY
+    - inputs:
+        - value_type_enum: 0
+          name: SILKMEN_OVEREMPIRICALLY
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          ordinal: 1
+          id: source
+          value_encoding: none
+          value: a
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - stage: pre_process
+          source_enum: 2
+          source: env_var_input
+          id: source
+          name: SILKMEN_OVEREMPIRICALLY
+          ordinal: 1
+          stage_enum: 0
+          value_encoding: none
+          value: ok_str
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+code_complexity_features:
+  - file_name: /tmp/tmpKkg7OY_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpKkg7OY_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmpKkg7OY_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_2
+  - file_name: /tmp/tmpKkg7OY_ss_testcase/src-rose/subversion/libsvn_subr/dirent_uri.c
+    function_name: internal_style
+    line_number: 0
+    feature_group: control_flow
+    feature: infinite_loop

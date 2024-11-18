@@ -1,0 +1,106 @@
+code_complexity_features:
+  - file_name: /tmp/tmpsDZx7P_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: SHARED_MEMORY
+  - file_name: /tmp/tmpsDZx7P_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpsDZx7P_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - file_name: /tmp/tmpsDZx7P_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    feature_group: control_flow
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: indirectly_recursive
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value: AAAAAAAAAAA
+          value_type: USE_TEXT_DIRECTLY
+          key: 3199
+          size: 40
+          flags: 950
+          source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 0
+          id: source
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_encoding: none
+          value: 12345 Hello world!
+          stage: pre_process
+          ordinal: 1
+          size: 40
+          source: shared_memory_input
+          flags: 950
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 6
+          key: 3199
+    - inputs:
+        - id: source
+          value_encoding: none
+          flags: 950
+          size: 40
+          stage: pre_process
+          ordinal: 1
+          stage_enum: 0
+          key: 3199
+          source: shared_memory_input
+          source_enum: 6
+          value: This string does not have 10 characters
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+  exploits:
+    - inputs:
+        - size: 40
+          id: source
+          key: 3199
+          source_enum: 6
+          stage_enum: 0
+          source: shared_memory_input
+          ordinal: 1
+          flags: 950
+          value_type_enum: 0
+          stage: pre_process
+          value: 0123456789
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - id: source
+          ordinal: 1
+          stage_enum: 0
+          value_type_enum: 0
+          key: 3199
+          size: 40
+          source: shared_memory_input
+          flags: 950
+          stage: pre_process
+          source_enum: 6
+          value: 10 chars..
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  description: "Create a function pointer on the stack.  If the input length is not equal to 10, set the function pointer to a function.  Try to use the function pointer. This will seg fault if the input length is exactly 10.\n\n"
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      key: 3199
+      size: 40
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage: pre_process

@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpMO5jDY_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpMO5jDY_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpMO5jDY_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - line_number: 0
+    file_name: /tmp/tmpMO5jDY_ss_testcase/src-rose/subversion/libsvn_subr/stream.c
+    function_name: svn_stream_set_close
+    feature_group: control_flow
+    feature: set_jump_long_jump
+io_pair:
+  benigns:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          id: source
+          name: FIBROMAS_DIVERGENCY
+          source: env_var_input
+          value: 1
+          value_encoding: none
+          ordinal: 1
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: 10
+          id: source
+          name: FIBROMAS_DIVERGENCY
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          ordinal: 1
+          value: 1000
+          id: source
+          name: FIBROMAS_DIVERGENCY
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage: pre_process
+          source: env_var_input
+          ordinal: 1
+          name: FIBROMAS_DIVERGENCY
+          value_encoding: none
+          value: 65538
+          id: source
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          name: FIBROMAS_DIVERGENCY
+          stage_enum: 0
+          id: source
+          value: 131074
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+  description: "Read a number from the input.  Create a struct with two fields: size (unsigned short) and buffer (char*).  Initialize the struct using the unsigned short value as a size, and malloc the unsigned short value worth of bytes.  Later, memset the buffer in the struct using the number passed in as input.  Since the input is a long, and we only allocated an unsigned short amount, we will corrupt the heap, leading to seg fault or glib error. Good inputs: 65535 or less. Bad inputs: more than 65535\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: FIBROMAS_DIVERGENCY

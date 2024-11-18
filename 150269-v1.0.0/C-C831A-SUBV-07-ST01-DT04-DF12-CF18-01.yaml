@@ -1,0 +1,179 @@
+io_pair:
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 I_do_not_even_what?
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: ADENOGRAPHICAL_CONTEMNOR
+          value_type: USE_TEXT_DIRECTLY
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && sleep 1 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled (10).  Sleeping...\" && sleep 1 && kill -s 12 \"${PROC_ID}\" && echo \"Signaled (12).\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          ordinal: 2
+          source: script_input
+          stage_enum: 0
+          id: background-complex
+          stage: pre_process
+        - id: background
+          source: script_input
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 --nosync
+          source_enum: 7
+          ordinal: 3
+          stage_enum: 0
+          stage: pre_process
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 Yes,_ma'am!
+          value_encoding: none
+          id: source
+          ordinal: 1
+          value_type_enum: 0
+          stage: pre_process
+          name: ADENOGRAPHICAL_CONTEMNOR
+          source: env_var_input
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+        - stage: pre_process
+          source: script_input
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && sleep 1 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled (10).  Sleeping...\" && sleep 1 && kill -s 12 \"${PROC_ID}\" && echo \"Signaled (12).\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          ordinal: 2
+          stage_enum: 0
+        - name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 /opt/stonesoup/workspace/testData/fifo2 --nosync
+          source_enum: 7
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 3
+          id: background
+          source: script_input
+  benigns:
+    - inputs:
+        - ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          name: ADENOGRAPHICAL_CONTEMNOR
+          value: /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 ffddssaa448
+          id: source
+          value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - id: background-complex
+          stage: pre_process
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+          ordinal: 2
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && sleep 1 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled (10).  Sleeping...\" && sleep 1 && kill -s 12 \"${PROC_ID}\" && echo \"Signaled (12).\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+        - stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 3
+        - name: /opt/stonesoup/workspace/testData/file2
+          stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 4
+          source_enum: 3
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 77dasd
+          name: ADENOGRAPHICAL_CONTEMNOR
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+        - stage: pre_process
+          source: script_input
+          stage_enum: 0
+          id: background-complex
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && sleep 1 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled (10).  Sleeping...\" && sleep 1 && kill -s 12 \"${PROC_ID}\" && echo \"Signaled (12).\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          source_enum: 7
+        - source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 3
+          source: file_content_input
+        - ordinal: 4
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/file2
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: ADENOGRAPHICAL_CONTEMNOR
+          value: /opt/stonesoup/workspace/testData/file1 /opt/stonesoup/workspace/testData/file2 What_do_we_have_here?
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && sleep 1 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled (10).  Sleeping...\" && sleep 1 && kill -s 12 \"${PROC_ID}\" && echo \"Signaled (12).\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          ordinal: 2
+          source: script_input
+          id: background-complex
+          stage_enum: 0
+          stage: pre_process
+        - stage: pre_process
+          stage_enum: 0
+          source: file_content_input
+          ordinal: 3
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+        - name: /opt/stonesoup/workspace/testData/file2
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 4
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: ADENOGRAPHICAL_CONTEMNOR
+  description: "This weakness expects a string in the form: '<file1> <file2> <data>' where file1 and file2 are files that are used to delay execution, and data is a string containing no spaces.  A non-rentrant signal handler is registered to multiple signals for certian inputs, causing a double free if invoked multiple times in rapid succession. In order to hit the weakness, file1 and file2 must be controlled by runFifo.py (file1 file2), and the data string must begin with a capital letter. In addition a signal must be sent to the process after it creates a file testData/*.pid.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmpTv8NSk_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+  - file_name: /tmp/tmpTv8NSk_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: heap_pointer
+    feature_group: data_type
+  - feature_group: data_flow
+    file_name: /tmp/tmpTv8NSk_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: var_arg_list
+  - file_name: /tmp/tmpTv8NSk_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: impy_rhyssa
+    line_number: 0
+    feature_group: control_flow
+    feature: pointer_to_function

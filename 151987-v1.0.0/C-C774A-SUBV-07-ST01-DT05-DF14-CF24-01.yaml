@@ -1,0 +1,94 @@
+io_pair:
+  base_inputs:
+    - ordinal: 1
+      name: MESOSIGMOID_PROCOMPRISE
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      id: source
+      stage: pre_process
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value: FF
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          name: MESOSIGMOID_PROCOMPRISE
+          ordinal: 1
+    - inputs:
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          stage_enum: 0
+          id: source
+          source_enum: 2
+          value_type_enum: 0
+          value: 20
+          ordinal: 1
+          name: MESOSIGMOID_PROCOMPRISE
+          value_encoding: none
+    - inputs:
+        - source_enum: 2
+          stage_enum: 0
+          name: MESOSIGMOID_PROCOMPRISE
+          id: source
+          ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          stage: pre_process
+          value: 1
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+  exploits:
+    - inputs:
+        - source_enum: 2
+          source: env_var_input
+          ordinal: 1
+          value_type_enum: 0
+          id: source
+          name: MESOSIGMOID_PROCOMPRISE
+          stage_enum: 0
+          stage: pre_process
+          value: FFF
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          name: MESOSIGMOID_PROCOMPRISE
+          ordinal: 1
+          id: source
+          value: FFFF
+          source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+  description: "Read an unsigned hex int from the input.  If unsigned is > FFFF, do nothing. Otherwise, open that many files for writing, without closing the file handles.  Output if any of the opens fail. The opens will fail if we try to open more than 1021 files.\n\n"
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpMDfmrH_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpMDfmrH_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: struct
+  - file_name: /tmp/tmpMDfmrH_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_nonlinear_expression
+  - file_name: /tmp/tmpMDfmrH_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: unconditional_jump

@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  exploits:
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          id: source
+          stage_enum: 0
+          ordinal: 1
+          source: env_var_input
+          name: SPERMOPHYTIC_IBSENIAN
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          value: 8
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: 4
+          id: source
+          stage_enum: 0
+          name: SPERMOPHYTIC_IBSENIAN
+          ordinal: 1
+          source: env_var_input
+          value_encoding: none
+          value_type_enum: 0
+  description: "Reads in a size to use for a malloc.  The size subtracts 10 before being used, which results in an integer underflow and an attempt at allocating a very large chunk of memory\n\n"
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          name: SPERMOPHYTIC_IBSENIAN
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value: 45
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          ordinal: 1
+    - inputs:
+        - value_encoding: none
+          name: SPERMOPHYTIC_IBSENIAN
+          stage_enum: 0
+          source_enum: 2
+          value_type_enum: 0
+          id: source
+          ordinal: 1
+          value: 80
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          id: source
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          ordinal: 1
+          name: SPERMOPHYTIC_IBSENIAN
+          stage: pre_process
+          value_type_enum: 0
+          value: 8000
+          source_enum: 2
+  base_inputs:
+    - stage_enum: 0
+      id: source
+      ordinal: 1
+      name: SPERMOPHYTIC_IBSENIAN
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+code_complexity_features:
+  - file_name: /tmp/tmp7lUklw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmp7lUklw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - file_name: /tmp/tmp7lUklw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_2
+  - file_name: /tmp/tmp7lUklw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: control_flow
+    feature: indirectly_recursive

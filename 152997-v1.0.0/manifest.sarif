@@ -1,0 +1,112 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "properties": {
+        "id": 152997,
+        "version": "1.0.0",
+        "type": "source code",
+        "status": "candidate",
+        "submissionDate": "2015-10-06",
+        "language": "c",
+        "author": "IARPA STONESOUP Test and Evaluation team",
+        "description": "This test case allocates a struct on the stack, with a 20-character buffer and a pointer following that buffer. It checks if the taint source is less than 20 characters. If so, it sets the 20-charcter buffer to all 0's then sets the pointer following the buffer to point to the beginning of the buffer. It then calls realpath with the destination being the 20-character buffer inside the struct. If realpath evaluates to more than 20 characters, the buffer inside the struct will overflow into the pointer inside the struct. The test case then calls strlen on the pointer inside the struct. If an overflow has occurred, this pointer will be invalid, and a segmentation fault will occur. \nMetadata\n - Base program: Subversion\n - Source Taint: SOCKET\n - Data Type: ARRAY\n - Data Flow: ADDRESS_AS_NONLINEAR_EXPRESSION\n - Control Flow: INFINITE_LOOP",
+        "state": "bad",
+        "application": "cpe:2.3:a:apache:subversion:1.8.3:*:*:*:*:*:*:*",
+        "dependencies": [
+          "stonesoup-vm-v3.0",
+          "apache-subversion-v1.8.3"
+        ]
+      },
+      "tool": {
+        "driver": {
+          "name": "SARD - SAMATE",
+          "fullName": "Software Assurance Reference Dataset Project",
+          "informationUri": "https://samate.nist.gov/SARD/",
+          "version": "5.0.0",
+          "organization": "NIST",
+          "supportedTaxonomies": [
+            {
+              "name": "CWE",
+              "index": 0
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "C-C785D-SUBV-04-ST03-DT01-DF14-CF03-01.xml"
+          },
+          "length": 71142,
+          "sourceLanguage": "xml",
+          "hashes": {
+            "sha-256": "9cc48f1a6f8db55cef6ed56673cda978753844886ac3db9d2091ca135b463be1"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/subversion/libsvn_subr/stream.c"
+          },
+          "length": 54903,
+          "sourceLanguage": "c",
+          "hashes": {
+            "sha-256": "448531e5d81ff851f04f29cc59bfa050333629997e9aad568574e7a06c0a98e0"
+          }
+        }
+      ],
+      "taxonomies": [
+        {
+          "name": "CWE",
+          "version": "4.6",
+          "informationUri": "https://cwe.mitre.org/data/published/cwe_v4.6.pdf",
+          "downloadUri": "https://cwe.mitre.org/data/xml/cwec_v4.6.xml.zip",
+          "organization": "MITRE",
+          "shortDescription": {
+            "text": "The MITRE Common Weakness Enumeration"
+          },
+          "isComprehensive": false,
+          "taxa": [
+            {
+              "id": "785",
+              "name": "Use of Path Manipulation Function without Maximum-sized Buffer"
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "CWE-785",
+          "message": {
+            "text": "Use of Path Manipulation Function without Maximum-sized Buffer."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/subversion/libsvn_subr/stream.c",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 1811,
+                  "endLine": 1821
+                }
+              }
+            }
+          ],
+          "taxa": [
+            {
+              "toolComponent": {
+                "name": "CWE",
+                "index": 0
+              },
+              "id": "785",
+              "index": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

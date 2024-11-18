@@ -1,0 +1,106 @@
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source: shared_memory_input
+          key: 7626
+          source_enum: 6
+          value_type_enum: 0
+          size: 53
+          flags: 950
+          stage: pre_process
+          value: This_input_is_too_long_to_be_contained_in_buffer
+          id: source
+          value_encoding: none
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          source_enum: 6
+          stage_enum: 0
+          stage: pre_process
+          flags: 950
+          value: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+          key: 7626
+          size: 53
+          id: source
+          source: shared_memory_input
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - stage: pre_process
+      key: 7626
+      size: 53
+      flags: 950
+      source: shared_memory_input
+      source_enum: 6
+      stage_enum: 0
+      ordinal: 1
+      id: source
+  description: "Good inputs:1) envrionment variable is set to a value whose length is less than or equal to 8 charsBad inputs:1) environment variable is not set2) environment variable is set to a value whose length is greater than 8 chars\n\n"
+  benigns:
+    - inputs:
+        - source_enum: 6
+          value_encoding: none
+          value: Hello
+          value_type_enum: 0
+          size: 53
+          key: 7626
+          id: source
+          source: shared_memory_input
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          flags: 950
+          stage_enum: 0
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          flags: 950
+          size: 53
+          source: shared_memory_input
+          stage_enum: 0
+          source_enum: 6
+          id: source
+          ordinal: 1
+          value: a
+          key: 7626
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+    - inputs:
+        - source: shared_memory_input
+          ordinal: 1
+          value: ok_str
+          key: 7626
+          stage: pre_process
+          flags: 950
+          source_enum: 6
+          size: 53
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          stage_enum: 0
+description: "Creating test case using base program.\nAdded an environment variable read to get a key in order to read in data from shared memory.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpIG_ZH4_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: SHARED_MEMORY
+    feature_group: source_taint
+  - file_name: /tmp/tmpIG_ZH4_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpIG_ZH4_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_linear_expression
+  - file_name: /tmp/tmpIG_ZH4_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: sequence

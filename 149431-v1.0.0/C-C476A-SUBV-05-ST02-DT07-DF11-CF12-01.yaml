@@ -1,0 +1,204 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    file_name: /tmp/tmpQySH___ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    file_name: /tmp/tmpQySH___ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: union
+  - file_name: /tmp/tmpQySH___ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpQySH___ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_1
+io_pair:
+  benigns:
+    - inputs:
+        - name: CLAVARIACEAE_CLERKLY
+          ordinal: 1
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          source: env_var_input
+          value_type_enum: 0
+          stage_enum: 0
+        - value_encoding: none
+          stage: pre_process
+          source_enum: 3
+          source: file_content_input
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          value: /opt/stonesoup/workspace/testData/good01.csv
+          value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+        - name: /opt/stonesoup/workspace/testData/good01.csv
+          stage_enum: 0
+          value: !<!> "\"this\",\"is\",\"data\""
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          source_enum: 3
+          value_encoding: none
+          ordinal: 2
+          stage: pre_process
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          name: CLAVARIACEAE_CLERKLY
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+        - ordinal: 2
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          source_enum: 3
+          value: /opt/stonesoup/workspace/testData/good02.csv
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          value_encoding: none
+          value_type_enum: 0
+        - source: file_content_input
+          value_encoding: none
+          stage: pre_process
+          value: !<!> "\"hello\",\"world\",\"!!!!\""
+          name: /opt/stonesoup/workspace/testData/good02.csv
+          stage_enum: 0
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_type_enum: 0
+    - inputs:
+        - name: CLAVARIACEAE_CLERKLY
+          value: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          ordinal: 1
+        - stage: pre_process
+          source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          stage_enum: 0
+          ordinal: 2
+          id: source
+          value: /opt/stonesoup/workspace/testData/good03.csv
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+        - source_enum: 3
+          value_encoding: none
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/good03.csv
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: !<!> "\"one\",\"two\",\"three\""
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: CLAVARIACEAE_CLERKLY
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+  description: "Reads file name of a csv containing 3, fully quoted, comma separated, columns.Opens file and reads each value and sets it to index in array. If a value isn'tfully quoted program will skip that value and eventually seg fault when dereferencingarray index for printing\n\n"
+  exploits:
+    - inputs:
+        - value_encoding: none
+          ordinal: 1
+          stage_enum: 0
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: CLAVARIACEAE_CLERKLY
+        - name: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          id: source
+          ordinal: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/bad01.csv
+          source: file_content_input
+          stage: pre_process
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value_encoding: none
+        - source_enum: 3
+          source: file_content_input
+          value_type_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 2
+          value: !<!> "\"this\",\"is\",data"
+          name: /opt/stonesoup/workspace/testData/bad01.csv
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: CLAVARIACEAE_CLERKLY
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/synovia_acoenaesthesia/chahar_jalousies.txt
+          value: /opt/stonesoup/workspace/testData/bad02.csv
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage_enum: 0
+          ordinal: 2
+          value: !<!> "\"malformed values with spaces\",\"because no\",quotes"
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/bad02.csv
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_encoding: none
+          value_type_enum: 0
+          source: file_content_input

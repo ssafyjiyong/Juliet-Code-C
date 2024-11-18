@@ -1,0 +1,154 @@
+code_complexity_features:
+  - file_name: /tmp/tmpWXR3Qx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpWXR3Qx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_type
+    feature: simple
+  - file_name: /tmp/tmpWXR3Qx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: data_flow
+    feature: basic
+  - file_name: /tmp/tmpWXR3Qx_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature_group: control_flow
+    feature: macros
+io_pair:
+  description: "Good inputs: 1) environment variable contains any number <= 511,2) Environment variable contains string that is not a number Bad input: 1) environment variable not set 2) environment variable contains any number >= 512\n\n"
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          name: PROPOS_SIMBLOT
+          source: env_var_input
+          stage: pre_process
+          value: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          source_enum: 2
+        - source_enum: 3
+          stage: pre_process
+          source: file_content_input
+          id: source
+          name: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value: 20
+          ordinal: 2
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          name: PROPOS_SIMBLOT
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+        - source_enum: 3
+          stage_enum: 0
+          value_encoding: none
+          id: source
+          ordinal: 2
+          stage: pre_process
+          value: 511
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          source: env_var_input
+          name: PROPOS_SIMBLOT
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+        - id: source
+          ordinal: 2
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value_encoding: none
+          value: 1
+          value_type_enum: 0
+  exploits:
+    - inputs:
+        - stage: pre_process
+          value: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          name: PROPOS_SIMBLOT
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_type_enum: 0
+        - source_enum: 3
+          source: file_content_input
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value: 1000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - name: PROPOS_SIMBLOT
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+          value: 5000
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - name: PROPOS_SIMBLOT
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/tocharic_dodoism/yancey_onymous.txt
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

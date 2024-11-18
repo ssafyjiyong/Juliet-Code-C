@@ -1,0 +1,204 @@
+code_complexity_features:
+  - feature_group: control_flow
+    function_name: svn_error_wrap_apr
+    line_number: 0
+    feature: callback
+    file_name: /tmp/tmpxjkgW__ss_testcase/src-rose/subversion/libsvn_subr/error.c
+  - line_number: 0
+    file_name: /tmp/tmpxjkgW__ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    feature: FILE_CONTENTS
+    function_name: triphasia_archbishopry
+    feature_group: source_taint
+  - feature_group: data_flow
+    feature: address_as_linear_expression
+    file_name: /tmp/tmpxjkgW__ss_testcase/src-rose/subversion/libsvn_subr/error.c
+    function_name: unlabialize_comrades
+    line_number: 0
+  - function_name: unlabialize_comrades
+    line_number: 0
+    feature_group: data_type
+    feature: array
+    file_name: /tmp/tmpxjkgW__ss_testcase/src-rose/subversion/libsvn_subr/error.c
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          ordinal: 1
+          stage_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: CLITION_NONRETENTIVELY
+          source: env_var_input
+          stage: pre_process
+        - stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: 15
+          id: source
+          name: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          ordinal: 2
+          source: file_content_input
+          value_encoding: none
+          source_enum: 3
+          stage: pre_process
+        - value_type_enum: 0
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_BUFF
+          stage: pre_process
+          ordinal: 2
+          source: env_var_input
+          value_encoding: none
+          value: hello
+          source_enum: 2
+    - inputs:
+        - value_encoding: none
+          source: env_var_input
+          stage_enum: 0
+          stage: pre_process
+          source_enum: 2
+          value_type_enum: 0
+          name: CLITION_NONRETENTIVELY
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+        - source: file_content_input
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          id: source
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          value_type_enum: 0
+          value: 8
+        - stage_enum: 0
+          value_encoding: none
+          value: abcdefghiklmnopqrstuvwxyz
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage: pre_process
+          name: SS_BUFF
+          value_type_enum: 0
+          source_enum: 2
+          source: env_var_input
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          source: env_var_input
+          name: CLITION_NONRETENTIVELY
+        - stage: pre_process
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          id: source
+          source_enum: 3
+          ordinal: 2
+          value: 1000
+          value_type_enum: 0
+        - ordinal: 2
+          name: SS_BUFF
+          stage_enum: 0
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value: Heeellllloooooo_Wooooorrrrrllllldddddd!!!!!!
+          source: env_var_input
+  base_inputs:
+    - stage: pre_process
+      source: env_var_input
+      source_enum: 2
+      stage_enum: 0
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      value: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+      ordinal: 1
+      name: CLITION_NONRETENTIVELY
+    - id: source
+      name: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+      source: file_content_input
+      source_enum: 3
+      stage_enum: 0
+      ordinal: 2
+      stage: pre_process
+  description: "This weakness reads a number to be used as a loop counter. The loop counter is initially read as an unsigned long, then converted to an int.  If the number read in is larger than MAX_UINT, it is silently converted to a negative number.  This breaks the loop counter logic, resulting in an infinite loop. Good inputs:  taint source is 2147483647 or less Bad inputs: taint source is 2147483648 or greater\n\n"
+  exploits:
+    - inputs:
+        - stage: pre_process
+          name: CLITION_NONRETENTIVELY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+        - stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          value: 4294967291
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          name: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          id: source
+          source_enum: 3
+          source: file_content_input
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 2
+          value_encoding: none
+          stage_enum: 0
+          value: Good_Bye_World
+          name: SS_BUFF
+          source: env_var_input
+          ordinal: 2
+          stage: pre_process
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          ordinal: 1
+          name: CLITION_NONRETENTIVELY
+        - id: source
+          name: /opt/stonesoup/workspace/testData/fordham_unblacked/knights_gorkhali.txt
+          source: file_content_input
+          source_enum: 3
+          stage_enum: 0
+          ordinal: 2
+          stage: pre_process
+          value: 2147483650
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - stage: pre_process
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: SS_BUFF
+          value_type_enum: 0
+          stage_enum: 0
+          source: env_var_input
+          value: aaaaaaaaaaaaaaaaa
+          ordinal: 2

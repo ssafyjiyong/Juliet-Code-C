@@ -1,0 +1,154 @@
+io_pair:
+  exploits:
+    - inputs:
+        - ordinal: 1
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value_type: USE_TEXT_DIRECTLY
+          name: TMA_WEATHERMAKER
+        - stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value: 123451234567
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: file_content_input
+          source_enum: 3
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: TMA_WEATHERMAKER
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value: 845633125678
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: TMA_WEATHERMAKER
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+  description: "Reads in a integer and uses the value to allocate memory for a string on the stack. Because the input value is unchecked can allocate arbitrarily large value, resulting in a resource drain\n\n"
+  benigns:
+    - inputs:
+        - stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          value: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value_type_enum: 0
+          value_encoding: none
+          name: TMA_WEATHERMAKER
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          ordinal: 1
+        - value_encoding: none
+          stage_enum: 0
+          name: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          ordinal: 2
+          value: 80
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          value_type_enum: 0
+          source: file_content_input
+          id: source
+          stage: pre_process
+    - inputs:
+        - name: TMA_WEATHERMAKER
+          value_type_enum: 0
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          value_type_enum: 0
+          source_enum: 3
+          stage_enum: 0
+          stage: pre_process
+          ordinal: 2
+          id: source
+          name: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value: 3643
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          stage_enum: 0
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source: env_var_input
+          value_encoding: none
+          name: TMA_WEATHERMAKER
+          source_enum: 2
+        - value_type_enum: 0
+          ordinal: 2
+          stage: pre_process
+          id: source
+          source: file_content_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 3
+          stage_enum: 0
+          value: 10
+          name: /opt/stonesoup/workspace/testData/hyperdemocracy_esculic/intermarried_prephragma.txt
+          value_encoding: none
+code_complexity_features:
+  - function_name: svn_config_read3
+    line_number: 0
+    feature: callback
+    file_name: /tmp/tmpqMroTh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: control_flow
+  - file_name: /tmp/tmpqMroTh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: univalved_crapelike
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpqMroTh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: univalved_crapelike
+    line_number: 0
+    feature_group: data_type
+    feature: heap_pointer
+  - file_name: /tmp/tmpqMroTh_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: diplopteryga_housewrecker
+    line_number: 0
+    feature_group: data_flow
+    feature: var_arg_list
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"

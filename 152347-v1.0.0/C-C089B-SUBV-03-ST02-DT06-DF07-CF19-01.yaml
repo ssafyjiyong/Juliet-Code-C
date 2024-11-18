@@ -1,0 +1,324 @@
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpyRHfVN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - file_name: /tmp/tmpyRHfVN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_type
+    feature: typedef
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: index_alias_1
+    file_name: /tmp/tmpyRHfVN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmpyRHfVN_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: control_flow
+    feature: recursive
+io_pair:
+  base_inputs:
+    - stage: pre_process
+      stage_enum: 0
+      value: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: KNOWLE_EPEIROGENESIS
+      source: env_var_input
+      source_enum: 2
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+  exploits:
+    - inputs:
+        - source_enum: 2
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          name: KNOWLE_EPEIROGENESIS
+          value_encoding: none
+          stage_enum: 0
+          ordinal: 1
+          value_type_enum: 0
+          source: env_var_input
+        - name: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          value_type_enum: 0
+          stage_enum: 0
+          value_encoding: none
+          source: file_content_input
+          id: source
+          value: x' or 'x'='x
+          source_enum: 3
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 2
+          stage: pre_process
+        - source: database_content_input
+          stage: pre_process
+          value: northwind
+          ordinal: 2
+          value_encoding: none
+          source_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          value_type_enum: 1
+          stage_enum: 0
+          database_enum: 1
+          database: postgresql
+          server: ss-db-postgres
+        - value_type: USE_TEXT_DIRECTLY
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          stage: pre_process
+          ordinal: 3
+          value_type_enum: 0
+          stage_enum: 0
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBPGDATABASE
+        - ordinal: 1
+          source: database_content_input
+          server: ss-db-postgres
+          database: postgresql
+          source_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 2
+          database_enum: 1
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          value_encoding: none
+          stage: post_process
+          value_type_enum: 0
+    - inputs:
+        - value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          stage: pre_process
+          stage_enum: 0
+          value_encoding: none
+          name: KNOWLE_EPEIROGENESIS
+          source_enum: 2
+        - value: "x'; SELECT * FROM Orders; -- "
+          ordinal: 2
+          id: source
+          stage: pre_process
+          stage_enum: 0
+          source_enum: 3
+          source: file_content_input
+          value_type_enum: 0
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          name: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+        - value: northwind
+          stage: pre_process
+          value_encoding: none
+          ordinal: 2
+          server: ss-db-postgres
+          source: database_content_input
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          source_enum: 0
+          database_enum: 1
+          value_type_enum: 1
+          database: postgresql
+        - name: SS_DBPGDATABASE
+          source: env_var_input
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+          value_encoding: none
+        - source: database_content_input
+          value_encoding: none
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          database: postgresql
+          database_enum: 1
+          server: ss-db-postgres
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          stage_enum: 2
+          source_enum: 0
+          ordinal: 1
+  benigns:
+    - inputs:
+        - name: KNOWLE_EPEIROGENESIS
+          source_enum: 2
+          stage_enum: 0
+          value: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          ordinal: 1
+        - value_type_enum: 0
+          id: source
+          value_encoding: none
+          ordinal: 2
+          value: USA
+          stage: pre_process
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: file_content_input
+          name: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          source_enum: 3
+        - source: database_content_input
+          server: ss-db-postgres
+          source_enum: 0
+          stage: pre_process
+          value_encoding: none
+          value_type_enum: 1
+          stage_enum: 0
+          value_type: USE_CONTENTS_OF_FILE
+          database: postgresql
+          value: northwind
+          ordinal: 2
+          database_enum: 1
+        - value: SET_DYNAMIC_DB_NAME
+          value_type_enum: 0
+          source_enum: 2
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          name: SS_DBPGDATABASE
+          value_encoding: none
+          ordinal: 3
+        - value_type_enum: 0
+          database: postgresql
+          ordinal: 1
+          source: database_content_input
+          value_type: USE_TEXT_DIRECTLY
+          source_enum: 0
+          database_enum: 1
+          value_encoding: none
+          server: ss-db-postgres
+          stage_enum: 2
+          stage: post_process
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+    - inputs:
+        - source_enum: 2
+          value_type_enum: 0
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+          name: KNOWLE_EPEIROGENESIS
+          value: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          value_encoding: none
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+        - source: file_content_input
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 0
+          value_type_enum: 0
+          ordinal: 2
+          value: Germany
+          id: source
+          stage: pre_process
+        - ordinal: 2
+          stage_enum: 0
+          source_enum: 0
+          value_encoding: none
+          value_type: USE_CONTENTS_OF_FILE
+          source: database_content_input
+          stage: pre_process
+          value_type_enum: 1
+          database_enum: 1
+          database: postgresql
+          server: ss-db-postgres
+          value: northwind
+        - value_type_enum: 0
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          name: SS_DBPGDATABASE
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 3
+          value: SET_DYNAMIC_DB_NAME
+          stage_enum: 0
+        - source: database_content_input
+          stage_enum: 2
+          database_enum: 1
+          server: ss-db-postgres
+          database: postgresql
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          stage: post_process
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 0
+    - inputs:
+        - value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          source: env_var_input
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          name: KNOWLE_EPEIROGENESIS
+          stage_enum: 0
+          value_encoding: none
+        - source: file_content_input
+          stage: pre_process
+          value_encoding: none
+          stage_enum: 0
+          source_enum: 3
+          value: Finland
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/occupational_sanatory/unconciliable_extensionist.txt
+          value_type_enum: 0
+        - stage_enum: 0
+          database_enum: 1
+          stage: pre_process
+          value: northwind
+          ordinal: 2
+          value_type_enum: 1
+          source_enum: 0
+          server: ss-db-postgres
+          database: postgresql
+          source: database_content_input
+          value_type: USE_CONTENTS_OF_FILE
+          value_encoding: none
+        - ordinal: 3
+          stage_enum: 0
+          source: env_var_input
+          stage: pre_process
+          value_type_enum: 0
+          value_encoding: none
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          value: SET_DYNAMIC_DB_NAME
+          name: SS_DBPGDATABASE
+        - source_enum: 0
+          server: ss-db-postgres
+          database: postgresql
+          value_type_enum: 0
+          source: database_content_input
+          database_enum: 1
+          stage: post_process
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          stage_enum: 2
+          value: DROP DATABASE IF EXISTS "$SS_DBPGDATABASE;"
+          ordinal: 1
+  description: "Good inputs: 1) name of country for use in Sql databaseBad inputs:1) SQL argument injection 2) SQL command injection \n\n"

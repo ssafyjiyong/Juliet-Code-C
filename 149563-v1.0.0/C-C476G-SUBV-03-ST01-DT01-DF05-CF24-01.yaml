@@ -1,0 +1,94 @@
+code_complexity_features:
+  - function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+    file_name: /tmp/tmp6ydduX_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+  - file_name: /tmp/tmp6ydduX_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    feature_group: data_type
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature: array
+  - file_name: /tmp/tmp6ydduX_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: get_xlate_handle_node_internal
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_constant
+  - file_name: /tmp/tmp6ydduX_ss_testcase/src-rose/subversion/libsvn_subr/utf.c
+    function_name: irritomotility_nonpresentable
+    feature_group: control_flow
+    line_number: 0
+    feature: unconditional_jump
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+io_pair:
+  description: "Good inputs: 1) taintvar is less than 64 characters long.Bad input: 1) taintvar is greater than or equal to 64 characters long.\n\n"
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: BRADMAN_MCGRAW
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          name: BRADMAN_MCGRAW
+          value_type: USE_TEXT_DIRECTLY
+          value: TmFoIG5haCBuYWggbmFoIG5haCBuYWgsIG5haCBuYWggbmFoLCBoZXkgSnVkZQpOYWggbmFoIG5haCBuYWggbmFoIG5haCwgbmFoIG5haCBuYWgsIGhleSBKdWRl
+          source_enum: 2
+          ordinal: 1
+          stage: pre_process
+          value_encoding: base64
+          id: source
+          source: env_var_input
+          stage_enum: 0
+    - inputs:
+        - stage: pre_process
+          stage_enum: 0
+          source_enum: 2
+          ordinal: 1
+          value: this string is more than sixty four characters long, so it should mess some stuff up
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: BRADMAN_MCGRAW
+          value_type_enum: 0
+          source: env_var_input
+  benigns:
+    - inputs:
+        - ordinal: 1
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          value_type_enum: 0
+          source: env_var_input
+          id: source
+          source_enum: 2
+          value: brah
+          stage_enum: 0
+          name: BRADMAN_MCGRAW
+    - inputs:
+        - value: dude
+          ordinal: 1
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          source: env_var_input
+          stage: pre_process
+          stage_enum: 0
+          value_type_enum: 0
+          source_enum: 2
+          name: BRADMAN_MCGRAW
+          value_encoding: none
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          value: bromigo
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          value_type_enum: 0
+          stage: pre_process
+          value_encoding: none
+          source_enum: 2
+          name: BRADMAN_MCGRAW
+          ordinal: 1

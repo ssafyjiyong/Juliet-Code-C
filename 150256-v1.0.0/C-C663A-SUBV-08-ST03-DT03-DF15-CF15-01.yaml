@@ -1,0 +1,100 @@
+description: "Creating test case using base program.\nAdded a Socket Server to accept communication from untrusted source.\nCompleted injection.\n"
+code_complexity_features:
+  - feature_group: source_taint
+    feature: SOCKET
+    file_name: /tmp/tmpv9awtF_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+  - file_name: /tmp/tmpv9awtF_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    feature_group: data_type
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature: void_pointer
+  - file_name: /tmp/tmpv9awtF_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_variable
+  - line_number: 0
+    feature_group: control_flow
+    feature: interprocedural_50
+    file_name: /tmp/tmpv9awtF_ss_testcase/src-rose/subversion/libsvn_subr/config.c
+    function_name: stonesoup_handle_taint
+io_pair:
+  exploits:
+    - inputs:
+        - stage: co_process
+          stage_enum: 1
+          source_enum: 5
+          source: socket_input
+          ordinal: 1
+          address: ss-localhost
+          id: source
+          port: 8887
+          value: 5000000 I'm_a_poet_and_I_didn't_even_know_it.
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+    - inputs:
+        - port: 8887
+          value_type_enum: 0
+          stage_enum: 1
+          value_encoding: none
+          source: socket_input
+          value_type: USE_TEXT_DIRECTLY
+          stage: co_process
+          ordinal: 1
+          source_enum: 5
+          id: source
+          address: ss-localhost
+          value: 6000000 But_my_toes_showed_it._Theyre_long_fellows
+  benigns:
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          source: socket_input
+          stage_enum: 1
+          stage: co_process
+          source_enum: 5
+          address: ss-localhost
+          ordinal: 1
+          value: 3 hephalump
+          id: source
+          port: 8887
+    - inputs:
+        - address: ss-localhost
+          stage_enum: 1
+          source: socket_input
+          source_enum: 5
+          id: source
+          port: 8887
+          value_encoding: none
+          value_type_enum: 0
+          value: 1 Sniffles_and_whiffles,_yo.
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: co_process
+    - inputs:
+        - value_type_enum: 0
+          source_enum: 5
+          value: 5 Silly_rabbit,_tricks_are_for_kids!
+          source: socket_input
+          ordinal: 1
+          value_encoding: none
+          id: source
+          stage_enum: 1
+          address: ss-localhost
+          port: 8887
+          stage: co_process
+          value_type: USE_TEXT_DIRECTLY
+  base_inputs:
+    - source: socket_input
+      source_enum: 5
+      stage: co_process
+      stage_enum: 1
+      ordinal: 1
+      address: ss-localhost
+      id: source
+      port: 8887
+  description: "This weakness expects a string in the form: '<qsize> <data>' where qsize is the size of the quick sort (used to delay execution), and data is a string containing no spaces.  It creates two threads which both enter a non-reentrant function and increment a static counter. This causes a buffer overflow which will overwrite the free() struct causing an error when free() is called. In order to overwrite the free() struct, qsize >= 500000 and the input string must be 14+ char long.\n\n"

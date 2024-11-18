@@ -1,0 +1,154 @@
+code_complexity_features:
+  - function_name: svn_stringbuf_appendbytes
+    line_number: 0
+    feature: callback
+    feature_group: control_flow
+    file_name: /tmp/tmp6mXj6R_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+  - file_name: /tmp/tmp6mXj6R_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: thermostat_annelides
+    line_number: 0
+    feature_group: source_taint
+    feature: FILE_CONTENTS
+  - feature_group: data_type
+    file_name: /tmp/tmp6mXj6R_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: thermostat_annelides
+    line_number: 0
+    feature: void_pointer
+  - feature_group: data_flow
+    file_name: /tmp/tmp6mXj6R_ss_testcase/src-rose/subversion/libsvn_subr/string.c
+    function_name: helsell_unfermentative
+    line_number: 0
+    feature: address_alias_2
+description: "Creating test case using base program.\nAdded an environment variable read to get a filename to read in the file contents using an fread operation within the function\nCompleted injection.\n"
+io_pair:
+  base_inputs:
+    - value: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+      value_encoding: none
+      value_type: USE_TEXT_DIRECTLY
+      value_type_enum: 0
+      ordinal: 1
+      name: DONAU_ARCADIAS
+      source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+    - source: file_content_input
+      source_enum: 3
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 2
+      name: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+  description: "Read a space-delimited string from the input.  The first element in the string is the number of elements following it.  Then read in the following elements, and output them to stderr.  If there are fewer elements than expected, a seg fault occurs.\n\n"
+  exploits:
+    - inputs:
+        - value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          value_encoding: none
+          value: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          stage: pre_process
+          name: DONAU_ARCADIAS
+          source_enum: 2
+          source: env_var_input
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          value: 2 a
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          name: DONAU_ARCADIAS
+          source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+        - source: file_content_input
+          source_enum: 3
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 2
+          name: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          value: 10 a b c
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+  benigns:
+    - inputs:
+        - source: env_var_input
+          stage: pre_process
+          source_enum: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          name: DONAU_ARCADIAS
+          value_type_enum: 0
+          ordinal: 1
+          value: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+        - ordinal: 2
+          id: source
+          value: 1 foo
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          stage_enum: 0
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          stage: pre_process
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          value: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          name: DONAU_ARCADIAS
+          value_encoding: none
+        - source: file_content_input
+          ordinal: 2
+          stage_enum: 0
+          value: 2 a b
+          value_encoding: none
+          value_type_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          id: source
+          name: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          stage: pre_process
+          source_enum: 3
+    - inputs:
+        - value_encoding: none
+          value_type_enum: 0
+          name: DONAU_ARCADIAS
+          value: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          source_enum: 2
+          value_type: USE_TEXT_DIRECTLY
+          ordinal: 1
+          stage: pre_process
+          stage_enum: 0
+          source: env_var_input
+        - value: 3 alpha bravo charlie
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          stage: pre_process
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/sinuitis_vaios/valorise_commoved.txt
+          value_encoding: none
+          ordinal: 2
+          source: file_content_input
+          id: source
+          value_type_enum: 0

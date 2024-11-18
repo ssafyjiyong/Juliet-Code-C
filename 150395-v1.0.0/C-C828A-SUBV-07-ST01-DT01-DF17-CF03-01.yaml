@@ -1,0 +1,161 @@
+code_complexity_features:
+  - file_name: /tmp/tmpanJRIC_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpanJRIC_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_type
+    feature: array
+  - file_name: /tmp/tmpanJRIC_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: buffer_address_array_index
+  - file_name: /tmp/tmpanJRIC_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: control_flow
+    function_name: skip_bom
+    line_number: 0
+    feature: infinite_loop
+io_pair:
+  benigns:
+    - inputs:
+        - stage_enum: 0
+          source: env_var_input
+          name: NONSPURIOUS_RUDDERPOST
+          value: /opt/stonesoup/workspace/testData/file1 What_is_the_answer_to_life,_the_universe,_and_everything?
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          ordinal: 1
+          source_enum: 2
+          stage: pre_process
+          id: source
+        - source_enum: 7
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          id: background-complex
+          stage_enum: 0
+          ordinal: 2
+        - stage_enum: 0
+          source_enum: 3
+          stage: pre_process
+          name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 3
+          source: file_content_input
+    - inputs:
+        - value: /opt/stonesoup/workspace/testData/file1 This_string_is_most_definitely_longer_than_50_char,_I_wonder_what_will_happen?
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          name: NONSPURIOUS_RUDDERPOST
+          stage: pre_process
+          source: env_var_input
+          source_enum: 2
+          ordinal: 1
+          stage_enum: 0
+          id: source
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          source_enum: 7
+          stage_enum: 0
+          id: background-complex
+          stage: pre_process
+          source: script_input
+        - stage_enum: 0
+          ordinal: 3
+          source_enum: 3
+          name: /opt/stonesoup/workspace/testData/file1
+          stage: pre_process
+          source: file_content_input
+    - inputs:
+        - source: env_var_input
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+          ordinal: 1
+          name: NONSPURIOUS_RUDDERPOST
+          value: /opt/stonesoup/workspace/testData/file1 Silly_rabbit,_tricks_are_for_kids!
+          value_encoding: none
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+        - ordinal: 2
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source: script_input
+          source_enum: 7
+          id: background-complex
+          stage: pre_process
+          stage_enum: 0
+        - name: /opt/stonesoup/workspace/testData/file1
+          ordinal: 3
+          stage_enum: 0
+          stage: pre_process
+          source: file_content_input
+          source_enum: 3
+  description: "This weakness expects a string in the form: '<file1> <data>' where file1 is a file used to delay execution, and data is a string containing no spaces. Using an asyncronous unsafe signal handler that accesses a char* without checking for a null pointer creates a vulnerability if it is called in a section where the variable is temporarily set to null. In order to hit the weakness, file1 must be a FIFO file controlled by runFifo.py, and the input string must have length > 50 char.  In addition a signal must be sent to the process after it creates a file testData/*.pid.\n\n"
+  exploits:
+    - inputs:
+        - ordinal: 1
+          value: /opt/stonesoup/workspace/testData/fifo1 This_string_is_most_definitely_longer_than_50_char,_I_wonder_what_will_happen?
+          value_encoding: none
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          name: NONSPURIOUS_RUDDERPOST
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+          stage_enum: 0
+          id: source
+        - name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          ordinal: 2
+          stage: pre_process
+          id: background-complex
+          source_enum: 7
+          source: script_input
+          stage_enum: 0
+        - source_enum: 7
+          stage_enum: 0
+          source: script_input
+          stage: pre_process
+          ordinal: 3
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          id: background
+    - inputs:
+        - ordinal: 1
+          name: NONSPURIOUS_RUDDERPOST
+          stage_enum: 0
+          id: source
+          value: /opt/stonesoup/workspace/testData/fifo1 What_is_the_answer_to_life,_the_universe,_and_everything?
+          source: env_var_input
+          value_type: USE_TEXT_DIRECTLY
+          value_encoding: none
+          value_type_enum: 0
+          source_enum: 2
+          stage: pre_process
+        - ordinal: 2
+          stage_enum: 0
+          stage: pre_process
+          name: !<!> "inotifywait -m -e create --format \"%f\" /opt/stonesoup/workspace/testData/ | while read NEW_FILE; do if [[ \"${NEW_FILE}\" == *.pid ]]; then PROC_ID=\"${NEW_FILE%.pid}\"; echo \"Signaling: \" \"${PROC_ID}\" && echo \"Waiting\" && sleep 0.5 && kill -s 10 \"${PROC_ID}\" && echo \"Signaled.\"; else echo \"Ignoring: \" \"/opt/stonesoup/workspace/testData/${NEW_FILE}\"; fi; done;"
+          source_enum: 7
+          id: background-complex
+          source: script_input
+        - ordinal: 3
+          id: background
+          stage: pre_process
+          name: runFifos.py /opt/stonesoup/workspace/testData/fifo1 --nosync
+          source: script_input
+          source_enum: 7
+          stage_enum: 0
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: NONSPURIOUS_RUDDERPOST
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"

@@ -1,0 +1,94 @@
+description: "Creating test case using base program.\nAdded an environment variable read to the function definition.\nCompleted injection.\n"
+code_complexity_features:
+  - file_name: /tmp/tmpgutIjw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: source_taint
+    feature: ENVIRONMENT_VARIABLE
+  - file_name: /tmp/tmpgutIjw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    feature_group: data_type
+    function_name: skip_bom
+    line_number: 0
+    feature: heap_pointer
+  - file_name: /tmp/tmpgutIjw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature_group: data_flow
+    feature: address_as_function_return_value
+  - feature_group: control_flow
+    file_name: /tmp/tmpgutIjw_ss_testcase/src-rose/subversion/libsvn_subr/config_file.c
+    function_name: skip_bom
+    line_number: 0
+    feature: pointer_to_function
+io_pair:
+  benigns:
+    - inputs:
+        - name: TANAGRA_ASSAHY
+          value: aTest
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          stage_enum: 0
+          stage: pre_process
+          source: env_var_input
+          value_encoding: none
+          source_enum: 2
+          ordinal: 1
+          id: source
+    - inputs:
+        - stage_enum: 0
+          value_encoding: none
+          source: env_var_input
+          stage: pre_process
+          ordinal: 1
+          name: TANAGRA_ASSAHY
+          id: source
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          source_enum: 2
+          value: abigwordwithoutspaces
+    - inputs:
+        - name: TANAGRA_ASSAHY
+          stage_enum: 0
+          value_encoding: none
+          ordinal: 1
+          id: source
+          stage: pre_process
+          value_type: USE_TEXT_DIRECTLY
+          value_type_enum: 0
+          value: anotherTestWithoutSpace
+          source: env_var_input
+          source_enum: 2
+  exploits:
+    - inputs:
+        - id: source
+          value_type: USE_TEXT_DIRECTLY
+          stage_enum: 0
+          value_encoding: none
+          source_enum: 2
+          source: env_var_input
+          value: This is a bad test.
+          stage: pre_process
+          name: TANAGRA_ASSAHY
+          value_type_enum: 0
+          ordinal: 1
+    - inputs:
+        - ordinal: 1
+          id: source
+          source: env_var_input
+          source_enum: 2
+          stage_enum: 0
+          value_type: USE_TEXT_DIRECTLY
+          name: TANAGRA_ASSAHY
+          value_type_enum: 0
+          value_encoding: none
+          value: A NEW TEST
+          stage: pre_process
+  base_inputs:
+    - source: env_var_input
+      source_enum: 2
+      stage: pre_process
+      stage_enum: 0
+      id: source
+      ordinal: 1
+      name: TANAGRA_ASSAHY
+  description: "Read a string from the input.  If the string contains any spaces, a thread isspawned that attempts to decrements a semaphore twice causing a deadlock.\n\n"
