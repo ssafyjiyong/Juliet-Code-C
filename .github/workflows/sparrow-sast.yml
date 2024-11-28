@@ -1,0 +1,29 @@
+name: Sparrow SAST Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  sast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Sparrow CLI
+        run: |
+          curl -L -o sparrow-cli.tar.gz https://example.com/download/sparrow-cli
+          tar -xzvf sparrow-cli.tar.gz
+          export PATH=$PATH:$PWD/sparrow-cli
+
+      - name: Run Sparrow SAST
+        run: sparrow-cli analyze -p ./ -o ./output
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: sparrow-report
+          path: ./output
