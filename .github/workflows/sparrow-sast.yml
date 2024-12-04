@@ -15,7 +15,7 @@ jobs:
 
       - name: Set up Sparrow CLI
         run: |
-          curl -L -o sparrow-cli.tar.gz https://localhost:18080/sparrow-client.tar.gz
+          curl -L -o sparrow-cli.tar.gz https://localhost:18080
           tar -xzvf sparrow-cli.tar.gz
           chmod +x sparrow-client.sh
           export PATH=$PATH:$PWD
