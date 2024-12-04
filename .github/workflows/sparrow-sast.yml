@@ -15,12 +15,16 @@ jobs:
 
       - name: Set up Sparrow CLI
         run: |
-          curl -L -o sparrow-cli.tar.gz https://example.com/download/sparrow-cli
+          curl -L -o sparrow-cli.tar.gz https://localhost:18080/sparrow-client.tar.gz
           tar -xzvf sparrow-cli.tar.gz
-          export PATH=$PATH:$PWD/sparrow-cli
+          chmod +x sparrow-client.sh
+          export PATH=$PATH:$PWD
 
-      - name: Run Sparrow SAST
-        run: sparrow-cli analyze -p ./ -o ./output
+      - name: Analyze All Folders
+        run: |
+          for folder in $(find ./Juliet-Code-C -type d -mindepth 1 -maxdepth 1); do
+            ./sparrow-client.sh -S https://localhost:18080 -U admin -PW $(cat ./pw.txt) -P Juliet-Code-C -SD "$folder" -F
+          done
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
