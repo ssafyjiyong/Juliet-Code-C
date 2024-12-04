@@ -15,7 +15,6 @@ jobs:
 
       - name: Prepare Sparrow CLI
         run: |
-          # 프로젝트 내 `scripts/` 디렉토리에 있는 sparrow-client.sh 사용
           chmod +x ./scripts/sparrow-client.sh
           export PATH=$PATH:$PWD/scripts
 
