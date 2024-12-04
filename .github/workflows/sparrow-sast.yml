@@ -21,7 +21,7 @@ jobs:
       - name: Analyze All Folders
         run: |
           for folder in $(find ./Juliet-Code-C -type d -mindepth 1 -maxdepth 1); do
-            ./scripts/sparrow-client.sh -S https://localhost:18080 -U admin -PW 1234qwer!@#$ -P Juliet-Code-C -SD "$folder" -F
+            ./scripts/sparrow-client.sh -S https://localhost:18080 -U admin -PW 1234qwer!@#$ -P Juliet-Code-C -SD ./ -F
           done
 
       - name: Upload Results
